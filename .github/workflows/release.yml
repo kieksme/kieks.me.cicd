@@ -1,0 +1,207 @@
+name: Create Release Assets
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get release version
+        id: version
+        run: |
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          VERSION=${TAG_NAME#v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+
+      - name: Create assets directory structure
+        run: |
+          mkdir -p release-assets
+
+      - name: Copy all assets
+        run: |
+          # Copy main directories
+          cp -r assets release-assets/ 2>/dev/null || true
+          cp -r logos release-assets/ 2>/dev/null || true
+          cp -r guidelines release-assets/ 2>/dev/null || true
+          cp -r colors release-assets/ 2>/dev/null || true
+          cp -r fonts release-assets/ 2>/dev/null || true
+          cp -r templates release-assets/ 2>/dev/null || true
+          
+          # Copy root level files
+          cp README.md release-assets/ 2>/dev/null || true
+          cp LICENSE release-assets/ 2>/dev/null || true
+          cp CONTRIBUTING.md release-assets/ 2>/dev/null || true
+          cp USAGE.md release-assets/ 2>/dev/null || true
+          cp CODEOWNERS release-assets/ 2>/dev/null || true
+
+      - name: Create ZIP archive
+        run: |
+          cd release-assets
+          zip -r ../kieks-me-assets-v${{ steps.version.outputs.version }}.zip .
+          cd ..
+
+      - name: Generate Release README
+        id: readme
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          RELEASE_DATE=$(date -u +"%Y-%m-%d")
+          cat > RELEASE_README.md << EOF
+          # kieks.me Corporate Identity Assets - v${VERSION}
+
+          ## 📦 What's Included
+
+          This release contains all official Corporate Identity and Corporate Design materials for kieks.me GbR.
+
+          ### Assets Structure
+
+          - **Logos**: All logo variants in SVG, PNG, and JPG formats
+            - Dark background versions (purple and red)
+            - Light background versions (red)
+            - Favicon files in multiple formats
+
+          - **Colors**: Brand color palette definitions
+            - \`colors.css\` - CSS variables
+            - \`colors.scss\` - SCSS variables
+            - \`colors.json\` - JSON format with HEX, RGB, and CMYK values
+
+          - **Fonts**: Typography specifications and font files (if included)
+
+          - **Templates**: Document and presentation templates
+
+          - **Guidelines**: Complete brand guidelines documentation
+            - Brand Guidelines
+            - Logo Usage
+            - Color Palette
+            - Typography
+
+          - **Documentation**: Usage instructions and contributing guidelines
+
+          ## 📥 Download
+
+          You can download all assets in one convenient ZIP file:
+          - **kieks-me-assets-v${VERSION}.zip** - Complete asset package
+
+          Or browse individual files in the release assets below.
+
+          ## 🚀 Quick Start
+
+          1. **Download the ZIP file** or individual assets you need
+          2. **Extract** the ZIP file to your project directory
+          3. **Review the guidelines** in the \`guidelines/\` directory before using assets
+          4. **Follow brand guidelines** to ensure consistent brand representation
+
+          ## 📖 Usage Guidelines
+
+          ### For Developers
+
+          \`\`\`bash
+          # Extract the assets
+          unzip kieks-me-assets-v${VERSION}.zip
+
+          # Use CSS variables for colors
+          @import './assets/colors/colors.css';
+          \`\`\`
+
+          ### For Designers
+
+          - Use vector formats (SVG) for scalable graphics
+          - Use PNG for transparent backgrounds
+          - Refer to \`guidelines/\` for proper usage rules
+          - Maintain minimum clear space around logos
+
+          ### For Marketing
+
+          - Use templates from \`assets/templates/\` directory
+          - Follow brand guidelines for all materials
+          - Use appropriate file formats for your medium (print vs. digital)
+
+          ## 📚 Documentation
+
+          Detailed documentation is included in this release:
+
+          - **[README.md](README.md)** - Main repository overview
+          - **[USAGE.md](USAGE.md)** - Usage guidelines and permissions
+          - **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute changes
+          - **[Guidelines](guidelines/)** - Complete brand guidelines
+
+          ## ✅ Permitted Uses
+
+          All company members are allowed to use these materials for:
+          - Internal and external company communications
+          - Marketing materials and campaigns
+          - Product and service delivery
+          - Partner and vendor collaborations
+
+          See [USAGE.md](USAGE.md) for complete usage policy.
+
+          ## ⚠️ Important Notes
+
+          - **No unauthorized modifications** are permitted
+          - Always use official assets from this repository
+          - Follow brand guidelines to maintain consistency
+          - Contact maintainers (see CODEOWNERS) for questions
+
+          ## 🔗 Repository
+
+          Source repository: [kieks.me Corporate Identity](https://github.com/kieksme/kieks.me.cicd)
+
+          ## 📄 License
+
+          This repository is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
+
+          ---
+
+          **Version**: ${VERSION}  
+          **Release Date**: ${RELEASE_DATE}
+          EOF
+          echo "readme_path=RELEASE_README.md" >> $GITHUB_OUTPUT
+
+      - name: Upload ZIP to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./kieks-me-assets-v${{ steps.version.outputs.version }}.zip
+          asset_name: kieks-me-assets-v${{ steps.version.outputs.version }}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Release README as asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./RELEASE_README.md
+          asset_name: RELEASE_README.md
+          asset_content_type: text/markdown
+        continue-on-error: true
+
+      - name: Upload main logos as individual assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./logos/kieks.me - dark - purple.svg
+          asset_name: kieks-me-logo-dark-purple.svg
+          asset_content_type: image/svg+xml
+        continue-on-error: true
+
+      - name: Update Release Notes
+        run: |
+          gh release edit ${{ github.event.release.tag_name }} \
+            --repo ${{ github.repository }} \
+            --notes-file RELEASE_README.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
