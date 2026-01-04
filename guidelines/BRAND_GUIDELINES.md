@@ -19,12 +19,15 @@ Welcome to the kieks.me GbR brand guidelines. This document outlines the visual 
 ## Visual Identity
 
 ### Logo
+
 Our logo is the primary visual identifier of our brand. Refer to [Logo Usage Guidelines](LOGO_USAGE.md) for detailed instructions.
 
 ### Colors
+
 Our brand colors create a consistent visual experience. See [Color Palette](COLOR_PALETTE.md) for specifications.
 
 ### Typography
+
 Typography plays a crucial role in our brand expression. Review [Typography Guidelines](TYPOGRAPHY.md) for details.
 
 ## Brand Voice
@@ -32,11 +35,13 @@ Typography plays a crucial role in our brand expression. Review [Typography Guid
 *[To be defined: Description of your brand's communication style]*
 
 ### Tone
+
 - Professional yet approachable
 - Clear and concise
 - Authentic and transparent
 
 ### Language
+
 - Use active voice
 - Avoid jargon when possible
 - Be inclusive and respectful
@@ -44,12 +49,14 @@ Typography plays a crucial role in our brand expression. Review [Typography Guid
 ## Usage Restrictions
 
 ### Do's
+
 - Always use approved logo versions
 - Maintain proper spacing and clear space
 - Use official brand colors
 - Follow typography hierarchy
 
 ### Don'ts
+
 - Don't distort or modify the logo
 - Don't use unauthorized colors
 - Don't use low-resolution assets
