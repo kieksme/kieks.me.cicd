@@ -17,16 +17,16 @@ This directory contains the official kieks.me GbR brand color palette, including
 
 ### Selection Colors
 
-| Color                           | Hex       | RGB                | Description                           |
-|---------------------------------|-----------|--------------------|---------------------------------------|
+| Color                                    | Hex       | RGB                | Description                           |
+|------------------------------------------|-----------|--------------------|---------------------------------------|
 | ![Aqua](swatches/aqua.svg) Aqua          | `#00FFDC` | `rgb(0, 255, 220)` | Bright turquoise/aqua selection color |
 | ![Navy](swatches/navy.svg) Navy          | `#1E2A45` | `rgb(30, 42, 69)`  | Dark blue/navy selection color        |
 | ![Fuchsia](swatches/fuchsia.svg) Fuchsia | `#FF008F` | `rgb(255, 0, 143)` | Vibrant pink/fuchsia selection color  |
 
 ### Text Colors
 
-| Color                                 | Hex       | RGB                  | Usage                          |
-|---------------------------------------|-----------|----------------------|--------------------------------|
+| Color                                          | Hex       | RGB                  | Usage                          |
+|------------------------------------------------|-----------|----------------------|--------------------------------|
 | ![White](swatches/white.svg) White             | `#FFFFFF` | `rgb(255, 255, 255)` | Text color on white background |
 | ![Dark Gray](swatches/dark-gray.svg) Dark Gray | `#333333` | `rgb(51, 51, 51)`    | Text color on white background |
 
