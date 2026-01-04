@@ -1,34 +1,56 @@
 /* kieks.me Brand Colors */
 
 :root {
-  /* Primary Colors */
+  /* Selection Colors */
+  --color-aqua: #00FFDC;
+  --color-navy: #1E2A45;
+  --color-fuchsia: #FF008F;
+  
+  /* Text Colors */
+  --color-white: #FFFFFF;
+  --color-gray-dark: #333333;
+  
+  /* Legacy/Naming Compatibility */
   --color-primary: #000000;
   --color-secondary: #FFFFFF;
   
   /* Neutral Colors */
-  --color-gray-dark: #333333;
   --color-gray-medium: #666666;
   --color-gray-light: #CCCCCC;
   
   /* RGB Values (for use with opacity) */
+  --color-aqua-rgb: 0, 255, 220;
+  --color-navy-rgb: 30, 42, 69;
+  --color-fuchsia-rgb: 255, 0, 143;
+  --color-white-rgb: 255, 255, 255;
+  --color-gray-dark-rgb: 51, 51, 51;
   --color-primary-rgb: 0, 0, 0;
   --color-secondary-rgb: 255, 255, 255;
-  --color-gray-dark-rgb: 51, 51, 51;
   --color-gray-medium-rgb: 102, 102, 102;
   --color-gray-light-rgb: 204, 204, 204;
 }
 
 /* Usage Examples:
 .button-primary {
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
+  background-color: var(--color-aqua);
+  color: var(--color-white);
 }
 
 .text-body {
   color: var(--color-gray-dark);
 }
 
+.selection-navy {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+}
+
+.selection-fuchsia {
+  background-color: var(--color-fuchsia);
+  color: var(--color-white);
+}
+
 .with-opacity {
-  background-color: rgba(var(--color-primary-rgb), 0.8);
+  background-color: rgba(var(--color-aqua-rgb), 0.8);
 }
 */

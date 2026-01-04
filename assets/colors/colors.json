@@ -1,4 +1,51 @@
 {
+  "selection": {
+    "aqua": {
+      "hex": "#00FFDC",
+      "rgb": {
+        "r": 0,
+        "g": 255,
+        "b": 220
+      },
+      "cmyk": {
+        "c": 100,
+        "m": 0,
+        "y": 14,
+        "k": 0
+      },
+      "usage": "Bright turquoise/aqua selection color"
+    },
+    "navy": {
+      "hex": "#1E2A45",
+      "rgb": {
+        "r": 30,
+        "g": 42,
+        "b": 69
+      },
+      "cmyk": {
+        "c": 100,
+        "m": 60,
+        "y": 0,
+        "k": 73
+      },
+      "usage": "Dark blue/navy selection color"
+    },
+    "fuchsia": {
+      "hex": "#FF008F",
+      "rgb": {
+        "r": 255,
+        "g": 0,
+        "b": 143
+      },
+      "cmyk": {
+        "c": 0,
+        "m": 100,
+        "y": 44,
+        "k": 0
+      },
+      "usage": "Vibrant pink/fuchsia selection color"
+    }
+  },
   "primary": {
     "hex": "#000000",
     "rgb": {
