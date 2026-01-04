@@ -2,37 +2,59 @@
 
 ## Initial Release Setup
 
-Since release-please requires an existing release to work properly, you need to create an initial release manually:
+**Important:** release-please requires an existing release to work properly. You need to create an initial release manually before the automated workflow can function.
 
-1. **Create and push the initial tag:**
+### Step 1: Create and push the initial tag
 
-   ```bash
-   git tag v0.1.0
-   git push origin v0.1.0
-   ```
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
 
-2. **Create the initial release on GitHub:**
-   - Go to the repository on GitHub
-   - Navigate to "Releases" → "Draft a new release"
-   - Select tag `v0.1.0`
-   - Add release title: "v0.1.0 - Initial Release"
-   - Add release notes (optional)
-   - Click "Publish release"
+### Step 2: Create the initial release on GitHub
 
-After the initial release is created, release-please will automatically create release PRs for future changes.
+1. Go to the repository on GitHub
+2. Navigate to "Releases" → "Draft a new release"
+3. Select tag `v0.1.0`
+4. Add release title: "v0.1.0 - Initial Release"
+5. Add release notes (you can use the content from RELEASE_README.md template)
+6. Click "Publish release"
+
+### Step 3: Verify the release
+
+After publishing, verify that:
+
+- The release appears in the Releases section
+- The tag `v0.1.0` is visible
+- The `.release-please-manifest.json` file contains `".": "0.1.0"`
 
 ## Future Releases
 
 Once the initial release is set up, release-please will:
 
-- Automatically create release PRs when you push to `main`
-- Merge the release PR to create a new release
-- The `release.yml` workflow will then package and upload all assets
+- Automatically create release PRs when you push to `main` (if there are changes)
+- You can merge the release PR to create a new release
+- The `release.yml` workflow will automatically package and upload all assets
 
 ## Commit Message Format
 
-While release-please works best with Conventional Commits, the `simple` release-type is more flexible. However, for better release notes, consider using Conventional Commits format:
+The `simple` release-type is flexible and works with any commit messages. However, for better release notes and automatic version bumping, consider using Conventional Commits format:
 
-- `feat: Add new logo variant`
-- `fix: Update color palette`
-- `docs: Update guidelines`
+- `feat: Add new logo variant` - Creates a minor version bump
+- `fix: Update color palette` - Creates a patch version bump
+- `docs: Update guidelines` - No version bump (documentation only)
+- `feat!: Breaking change` - Creates a major version bump
+
+## Troubleshooting
+
+If release-please fails with commit parsing errors:
+
+- This is normal for the initial setup before the first release exists
+- Create the initial release manually as described above
+- Future releases will work automatically
+
+If you see JSON parsing errors:
+
+- Ensure `.release-please-manifest.json` is valid JSON
+- The file should contain: `{ ".": "0.1.0" }`
+- No trailing commas or extra characters
