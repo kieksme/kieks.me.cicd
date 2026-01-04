@@ -1,4 +1,5 @@
 # OS generated files
+# Operating System Files
 .DS_Store
 .DS_Store?
 ._*
@@ -49,3 +50,55 @@ _build/
 # *.zip
 # *.rar
 # *.7z
+# Temporary Files
+*.tmp
+*.temp
+~$*
+*.swp
+*.swo
+*~
+
+# Adobe Creative Suite
+*.ai~
+*.psd~
+*.indd~
+
+# Office Temporary Files
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+
+# Backup Files
+*.bak
+*.backup
+*-backup.*
+
+# Archive Files (unless specifically needed)
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+# Log Files
+*.log
+
+# Cache and Build Directories
+.cache/
+node_modules/
+dist/
+build/
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Font Cache Files
+.uuid
+
+# Preview and Draft Files
+*-draft.*
+*-preview.*
+*-test.*
