@@ -5,7 +5,7 @@ This directory contains color palette definitions and color-related assets.
 ## Available Files
 
 - **Color swatches**: `.ase` files for Adobe Creative Suite
-- **CSS/SCSS variables**: `.css` or `.scss` files with color definitions
+- **CSS variables**: `.css` files with color definitions
 - **JSON**: `.json` files for developers and applications
 - **Palette images**: Visual reference images of the color palette
 
@@ -15,31 +15,22 @@ This directory contains color palette definitions and color-related assets.
 Import the `.ase` (Adobe Swatch Exchange) file into your Adobe Creative Cloud applications (Photoshop, Illustrator, InDesign) to access the brand color palette.
 
 ### For Developers
-Use the CSS/SCSS variables or JSON file in your web projects:
+Use the CSS variables or JSON file in your web projects:
 
 **CSS Example**:
 ```css
 @import 'colors.css';
 
 .button {
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
 }
 ```
 
-**SCSS Example**:
-```scss
-@import 'colors';
-
-.button {
-  background-color: $primary-color;
-}
-```
-
-**JavaScript Example**:
+**JavaScript/TypeScript Example**:
 ```javascript
 import colors from './colors.json';
 
-const primaryColor = colors.primary;
+const primaryColor = colors.primary.hex;
 ```
 
 ## Color Palette
@@ -53,6 +44,8 @@ When adding new colors to the palette:
 2. Ensure the color meets accessibility contrast requirements
 3. Update the Color Palette Guidelines documentation
 4. Generate new palette reference images if needed
+
+**Note**: SCSS files are no longer maintained. Use CSS variables or JSON for your projects.
 
 ---
 

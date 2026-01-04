@@ -175,5 +175,5 @@ Font: Monaco, 'Courier New', monospace
 
 Font files are located in:
 
-- `assets/fonts/` - Font files in various formats (.woff, .woff2, .ttf, .otf)
+- `fonts/` - Font files in various formats (.woff, .woff2, .ttf, .otf)
 - Include license information for each font

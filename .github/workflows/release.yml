@@ -28,13 +28,19 @@ jobs:
 
       - name: Copy all assets
         run: |
-          # Copy main directories
-          cp -r assets release-assets/ 2>/dev/null || true
-          cp -r logos release-assets/ 2>/dev/null || true
+          # Copy main directories (only root-level directories)
           cp -r guidelines release-assets/ 2>/dev/null || true
           cp -r colors release-assets/ 2>/dev/null || true
           cp -r fonts release-assets/ 2>/dev/null || true
           cp -r templates release-assets/ 2>/dev/null || true
+          
+          # Copy assets directory (logos, colors for developers)
+          mkdir -p release-assets/assets
+          cp -r assets/logos release-assets/assets/ 2>/dev/null || true
+          mkdir -p release-assets/assets/colors
+          cp assets/colors/colors.css release-assets/assets/colors/ 2>/dev/null || true
+          cp assets/colors/colors.json release-assets/assets/colors/ 2>/dev/null || true
+          cp assets/colors/README.md release-assets/assets/colors/ 2>/dev/null || true
           
           # Copy root level files
           cp README.md release-assets/ 2>/dev/null || true
@@ -69,9 +75,9 @@ jobs:
             - Favicon files in multiple formats
 
           - **Colors**: Brand color palette definitions
-            - \`colors.css\` - CSS variables
-            - \`colors.scss\` - SCSS variables
-            - \`colors.json\` - JSON format with HEX, RGB, and CMYK values
+            - \`colors.css\` - CSS variables (in \`assets/colors/\`)
+            - \`colors.json\` - JSON format with HEX, RGB, and CMYK values (in \`assets/colors/\`)
+            - Color swatches in SVG format (in \`colors/\`)
 
           - **Fonts**: Typography specifications and font files (if included)
 
@@ -109,6 +115,9 @@ jobs:
 
           # Use CSS variables for colors
           @import './assets/colors/colors.css';
+          
+          # Or use JSON for JavaScript/TypeScript projects
+          import colors from './assets/colors/colors.json';
           \`\`\`
 
           ### For Designers
@@ -120,7 +129,8 @@ jobs:
 
           ### For Marketing
 
-          - Use templates from \`assets/templates/\` directory
+          - Use templates from \`templates/\` directory
+          - Use logos from \`assets/logos/\` directory
           - Follow brand guidelines for all materials
           - Use appropriate file formats for your medium (print vs. digital)
 
@@ -192,7 +202,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./logos/kieks.me - dark - purple.svg
+          asset_path: ./assets/logos/kieks.me - dark - purple.svg
           asset_name: kieks-me-logo-dark-purple.svg
           asset_content_type: image/svg+xml
         continue-on-error: true

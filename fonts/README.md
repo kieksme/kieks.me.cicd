@@ -5,6 +5,7 @@ This directory contains the official kieks.me GbR corporate fonts and typography
 ## Font Files
 
 Corporate fonts should include:
+
 - **Primary typeface** - Main font family for headers and body text
 - **Secondary typeface** - Supporting fonts for specific use cases
 - **Web fonts** - WOFF, WOFF2 formats for web use
@@ -13,6 +14,7 @@ Corporate fonts should include:
 ## Font Weights & Styles
 
 Include all necessary weights and styles:
+
 - Regular
 - Bold
 - Italic
@@ -30,6 +32,7 @@ Include all necessary weights and styles:
 ## Licensing
 
 Ensure all fonts included have appropriate licenses for:
+
 - Desktop use
 - Web embedding
 - Distribution within company materials

@@ -7,7 +7,7 @@ Our logo comes in several variations to ensure versatility across different appl
 ### Primary Logo
 
 - **Full Color**: Use whenever possible on light backgrounds
-- **Location**: `assets/logos/vector/primary-logo.svg` or `assets/logos/raster/primary-logo.png`
+- **Location**: `assets/logos/` directory - see available files in the repository
 
 ### Secondary Variations
 

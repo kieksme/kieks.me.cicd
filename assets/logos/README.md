@@ -1,60 +1,47 @@
 # Logos
 
-This directory contains all logo variations for kieks.me GbR.
+This directory contains official kieks.me GbR logos in various formats.
 
-## Directory Structure
+## File Formats
 
-```
-logos/
-├── vector/     # Vector format logos (SVG, AI, EPS)
-└── raster/     # Raster format logos (PNG, JPG)
-```
+- **SVG** - Scalable Vector Graphics (preferred for web and print)
+- **PNG** - Portable Network Graphics (transparent backgrounds)
+- **JPG** - JPEG format (solid backgrounds)
+- **EPS** - Encapsulated PostScript (for professional printing)
 
-## Available Logo Variations
+## Available Logos
 
-- **Primary Logo**: Full color version for standard use
-- **Monochrome**: Single color version
-- **White**: For dark backgrounds
-- **Black**: For light backgrounds and print
-- **Icon**: Standalone icon/symbol
-- **Wordmark**: Text-only version (if applicable)
+### Main Logos
 
-## Format Guidelines
+#### Dark Background Versions
 
-### Vector Formats (Preferred)
-- **SVG**: Best for web and digital applications
-- **AI**: Adobe Illustrator source files
-- **EPS**: Universal vector format for professional design
+- `kieks.me - dark - purple.svg` / `kieks.me - dark - purple.png` - Purple variant for dark backgrounds
+- `kieks.me - dark - red.svg` / `kieks.me - dark - red.png` - Red variant for dark backgrounds
 
-### Raster Formats
-- **PNG**: Transparent backgrounds, multiple resolutions
-- **JPG**: Opaque backgrounds, when transparency not needed
+#### Light Background Versions
 
-## Usage
+- `kieks.me - light - red.svg` / `kieks.me - light - red.png` - Red variant for light backgrounds
 
-Please refer to the [Logo Usage Guidelines](../../guidelines/LOGO_USAGE.md) for detailed information on:
-- Minimum sizes
-- Clear space requirements
-- Color specifications
-- Do's and don'ts
+### Favicons
 
-## Adding New Logos
+- `kieks.me - favicon.svg` - Scalable favicon (preferred)
+- `kieks.me - favicon.png` - PNG favicon
+- `kieks.me - favicon.jpg` - JPEG favicon
+- `kieks.me - favicon light.svg` - Light variant favicon
 
-When adding new logo variations:
-1. Save vector versions in the `vector/` directory
-2. Export raster versions in multiple resolutions (1x, 2x, 3x) to `raster/`
-3. Use descriptive filenames (e.g., `kieksme-logo-primary.svg`)
-4. Update this README with the new variation
+## Logo Variants
 
-## Quick Reference
+Logos are organized by:
 
-| Logo Type | File Location | Best Use Case |
-|-----------|---------------|---------------|
-| Primary SVG | `vector/kieksme-logo-primary.svg` | Web, digital |
-| Primary PNG | `raster/kieksme-logo-primary.png` | General use |
-| White SVG | `vector/kieksme-logo-white.svg` | Dark backgrounds |
-| Black SVG | `vector/kieksme-logo-black.svg` | Print, light backgrounds |
+- Primary logo (full color)
+- Secondary logo (monochrome)
+- Icon/mark only
+- Wordmark only
+- Inverted versions (for dark backgrounds)
 
----
+## Usage Guidelines
 
-*For questions about logo usage, please refer to the brand guidelines or contact the brand team.*
+- Always maintain proper spacing around the logo (minimum clear space)
+- Do not distort, rotate, or modify the logo
+- Use the appropriate version for your background color
+- Refer to the brand guidelines for detailed usage instructions

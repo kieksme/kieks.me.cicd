@@ -79,7 +79,9 @@ When contributing, please follow the established directory structure:
 ```plaintext
 kieks.me.cicd/
 ├── assets/
-│   ├── logos/          # Logo files in various formats
+│   ├── assets/
+│   │   ├── logos/      # Logo files in various formats
+│   │   └── colors/     # Developer files (CSS, JSON)
 │   │   ├── vector/     # Vector formats (SVG, AI, EPS)
 │   │   └── raster/     # Raster formats (PNG, JPG)
 │   ├── colors/         # Color palette definitions
