@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.0](https://github.com/kieksme/kieks.me.cicd/compare/v0.2.0...v0.3.0) (2026-01-04)
+
+
+### Features
+
+* **fonts:** add source links for font families in README ([6213885](https://github.com/kieksme/kieks.me.cicd/commit/6213885767d290e33cd85867eee16b4547705d55))
+* **fonts:** remove brand fonts section from README for clarity ([684c0b2](https://github.com/kieksme/kieks.me.cicd/commit/684c0b20e57c2b503c8971a3337f198e616ccc17))
+
+
+### Bug Fixes
+
+* **colors:** enhance README with additional details and examples ([95376da](https://github.com/kieksme/kieks.me.cicd/commit/95376da14f2da7bf6fa3750b3fb510aeebad7c88))
+* **colors:** improve formatting in colors README for better readability ([6d78da7](https://github.com/kieksme/kieks.me.cicd/commit/6d78da780a20addad29b1d250da0c54f5d5ae5f3))
+* **guidelines:** update brand guidelines with additional details on logo usage, color palette, and typography ([a77cdab](https://github.com/kieksme/kieks.me.cicd/commit/a77cdab317e393c75cc547171999ab281d85cd00))
+
 ## [0.2.0](https://github.com/kieksme/kieks.me.cicd/compare/v0.1.0...v0.2.0) (2026-01-04)
 
 
