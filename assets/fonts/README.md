@@ -22,6 +22,7 @@ assets/fonts/
 - **Font Family**: Hanken Grotesk
 - **Usage**: Headings, UI elements, and brand-specific typography
 - **Style**: Sans-serif
+- **Source**: [Google Fonts](https://fonts.google.com/specimen/Hanken+Grotesk)
 
 ### Body Text Font (Fließtext)
 
@@ -30,6 +31,7 @@ assets/fonts/
 - **Font Family**: Source Sans 3
 - **Usage**: Body text, paragraphs, and readable content
 - **Style**: Sans-serif
+- **Source**: [Google Fonts](https://fonts.google.com/specimen/Source+Sans+3)
 
 ### Font Organization
 
