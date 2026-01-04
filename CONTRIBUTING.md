@@ -72,6 +72,23 @@ You may propose changes in the following situations:
    - Be prepared to make revisions based on feedback
    - Changes will only be merged after proper approval
 
+## Repository Structure
+
+When contributing, please follow the established directory structure:
+
+```plaintext
+kieks.me.cicd/
+├── assets/
+│   ├── logos/          # Logo files in various formats
+│   │   ├── vector/     # Vector formats (SVG, AI, EPS)
+│   │   └── raster/     # Raster formats (PNG, JPG)
+│   ├── colors/         # Color palette definitions
+│   ├── fonts/          # Typography and font files
+│   └── templates/      # Document and presentation templates
+├── guidelines/         # Brand guidelines and usage documentation
+└── README.md           # Main repository documentation
+```
+
 ## File Naming Conventions
 
 Use consistent, descriptive names:

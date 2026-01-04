@@ -24,21 +24,6 @@ This repository serves as the central source of truth for all Corporate Identity
 - Download and utilize assets for internal and external company materials
 - Share materials with partners and vendors when representing kieks.me GbR
 
-## 📁 Repository Structure
-
-```plaintext
-kieks.me.cicd/
-├── assets/
-│   ├── logos/          # Logo files in various formats
-│   │   ├── vector/     # Vector formats (SVG, AI, EPS)
-│   │   └── raster/     # Raster formats (PNG, JPG)
-│   ├── colors/         # Color palette definitions
-│   ├── fonts/          # Typography and font files
-│   └── templates/      # Document and presentation templates
-├── guidelines/         # Brand guidelines and usage documentation
-└── README.md           # This file
-```
-
 ## 🎨 What's Included
 
 This repository contains all the visual identity assets and brand guidelines for kieks.me GbR, including:
@@ -60,21 +45,23 @@ Detailed documentation for each aspect of the brand identity:
 
 ## 🚀 Usage
 
+### Download Assets
+
+**Download the latest release of brand assets:**
+
+Visit the [Releases](https://github.com/kieksme/kieks.me.cicd/releases) page to download the latest version of all brand assets as a complete package.
+
 ### For Developers
 
-Clone this repository to access brand assets in your projects:
+If you need to integrate assets directly into your project, you can clone this repository:
 
 ```bash
 git clone https://github.com/kieksme/kieks.me.cicd.git
 ```
 
-### For Designers
+### For Designers & Marketing
 
-Download specific assets from the `assets/` directory or refer to the guidelines for creating new materials.
-
-### For Marketing
-
-Use the templates in `assets/templates/` for creating consistent branded materials.
+Download the latest release package or refer to the guidelines for creating new materials. Use the templates and assets for creating consistent branded materials.
 
 **Please review the brand guidelines before using any assets to ensure consistent brand representation across all touchpoints.**
 
