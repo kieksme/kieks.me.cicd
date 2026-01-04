@@ -1,0 +1,79 @@
+{
+  "primary": {
+    "hex": "#000000",
+    "rgb": {
+      "r": 0,
+      "g": 0,
+      "b": 0
+    },
+    "cmyk": {
+      "c": 0,
+      "m": 0,
+      "y": 0,
+      "k": 100
+    },
+    "usage": "Primary buttons, headers, key brand elements"
+  },
+  "secondary": {
+    "hex": "#FFFFFF",
+    "rgb": {
+      "r": 255,
+      "g": 255,
+      "b": 255
+    },
+    "cmyk": {
+      "c": 0,
+      "m": 0,
+      "y": 0,
+      "k": 0
+    },
+    "usage": "Backgrounds, complementary elements"
+  },
+  "neutral": {
+    "darkGray": {
+      "hex": "#333333",
+      "rgb": {
+        "r": 51,
+        "g": 51,
+        "b": 51
+      },
+      "cmyk": {
+        "c": 0,
+        "m": 0,
+        "y": 0,
+        "k": 80
+      },
+      "usage": "Body text, dark UI elements"
+    },
+    "mediumGray": {
+      "hex": "#666666",
+      "rgb": {
+        "r": 102,
+        "g": 102,
+        "b": 102
+      },
+      "cmyk": {
+        "c": 0,
+        "m": 0,
+        "y": 0,
+        "k": 60
+      },
+      "usage": "Secondary text, borders"
+    },
+    "lightGray": {
+      "hex": "#CCCCCC",
+      "rgb": {
+        "r": 204,
+        "g": 204,
+        "b": 204
+      },
+      "cmyk": {
+        "c": 0,
+        "m": 0,
+        "y": 0,
+        "k": 20
+      },
+      "usage": "Backgrounds, dividers, subtle elements"
+    }
+  }
+}
