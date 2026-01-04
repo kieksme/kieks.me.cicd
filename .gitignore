@@ -1,0 +1,51 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Adobe Creative Cloud files
+*.ai~
+*.psd~
+*.indd~
+*.idlk
+*.tmp
+
+# Working files
+*-working.*
+*-draft.*
+*-temp.*
+*.backup
+
+# Large source files (optional - uncomment if needed)
+# *.psd
+# *.ai
+# *.sketch
+
+# System folders
+.tmp/
+temp/
+tmp/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Version control
+*.orig
+
+# Documentation builds
+.doctrees/
+_build/
+
+# Compressed files (only if you don't want to version them)
+# *.zip
+# *.rar
+# *.7z

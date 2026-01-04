@@ -1,0 +1,35 @@
+// kieks.me Brand Colors
+
+// Primary Colors
+$color-primary: #000000;
+$color-secondary: #FFFFFF;
+
+// Neutral Colors
+$color-gray-dark: #333333;
+$color-gray-medium: #666666;
+$color-gray-light: #CCCCCC;
+
+// Color Map for easy iteration
+$colors: (
+  'primary': $color-primary,
+  'secondary': $color-secondary,
+  'gray-dark': $color-gray-dark,
+  'gray-medium': $color-gray-medium,
+  'gray-light': $color-gray-light
+);
+
+// Usage Examples:
+// .button-primary {
+//   background-color: $color-primary;
+//   color: $color-secondary;
+// }
+//
+// .text-body {
+//   color: $color-gray-dark;
+// }
+//
+// @each $name, $color in $colors {
+//   .bg-#{$name} {
+//     background-color: $color;
+//   }
+// }

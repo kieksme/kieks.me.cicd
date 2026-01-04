@@ -1,0 +1,34 @@
+/* kieks.me Brand Colors */
+
+:root {
+  /* Primary Colors */
+  --color-primary: #000000;
+  --color-secondary: #FFFFFF;
+  
+  /* Neutral Colors */
+  --color-gray-dark: #333333;
+  --color-gray-medium: #666666;
+  --color-gray-light: #CCCCCC;
+  
+  /* RGB Values (for use with opacity) */
+  --color-primary-rgb: 0, 0, 0;
+  --color-secondary-rgb: 255, 255, 255;
+  --color-gray-dark-rgb: 51, 51, 51;
+  --color-gray-medium-rgb: 102, 102, 102;
+  --color-gray-light-rgb: 204, 204, 204;
+}
+
+/* Usage Examples:
+.button-primary {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.text-body {
+  color: var(--color-gray-dark);
+}
+
+.with-opacity {
+  background-color: rgba(var(--color-primary-rgb), 0.8);
+}
+*/
