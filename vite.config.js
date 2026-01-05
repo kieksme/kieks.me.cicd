@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
+  base: '/kieks.me.cicd/',
   root: resolve(__dirname, 'app'),
   plugins: [
     tailwindcss(),
@@ -13,6 +14,7 @@ export default defineConfig({
   build: {
     outDir: resolve(__dirname, 'dist'),
     emptyOutDir: true,
+    cssCodeSplit: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'app/index.html'),
