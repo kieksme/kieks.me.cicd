@@ -1224,53 +1224,8 @@ async function main() {
         // Import and run sample generator
         const sampleGeneratorPath = join(__dirname, 'generate-sample-cards.mjs');
         const { default: generateSamples } = await import(`file://${sampleGeneratorPath}`);
-        // Note: generate-sample-cards.mjs doesn't export a default function,
-        // so we'll handle it differently - just execute the script logic here
-        const sampleContacts = [
-          {
-            name: 'Max Mustermann',
-            position: 'Geschäftsführer',
-            email: 'max@kieks.me',
-            phone: '+49 123 456789',
-            mobile: '+49 123 4567890',
-            address: 'Musterstraße 123',
-            postalCode: '12345',
-            city: 'Berlin',
-            country: 'Deutschland',
-            website: 'www.kieks.me',
-            socialMedia: [
-              { name: 'LinkedIn', url: 'https://linkedin.com/in/max-mustermann' },
-              { name: 'Twitter', url: 'https://twitter.com/maxmustermann' },
-            ],
-          },
-          {
-            name: 'Anna Schmidt',
-            position: 'Lead Developer',
-            email: 'anna@kieks.me',
-            phone: '+49 123 456788',
-            mobile: '+49 123 4567880',
-            address: 'Beispielweg 45',
-            postalCode: '54321',
-            city: 'München',
-            country: 'Deutschland',
-            website: 'www.kieks.me',
-            socialMedia: [
-              { name: 'GitHub', url: 'https://github.com/annaschmidt' },
-              { name: 'LinkedIn', url: 'https://linkedin.com/in/anna-schmidt' },
-            ],
-          },
-          {
-            name: 'Tom Weber',
-            position: 'Designer',
-            email: 'tom@kieks.me',
-            mobile: '+49 123 4567870',
-            address: 'Designstraße 78',
-            postalCode: '10115',
-            city: 'Berlin',
-            country: 'Deutschland',
-            website: 'www.kieks.me',
-          },
-        ];
+        // Import sample contacts from shared module
+        const { sampleContacts } = await import('./sample-data.mjs');
 
         const outputDir = join(projectRoot, 'examples', 'sample-business-cards');
         

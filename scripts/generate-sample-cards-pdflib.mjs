@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * Generate sample business cards
+ * Generate sample business cards using pdf-lib
  * Creates example business cards for demonstration purposes
  */
 
 import { join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { generateBusinessCard } from './business-card-generator.mjs';
+import { generateBusinessCardWithPdfLib } from './business-card-generator-pdflib.mjs';
 import { header, success, info, endGroup } from './misc-cli-utils.mjs';
 import { sampleContacts } from './sample-data.mjs';
 
@@ -20,7 +20,7 @@ const projectRoot = resolve(__dirname, '..');
  */
 async function main() {
   try {
-    header('Sample Business Cards Generator', 'Generiere Mustervisitenkarten', 'bgCyan');
+    header('Sample Business Cards Generator (pdf-lib)', 'Generiere Mustervisitenkarten mit pdf-lib', 'bgCyan');
 
     const outputDir = join(projectRoot, 'examples', 'sample-business-cards');
     
@@ -30,8 +30,8 @@ async function main() {
       const contact = sampleContacts[i];
       info(`\nGeneriere Visitenkarte ${i + 1}/${sampleContacts.length}: ${contact.name}`);
       
-      const result = await generateBusinessCard(contact, outputDir);
-      success(`✓ ${contact.name} - Vorder- und Rückseite generiert`);
+      const result = await generateBusinessCardWithPdfLib(contact, outputDir);
+      success(`✓ ✓ ${contact.name} - Vorder- und Rückseite generiert`);
     }
 
     endGroup();
@@ -40,6 +40,7 @@ async function main() {
   } catch (err) {
     endGroup();
     console.error('Fehler:', err.message);
+    console.error(err);
     process.exit(1);
   }
 }
