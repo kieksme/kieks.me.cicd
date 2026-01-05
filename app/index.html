@@ -15,6 +15,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
     <!-- Custom Styles -->
     <style>
         :root {
@@ -85,16 +88,112 @@
         .border-fuchsia {
             border-color: var(--color-fuchsia);
         }
+        
+        /* Markdown styling */
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4 {
+            font-family: var(--font-heading);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        
+        .markdown-content p {
+            margin-bottom: 1em;
+        }
+        
+        .markdown-content ul,
+        .markdown-content ol {
+            margin-left: 1.5em;
+            margin-bottom: 1em;
+        }
+        
+        .markdown-content code {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+        }
+        
+        .markdown-content a {
+            color: var(--color-aqua);
+            text-decoration: underline;
+        }
+        
+        /* Navigation */
+        .nav-link {
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-aqua);
+        }
+        
+        .nav-link.active {
+            color: var(--color-aqua);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .nav-menu.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--color-navy);
+                padding: 1rem;
+                z-index: 1000;
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
+    <!-- Navigation -->
+    <nav class="bg-navy text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center">
+                    <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.svg" 
+                         alt="kieks.me Logo" 
+                         class="h-8 w-8 mr-3">
+                    <span class="font-heading font-bold text-lg">kieks.me</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link active font-body">Home</a>
+                    <a href="logos.html" class="nav-link font-body">Logos</a>
+                    <a href="colors.html" class="nav-link font-body">Colors</a>
+                    <a href="fonts.html" class="nav-link font-body">Fonts</a>
+                    <a href="impressum.html" class="nav-link font-body">Impressum</a>
+                </div>
+                <button class="md:hidden" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-menu md:hidden" id="mobile-menu">
+                <a href="index.html" class="nav-link active font-body block py-2">Home</a>
+                <a href="logos.html" class="nav-link font-body block py-2">Logos</a>
+                <a href="colors.html" class="nav-link font-body block py-2">Colors</a>
+                <a href="fonts.html" class="nav-link font-body block py-2">Fonts</a>
+                <a href="impressum.html" class="nav-link font-body block py-2">Impressum</a>
+            </div>
+        </div>
+    </nav>
+    
     <!-- Hero Section -->
     <header class="bg-navy text-white py-16 px-4">
         <div class="max-w-6xl mx-auto">
             <div class="flex items-center justify-center mb-8">
-                <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-light.svg" 
+                <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.svg" 
                      alt="kieks.me Logo" 
-                     class="h-16 md:h-24">
+                     class="h-20 w-20 md:h-32 md:w-32">
             </div>
             <h1 class="font-heading text-4xl md:text-5xl font-bold text-center mb-4">
                 Corporate Identity & Corporate Design
@@ -320,7 +419,7 @@
                         <p class="font-body text-gray-600">Complete asset package</p>
                     </div>
                 </a>
-                <a href="https://github.com/kieksme/kieks.me.cicd/tree/main/assets/logos" 
+                <a href="logos.html" 
                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-transparent hover:border-aqua">
                     <div class="text-center">
                         <div class="text-4xl mb-4">🎨</div>
@@ -328,7 +427,7 @@
                         <p class="font-body text-gray-600">All logo variants</p>
                     </div>
                 </a>
-                <a href="https://github.com/kieksme/kieks.me.cicd/tree/main/assets/colors" 
+                <a href="colors.html" 
                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-transparent hover:border-aqua">
                     <div class="text-center">
                         <div class="text-4xl mb-4">🎨</div>
@@ -336,7 +435,7 @@
                         <p class="font-body text-gray-600">Brand color palette</p>
                     </div>
                 </a>
-                <a href="https://github.com/kieksme/kieks.me.cicd/tree/main/assets/fonts" 
+                <a href="fonts.html" 
                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-transparent hover:border-aqua">
                     <div class="text-center">
                         <div class="text-4xl mb-4">🔤</div>
@@ -362,7 +461,8 @@
                         © 2024 kieks.me GbR. All rights reserved.
                     </p>
                     <p class="font-body text-sm text-gray-400 mt-2">
-                        <a href="https://github.com/kieksme/kieks.me.cicd" class="hover:text-aqua transition-colors">View on GitHub</a>
+                        <a href="https://github.com/kieksme/kieks.me.cicd" class="hover:text-aqua transition-colors">View on GitHub</a> | 
+                        <a href="impressum.html" class="hover:text-aqua transition-colors">Impressum</a>
                     </p>
                 </div>
             </div>
@@ -387,11 +487,19 @@
                     day: 'numeric' 
                 });
                 
+                // Configure marked for security
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true
+                });
+                
+                const markdownHtml = release.body ? marked.parse(release.body) : '';
+                
                 releaseInfo.innerHTML = `
                     <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8 max-w-2xl mx-auto">
                         <h3 class="font-heading text-2xl font-bold mb-4">${release.tag_name}</h3>
                         <p class="font-body text-lg mb-4">Released on ${releaseDate}</p>
-                        ${release.body ? `<div class="font-body text-sm mb-6 prose prose-invert max-w-none">${release.body.replace(/\n/g, '<br>')}</div>` : ''}
+                        ${markdownHtml ? `<div class="font-body text-sm mb-6 markdown-content max-w-none text-left">${markdownHtml}</div>` : ''}
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
                             <a href="${release.html_url}" 
                                class="bg-aqua text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors text-center">
@@ -423,6 +531,16 @@
         
         // Fetch release info on page load
         fetchLatestRelease();
+        
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+        }
     </script>
 </body>
 </html>

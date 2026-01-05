@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Impressum - kieks.me GbR">
+    <meta name="keywords" content="kieks.me, impressum, legal notice">
+    <title>Impressum - kieks.me GbR</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --color-aqua: #00FFDC;
+            --color-navy: #1E2A45;
+            --color-fuchsia: #FF008F;
+            --color-white: #FFFFFF;
+            --color-gray-dark: #333333;
+            --color-gray-medium: #666666;
+            --color-gray-light: #CCCCCC;
+            --font-heading: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--color-gray-dark);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+        }
+        
+        .font-heading { font-family: var(--font-heading); }
+        .font-body { font-family: var(--font-body); }
+        .text-aqua { color: var(--color-aqua); }
+        .text-navy { color: var(--color-navy); }
+        .text-fuchsia { color: var(--color-fuchsia); }
+        .bg-aqua { background-color: var(--color-aqua); }
+        .bg-navy { background-color: var(--color-navy); }
+        .bg-fuchsia { background-color: var(--color-fuchsia); }
+        .border-aqua { border-color: var(--color-aqua); }
+        .border-navy { border-color: var(--color-navy); }
+        .border-fuchsia { border-color: var(--color-fuchsia); }
+        
+        .nav-link {
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-aqua);
+        }
+        
+        .nav-link.active {
+            color: var(--color-aqua);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .nav-menu.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--color-navy);
+                padding: 1rem;
+                z-index: 1000;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="bg-navy text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center">
+                    <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.svg" 
+                         alt="kieks.me Logo" 
+                         class="h-8 w-8 mr-3">
+                    <span class="font-heading font-bold text-lg">kieks.me</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link font-body">Home</a>
+                    <a href="logos.html" class="nav-link font-body">Logos</a>
+                    <a href="colors.html" class="nav-link font-body">Colors</a>
+                    <a href="fonts.html" class="nav-link font-body">Fonts</a>
+                    <a href="impressum.html" class="nav-link active font-body">Impressum</a>
+                </div>
+                <button class="md:hidden" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-menu md:hidden" id="mobile-menu">
+                <a href="index.html" class="nav-link font-body block py-2">Home</a>
+                <a href="logos.html" class="nav-link font-body block py-2">Logos</a>
+                <a href="colors.html" class="nav-link font-body block py-2">Colors</a>
+                <a href="fonts.html" class="nav-link font-body block py-2">Fonts</a>
+                <a href="impressum.html" class="nav-link active font-body block py-2">Impressum</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-navy text-white py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="font-heading text-4xl md:text-5xl font-bold text-center mb-4">
+                Impressum
+            </h1>
+            <p class="font-body text-xl text-center text-gray-300 max-w-2xl mx-auto">
+                Angaben gemäß § 5 TMG
+            </p>
+        </div>
+    </header>
+
+    <!-- Impressum Content -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="prose max-w-none">
+                <!-- Company Information -->
+                <div class="mb-12">
+                    <h2 class="font-heading text-2xl font-bold text-navy mb-6">Angaben gemäß § 5 TMG</h2>
+                    <div class="font-body text-lg text-gray-700 space-y-2">
+                        <p><strong>kieks.me GbR</strong></p>
+                        <p>Hardenbergstraße 48</p>
+                        <p>04275 Leipzig</p>
+                        <p>Deutschland</p>
+                    </div>
+                    <div class="font-body text-lg text-gray-700 mt-4">
+                        <p>Vertreten durch die Gesellschafter: André Lademann, Thomas Schöne</p>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="mb-12">
+                    <h2 class="font-heading text-2xl font-bold text-navy mb-6">Kontakt</h2>
+                    <div class="font-body text-lg text-gray-700 space-y-2">
+                        <p><strong>E-Mail:</strong> <a href="mailto:kontakt@kiek.me" class="text-aqua hover:underline">kontakt@kiek.me</a></p>
+                        <p><strong>Telefon:</strong> <a href="tel:+491707353067" class="text-aqua hover:underline">+49 170 7353 067</a></p>
+                    </div>
+                </div>
+
+                <!-- VAT ID -->
+                <div class="mb-12">
+                    <h2 class="font-heading text-2xl font-bold text-navy mb-6">Umsatzsteuer-Identifikationsnummer</h2>
+                    <div class="font-body text-lg text-gray-700">
+                        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:</p>
+                        <p class="mt-2"><strong>DE123456789</strong></p>
+                    </div>
+                </div>
+
+                <!-- Responsible for Content -->
+                <div class="mb-12">
+                    <h2 class="font-heading text-2xl font-bold text-navy mb-6">Verantwortlich für den Inhalt</h2>
+                    <div class="font-body text-lg text-gray-700">
+                        <p>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</p>
+                        <p class="mt-2">André Lademann, Thomas Schöne</p>
+                        <p>Hardenbergstraße 48</p>
+                        <p>04275 Leipzig</p>
+                        <p>Deutschland</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-light.svg" 
+                         alt="kieks.me Logo" 
+                         class="h-8">
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="font-body text-sm text-gray-400">
+                        © 2024 kieks.me GbR. All rights reserved.
+                    </p>
+                    <p class="font-body text-sm text-gray-400 mt-2">
+                        <a href="https://github.com/kieksme/kieks.me.cicd" class="hover:text-aqua transition-colors">View on GitHub</a> | 
+                        <a href="impressum.html" class="hover:text-aqua transition-colors">Impressum</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+        }
+    </script>
+</body>
+</html>

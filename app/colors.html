@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="kieks.me GbR Brand Colors - Color palette and specifications">
+    <meta name="keywords" content="kieks.me, colors, brand palette">
+    <title>Colors - kieks.me GbR</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --color-aqua: #00FFDC;
+            --color-navy: #1E2A45;
+            --color-fuchsia: #FF008F;
+            --color-white: #FFFFFF;
+            --color-gray-dark: #333333;
+            --color-gray-medium: #666666;
+            --color-gray-light: #CCCCCC;
+            --font-heading: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--color-gray-dark);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+        }
+        
+        .font-heading { font-family: var(--font-heading); }
+        .font-body { font-family: var(--font-body); }
+        .text-aqua { color: var(--color-aqua); }
+        .text-navy { color: var(--color-navy); }
+        .text-fuchsia { color: var(--color-fuchsia); }
+        .bg-aqua { background-color: var(--color-aqua); }
+        .bg-navy { background-color: var(--color-navy); }
+        .bg-fuchsia { background-color: var(--color-fuchsia); }
+        .border-aqua { border-color: var(--color-aqua); }
+        .border-navy { border-color: var(--color-navy); }
+        .border-fuchsia { border-color: var(--color-fuchsia); }
+        
+        .nav-link {
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-aqua);
+        }
+        
+        .nav-link.active {
+            color: var(--color-aqua);
+        }
+        
+        .color-swatch {
+            width: 100%;
+            height: 120px;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .nav-menu.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--color-navy);
+                padding: 1rem;
+                z-index: 1000;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="bg-navy text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center">
+                    <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.svg" 
+                         alt="kieks.me Logo" 
+                         class="h-8 w-8 mr-3">
+                    <span class="font-heading font-bold text-lg">kieks.me</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link font-body">Home</a>
+                    <a href="logos.html" class="nav-link font-body">Logos</a>
+                    <a href="colors.html" class="nav-link active font-body">Colors</a>
+                    <a href="fonts.html" class="nav-link font-body">Fonts</a>
+                    <a href="impressum.html" class="nav-link font-body">Impressum</a>
+                </div>
+                <button class="md:hidden" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-menu md:hidden" id="mobile-menu">
+                <a href="index.html" class="nav-link font-body block py-2">Home</a>
+                <a href="logos.html" class="nav-link font-body block py-2">Logos</a>
+                <a href="colors.html" class="nav-link active font-body block py-2">Colors</a>
+                <a href="fonts.html" class="nav-link font-body block py-2">Fonts</a>
+                <a href="impressum.html" class="nav-link font-body block py-2">Impressum</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-navy text-white py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="font-heading text-4xl md:text-5xl font-bold text-center mb-4">
+                Brand Colors
+            </h1>
+            <p class="font-body text-xl text-center text-gray-300 max-w-2xl mx-auto">
+                Official kieks.me GbR color palette and specifications
+            </p>
+        </div>
+    </header>
+
+    <!-- Selection Colors Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-8">Selection Colors</h2>
+            <p class="font-body text-lg text-gray-700 mb-8">
+                Primary brand colors used for selection and accent elements.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Aqua -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="color-swatch bg-aqua"></div>
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Aqua</h3>
+                    <div class="space-y-2 font-body text-sm">
+                        <div><strong>Hex:</strong> <code class="bg-gray-100 px-2 py-1 rounded">#00FFDC</code></div>
+                        <div><strong>RGB:</strong> <code class="bg-gray-100 px-2 py-1 rounded">rgb(0, 255, 220)</code></div>
+                        <div><strong>CMYK:</strong> <code class="bg-gray-100 px-2 py-1 rounded">C:100 M:0 Y:14 K:0</code></div>
+                        <p class="text-gray-600 mt-3">Bright turquoise/aqua selection color</p>
+                    </div>
+                </div>
+                
+                <!-- Navy -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="color-swatch bg-navy"></div>
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Navy</h3>
+                    <div class="space-y-2 font-body text-sm">
+                        <div><strong>Hex:</strong> <code class="bg-gray-100 px-2 py-1 rounded">#1E2A45</code></div>
+                        <div><strong>RGB:</strong> <code class="bg-gray-100 px-2 py-1 rounded">rgb(30, 42, 69)</code></div>
+                        <div><strong>CMYK:</strong> <code class="bg-gray-100 px-2 py-1 rounded">C:100 M:60 Y:0 K:73</code></div>
+                        <p class="text-gray-600 mt-3">Dark blue/navy selection color</p>
+                    </div>
+                </div>
+                
+                <!-- Fuchsia -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="color-swatch bg-fuchsia"></div>
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Fuchsia</h3>
+                    <div class="space-y-2 font-body text-sm">
+                        <div><strong>Hex:</strong> <code class="bg-gray-100 px-2 py-1 rounded">#FF008F</code></div>
+                        <div><strong>RGB:</strong> <code class="bg-gray-100 px-2 py-1 rounded">rgb(255, 0, 143)</code></div>
+                        <div><strong>CMYK:</strong> <code class="bg-gray-100 px-2 py-1 rounded">C:0 M:100 Y:44 K:0</code></div>
+                        <p class="text-gray-600 mt-3">Vibrant pink/fuchsia selection color</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text Colors Section -->
+    <section class="py-16 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-8">Text Colors</h2>
+            <p class="font-body text-lg text-gray-700 mb-8">
+                Colors optimized for text readability on white backgrounds.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- White -->
+                <div class="bg-navy p-6 rounded-lg shadow-md">
+                    <div class="color-swatch bg-white border-2 border-gray-300"></div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-4">White</h3>
+                    <div class="space-y-2 font-body text-sm text-gray-300">
+                        <div><strong>Hex:</strong> <code class="bg-gray-800 px-2 py-1 rounded text-white">#FFFFFF</code></div>
+                        <div><strong>RGB:</strong> <code class="bg-gray-800 px-2 py-1 rounded text-white">rgb(255, 255, 255)</code></div>
+                        <div><strong>CMYK:</strong> <code class="bg-gray-800 px-2 py-1 rounded text-white">C:0 M:0 Y:0 K:0</code></div>
+                        <p class="text-gray-300 mt-3">Text color on dark backgrounds</p>
+                    </div>
+                </div>
+                
+                <!-- Dark Gray -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="color-swatch" style="background-color: #333333;"></div>
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Dark Gray</h3>
+                    <div class="space-y-2 font-body text-sm">
+                        <div><strong>Hex:</strong> <code class="bg-gray-100 px-2 py-1 rounded">#333333</code></div>
+                        <div><strong>RGB:</strong> <code class="bg-gray-100 px-2 py-1 rounded">rgb(51, 51, 51)</code></div>
+                        <div><strong>CMYK:</strong> <code class="bg-gray-100 px-2 py-1 rounded">C:0 M:0 Y:0 K:80</code></div>
+                        <p class="text-gray-600 mt-3">Body text color on white backgrounds</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Neutral Colors Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-8">Neutral Colors</h2>
+            <p class="font-body text-lg text-gray-700 mb-8">
+                Supporting colors for UI elements, backgrounds, and secondary text.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Medium Gray -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="color-swatch" style="background-color: #666666;"></div>
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Medium Gray</h3>
+                    <div class="space-y-2 font-body text-sm">
+                        <div><strong>Hex:</strong> <code class="bg-gray-100 px-2 py-1 rounded">#666666</code></div>
+                        <div><strong>RGB:</strong> <code class="bg-gray-100 px-2 py-1 rounded">rgb(102, 102, 102)</code></div>
+                        <div><strong>CMYK:</strong> <code class="bg-gray-100 px-2 py-1 rounded">C:0 M:0 Y:0 K:60</code></div>
+                        <p class="text-gray-600 mt-3">Secondary text, borders</p>
+                    </div>
+                </div>
+                
+                <!-- Light Gray -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="color-swatch" style="background-color: #CCCCCC;"></div>
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Light Gray</h3>
+                    <div class="space-y-2 font-body text-sm">
+                        <div><strong>Hex:</strong> <code class="bg-gray-100 px-2 py-1 rounded">#CCCCCC</code></div>
+                        <div><strong>RGB:</strong> <code class="bg-gray-100 px-2 py-1 rounded">rgb(204, 204, 204)</code></div>
+                        <div><strong>CMYK:</strong> <code class="bg-gray-100 px-2 py-1 rounded">C:0 M:0 Y:0 K:20</code></div>
+                        <p class="text-gray-600 mt-3">Backgrounds, dividers, subtle elements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Usage Examples Section -->
+    <section class="py-16 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-8">Usage Examples</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- CSS Example -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">CSS Variables</h3>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm font-mono"><code>@import './colors.css';
+
+.button {
+  background-color: var(--color-aqua);
+  color: var(--color-navy);
+}
+
+.text-body {
+  color: var(--color-gray-dark);
+}</code></pre>
+                </div>
+                
+                <!-- JavaScript Example -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">JavaScript/TypeScript</h3>
+                    <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-sm font-mono"><code>import colors from './colors.json';
+
+const primaryColor = colors.selection.aqua.hex;
+const rgbValues = colors.selection.aqua.rgb;</code></pre>
+                </div>
+            </div>
+            
+            <p class="font-body text-lg text-gray-700 mt-8">
+                Download the complete color assets as part of the <a href="https://github.com/kieksme/kieks.me.cicd/releases/latest" class="text-aqua hover:underline">latest release ZIP</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-light.svg" 
+                         alt="kieks.me Logo" 
+                         class="h-8">
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="font-body text-sm text-gray-400">
+                        © 2024 kieks.me GbR. All rights reserved.
+                    </p>
+                    <p class="font-body text-sm text-gray-400 mt-2">
+                        <a href="https://github.com/kieksme/kieks.me.cicd" class="hover:text-aqua transition-colors">View on GitHub</a> | 
+                        <a href="impressum.html" class="hover:text-aqua transition-colors">Impressum</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+        }
+    </script>
+</body>
+</html>
