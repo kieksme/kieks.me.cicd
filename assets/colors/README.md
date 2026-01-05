@@ -2,22 +2,24 @@
 
 This directory contains the official kieks.me GbR brand color palette, including developer files and visual swatches.
 
+**Note**: Assets are distributed as ZIP archives only. Individual files are not available for download. Download the complete color assets as part of the [latest release ZIP](https://github.com/kieksme/kieks.me.cicd/releases).
+
 ## Available Files
 
-**Note**: Assets are distributed as ZIP archives only. Individual files are not available for download.
+| File Name | Format | Description | Download |
+|-----------|--------|-------------|----------|
+| `colors.css` | CSS | CSS variables for web projects | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.css) |
+| `colors.json` | JSON | HEX, RGB, and CMYK values for JavaScript/TypeScript projects | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.json) |
 
-### Developer Files
+### Color Swatches
 
-- **colors.css** - CSS variables for web projects
-- **colors.json** - JSON format with HEX, RGB, and CMYK values for JavaScript/TypeScript projects
-
-### Visual Swatches
-
-- **swatches/** - SVG color swatches for visual reference
-
-### Download
-
-Download the complete color assets as part of the [latest release ZIP](https://github.com/kieksme/kieks.me.cicd/releases).
+| File Name | Format | Color | Download |
+|-----------|--------|-------|----------|
+| `swatches/aqua.svg` | SVG | Aqua (#00FFDC) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/aqua.svg) |
+| `swatches/navy.svg` | SVG | Navy (#1E2A45) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/navy.svg) |
+| `swatches/fuchsia.svg` | SVG | Fuchsia (#FF008F) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/fuchsia.svg) |
+| `swatches/white.svg` | SVG | White (#FFFFFF) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/white.svg) |
+| `swatches/dark-gray.svg` | SVG | Dark Gray (#333333) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/dark-gray.svg) |
 
 ## Primary Brand Colors
 
