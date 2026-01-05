@@ -1,0 +1,179 @@
+/* Business Card Styles */
+/* Standard size: 85mm x 55mm (336px x 212px at 100 DPI) */
+
+@page {
+  size: 85mm 55mm;
+  margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 85mm;
+  height: 55mm;
+  margin: 0;
+  padding: 0;
+  font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: #000000;
+  background: #FFFFFF;
+  overflow: hidden;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Front Side Styles */
+.business-card-front {
+  width: 85mm;
+  height: 55mm;
+  padding: 6mm 8mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo-container {
+  margin-bottom: 4mm;
+}
+
+.logo-container img {
+  height: 8mm;
+  width: auto;
+  display: block;
+}
+
+.contact-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.name {
+  font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14pt;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 2mm;
+  line-height: 1.2;
+}
+
+.position {
+  font-size: 9pt;
+  font-weight: 600;
+  color: #00FFDC;
+  margin-bottom: 4mm;
+  line-height: 1.3;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+
+.contact-item {
+  font-size: 8pt;
+  color: #333333;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+}
+
+.contact-item a {
+  color: #333333;
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  color: #00FFDC;
+}
+
+.contact-label {
+  font-weight: 600;
+  margin-right: 2mm;
+  color: #666666;
+  min-width: 20px;
+}
+
+/* Back Side Styles */
+.business-card-back {
+  width: 85mm;
+  height: 55mm;
+  padding: 6mm 8mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.qr-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.qr-code {
+  width: 35mm;
+  height: 35mm;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 2mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-code img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.back-logo-container {
+  margin-top: auto;
+  padding-top: 2mm;
+}
+
+.back-logo-container img {
+  height: 5mm;
+  width: auto;
+  opacity: 0.6;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .business-card-front,
+  .business-card-back {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}
+
+/* Brand Colors */
+:root {
+  --color-primary: #000000;
+  --color-secondary: #FFFFFF;
+  --color-selection-aqua: #00FFDC;
+  --color-selection-aqua-medium: #00BFA5;
+  --color-selection-aqua-dark: #006B5F;
+  --color-selection-navy: #1E2A45;
+  --color-selection-fuchsia: #FF008F;
+  --color-neutral-dark-gray: #333333;
+  --color-neutral-medium-gray: #666666;
+  --color-neutral-light-gray: #CCCCCC;
+}

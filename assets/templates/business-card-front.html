@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitenkarte - {{name}}</title>
+  <link rel="stylesheet" href="business-card-styles.css">
+</head>
+<body>
+  <div class="business-card-front">
+    <div class="logo-container">
+      <img src="{{logoPath}}" alt="kieks.me Logo">
+    </div>
+    
+    <div class="contact-info">
+      <div class="name">{{name}}</div>
+      {{#if position}}
+      <div class="position">{{position}}</div>
+      {{/if}}
+      
+      <div class="contact-details">
+        {{#if email}}
+        <div class="contact-item">
+          <span class="contact-label">E-Mail:</span>
+          <a href="mailto:{{email}}">{{email}}</a>
+        </div>
+        {{/if}}
+        
+        {{#if phone}}
+        <div class="contact-item">
+          <span class="contact-label">Tel:</span>
+          <a href="tel:{{phone}}">{{phone}}</a>
+        </div>
+        {{/if}}
+        
+        {{#if mobile}}
+        <div class="contact-item">
+          <span class="contact-label">Mobil:</span>
+          <a href="tel:{{mobile}}">{{mobile}}</a>
+        </div>
+        {{/if}}
+        
+        {{#if website}}
+        <div class="contact-item">
+          <span class="contact-label">Web:</span>
+          <a href="{{website}}" target="_blank">{{website}}</a>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

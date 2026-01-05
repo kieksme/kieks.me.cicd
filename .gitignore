@@ -102,3 +102,19 @@ build/
 *-draft.*
 *-preview.*
 *-test.*
+
+# Business Card Generator Output
+output/
+
+# pnpm
+.pnpm-store/
+
+# tailwindcss
+tailwind.config.js
+postcss.config.js
+
+# puppeteer
+puppeteer-core-*.log
+
+# qrcode
+qrcode.png

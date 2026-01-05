@@ -1,0 +1,30 @@
+{
+  "name": "kieks-me-cicd",
+  "version": "1.0.0",
+  "description": "Corporate Identity & Corporate Design assets and tools for kieks.me GbR",
+  "type": "module",
+  "scripts": {
+    "generate-card": "node scripts/business-card-generator.mjs",
+    "generate-samples": "node scripts/generate-sample-cards.mjs"
+  },
+  "keywords": [
+    "brand",
+    "corporate-identity",
+    "business-cards"
+  ],
+  "author": "kieks.me GbR",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "boxen": "^8.0.1",
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {
+    "inquirer": "^9.2.15",
+    "puppeteer": "^21.6.1",
+    "qrcode": "^1.5.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@10.27.0"
+}
