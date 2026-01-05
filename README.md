@@ -2,6 +2,14 @@
 
 Repository to hold and share Corporate Identity and Corporate Design of kieks.me GbR.
 
+## Download Assets
+
+**Download the latest release of brand assets:**
+
+[![Download Latest Release](https://img.shields.io/github/v/release/kieksme/kieks.me.cicd?label=Download%20Latest%20Release&style=for-the-badge&logo=github&logoColor=white&color=00FFDC)](https://github.com/kieksme/kieks.me.cicd/releases/latest)
+
+Visit the [Releases](https://github.com/kieksme/kieks.me.cicd/releases) page to download the latest version of all brand assets as a complete package.
+
 ## Purpose
 
 This repository serves as the central source of truth for all Corporate Identity (CI) and Corporate Design (CD) materials for kieks.me GbR. It contains brand assets, guidelines, templates, and resources to ensure consistent brand representation across all company communications and materials.
@@ -44,14 +52,6 @@ Detailed documentation for each aspect of the brand identity:
 - [Typography](assets/guidelines/TYPOGRAPHY.md) - Font usage and hierarchy
 
 ## Usage
-
-### Download Assets
-
-**Download the latest release of brand assets:**
-
-[![Download Latest Release](https://img.shields.io/github/v/release/kieksme/kieks.me.cicd?label=Download%20Latest%20Release&style=for-the-badge&logo=github&logoColor=white&color=00FFDC)](https://github.com/kieksme/kieks.me.cicd/releases/latest)
-
-Visit the [Releases](https://github.com/kieksme/kieks.me.cicd/releases) page to download the latest version of all brand assets as a complete package.
 
 ### For Developers
 
