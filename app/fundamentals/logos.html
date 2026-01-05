@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="alternate icon" href="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.png">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.png">
     
     <!-- Web App Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="../manifest.json">
     <meta name="theme-color" content="#1E2A45">
     
     <meta name="description" content="kieks.me GbR Logos - All logo variants and formats">
@@ -22,7 +22,7 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kieksme.github.io/kieks.me.cicd/logos.html">
+    <meta property="og:url" content="https://kieksme.github.io/kieks.me.cicd/fundamentals/logos.html">
     <meta property="og:title" content="Logos - kieks.me GbR">
     <meta property="og:description" content="All official kieks.me GbR logo variants and formats - horizontal, single, and icon versions">
     <meta property="og:image" content="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/logos.svg">
@@ -34,13 +34,13 @@
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://kieksme.github.io/kieks.me.cicd/logos.html">
+    <meta name="twitter:url" content="https://kieksme.github.io/kieks.me.cicd/fundamentals/logos.html">
     <meta name="twitter:title" content="Logos - kieks.me GbR">
     <meta name="twitter:description" content="All official kieks.me GbR logo variants and formats">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/logos.svg">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://kieksme.github.io/kieks.me.cicd/logos.html">
+    <link rel="canonical" href="https://kieksme.github.io/kieks.me.cicd/fundamentals/logos.html">
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -49,7 +49,7 @@
       "@type": "WebPage",
       "name": "Logos - kieks.me GbR",
       "description": "All official kieks.me GbR logo variants and formats",
-      "url": "https://kieksme.github.io/kieks.me.cicd/logos.html",
+      "url": "https://kieksme.github.io/kieks.me.cicd/fundamentals/logos.html",
       "isPartOf": {
         "@type": "WebSite",
         "name": "kieks.me Corporate Identity",
@@ -72,7 +72,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -80,7 +80,7 @@
         <div class="max-w-6xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <a href="index.html">
+                    <a href="../index.html">
                         <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.svg" 
                              alt="kieks.me Logo" 
                              class="h-8 w-8 mr-3">
@@ -88,11 +88,36 @@
                     <span class="font-heading font-bold text-lg">kieks.me</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="nav-link font-body">Home</a>
-                    <a href="logos.html" class="nav-link active font-body">Logos</a>
-                    <a href="colors.html" class="nav-link font-body">Colors</a>
-                    <a href="fonts.html" class="nav-link font-body">Fonts</a>
-                    <a href="impressum.html" class="nav-link font-body">Impressum</a>
+                    <a href="../index.html" class="nav-link font-body">Home</a>
+                    <div class="relative group">
+                        <a href="index.html" class="nav-link active font-body flex items-center">
+                            Fundamentals
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="py-2">
+                                <a href="logos.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Logos</a>
+                                <a href="colors.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Colors</a>
+                                <a href="fonts.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Fonts</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <a href="../implementations/index.html" class="nav-link font-body flex items-center">
+                            Implementations
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="py-2">
+                                <a href="../implementations/business-cards.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Business Cards</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../impressum.html" class="nav-link font-body">Impressum</a>
                 </div>
                 <button class="md:hidden" id="mobile-menu-toggle" aria-label="Toggle menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,11 +126,14 @@
                 </button>
             </div>
             <div class="nav-menu md:hidden" id="mobile-menu">
-                <a href="index.html" class="nav-link font-body block py-2">Home</a>
-                <a href="logos.html" class="nav-link active font-body block py-2">Logos</a>
-                <a href="colors.html" class="nav-link font-body block py-2">Colors</a>
-                <a href="fonts.html" class="nav-link font-body block py-2">Fonts</a>
-                <a href="impressum.html" class="nav-link font-body block py-2">Impressum</a>
+                <a href="../index.html" class="nav-link font-body block py-2">Home</a>
+                <a href="index.html" class="nav-link font-body block py-2">Fundamentals</a>
+                <a href="logos.html" class="nav-link active font-body block py-2 pl-4">→ Logos</a>
+                <a href="colors.html" class="nav-link font-body block py-2 pl-4">→ Colors</a>
+                <a href="fonts.html" class="nav-link font-body block py-2 pl-4">→ Fonts</a>
+                <a href="../implementations/index.html" class="nav-link font-body block py-2">Implementations</a>
+                <a href="../implementations/business-cards.html" class="nav-link font-body block py-2 pl-4">→ Business Cards</a>
+                <a href="../impressum.html" class="nav-link font-body block py-2">Impressum</a>
             </div>
         </div>
     </nav>
@@ -496,7 +524,7 @@
                     </p>
                     <p class="font-body text-sm text-gray-400 mt-2">
                         <a href="https://github.com/kieksme/kieks.me.cicd" class="text-aqua hover:opacity-90 transition-colors">View on GitHub</a> | 
-                        <a href="impressum.html" class="text-aqua hover:opacity-90 transition-colors">Impressum</a>
+                        <a href="../impressum.html" class="text-aqua hover:opacity-90 transition-colors">Impressum</a>
                     </p>
                 </div>
             </div>

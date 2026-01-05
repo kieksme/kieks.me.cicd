@@ -19,9 +19,20 @@
     </image:image>
   </url>
   
+  <!-- Fundamentals Overview -->
+  <url>
+    <loc>https://kieks.me/fundamentals/</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/index.svg</image:loc>
+    </image:image>
+  </url>
+  
   <!-- Logos Page -->
   <url>
-    <loc>https://kieks.me/logos.html</loc>
+    <loc>https://kieks.me/fundamentals/logos.html</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -118,7 +129,7 @@
   
   <!-- Colors Page -->
   <url>
-    <loc>https://kieks.me/colors.html</loc>
+    <loc>https://kieks.me/fundamentals/colors.html</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -163,12 +174,34 @@
   
   <!-- Fonts Page -->
   <url>
-    <loc>https://kieks.me/fonts.html</loc>
+    <loc>https://kieks.me/fundamentals/fonts.html</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
       <image:loc>https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/fonts.svg</image:loc>
+    </image:image>
+  </url>
+  
+  <!-- Implementations Overview -->
+  <url>
+    <loc>https://kieks.me/implementations/</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/index.svg</image:loc>
+    </image:image>
+  </url>
+  
+  <!-- Business Cards Page -->
+  <url>
+    <loc>https://kieks.me/implementations/business-cards.html</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/index.svg</image:loc>
     </image:image>
   </url>
   

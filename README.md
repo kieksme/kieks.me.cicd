@@ -34,13 +34,26 @@ This repository serves as the central source of truth for all Corporate Identity
 
 ## What's Included
 
-This repository contains all the visual identity assets and brand guidelines for kieks.me GbR, including:
+This repository contains all the visual identity assets and brand guidelines for kieks.me GbR, organized into two main categories:
+
+### Fundamentals
+
+The foundational brand elements that form the core of our corporate identity:
 
 - [**Logos**](assets/logos/) – Various logo versions (full, icon, wordmark) in multiple formats
 - [**Colors**](assets/colors/) – Brand color palette with color codes (HEX, RGB, CMYK)
 - [**Typography**](assets/fonts/) – Font specifications and typeface files
+
+### Implementations
+
+Products and applications built from our brand fundamentals:
+
+- [**Business Cards**](examples/sample-business-cards/) – Digital business card presentations
 - [**Templates**](assets/templates/) – Document templates, presentation templates, and other brand materials
-- [**Guidelines**](assets/guidelines/) – Comprehensive brand guidelines and usage rules
+
+### Documentation
+
+- [**Guidelines**](guidelines/) – Comprehensive brand guidelines and usage rules
 
 ## Documentation
 
