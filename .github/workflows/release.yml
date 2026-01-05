@@ -67,7 +67,9 @@ jobs:
             
             if [ -n "$CHANGELOG_ENTRY" ] && [ "$CHANGELOG_ENTRY" != "" ]; then
               # Convert changelog format to release notes format
-              CHANGELOG_SECTION="## ✨ What's New in v${VERSION}"$'\n\n'
+              # Use a prominent header with visual separation
+              CHANGELOG_SECTION=$'\n---\n\n'
+              CHANGELOG_SECTION+="## ✨ What'\''s New in v${VERSION}"$'\n\n'
               
               # Format the changelog entries - preserve structure but improve formatting
               CHANGELOG_SECTION+=$(echo "$CHANGELOG_ENTRY" | \
@@ -77,8 +79,8 @@ jobs:
                 sed 's/^### Bug Fixes/### 🐛 Bug Fixes/' | \
                 sed 's/^### Miscellaneous Chores/### 🔧 Miscellaneous Chores/')
               
-              # Add spacing at the end
-              CHANGELOG_SECTION+=$'\n'
+              # Add spacing and visual separator at the end
+              CHANGELOG_SECTION+=$'\n\n---\n'
               
               # Save to temp file for insertion
               echo "$CHANGELOG_SECTION" > /tmp/changelog_section.txt
