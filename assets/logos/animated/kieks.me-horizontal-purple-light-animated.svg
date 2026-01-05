@@ -7,8 +7,9 @@
   10%, 100% { transform: translate(0, 0); }
 }
 @keyframes kLetterBounce {
-  0%, 5.7% { transform: rotate(0deg); transform-origin: 122.727px 98.912px; }
-  6.4% { transform: rotate(10deg); transform-origin: 122.727px 98.912px; }
+  0%, 2.9% { transform: rotate(0deg); transform-origin: 122.727px 98.912px; }
+  4.3% { transform: rotate(6deg); transform-origin: 122.727px 98.912px; }
+  5.7% { transform: rotate(10deg); transform-origin: 122.727px 98.912px; }
   7.1% { transform: rotate(8deg); transform-origin: 122.727px 98.912px; }
   8.6% { transform: rotate(3deg); transform-origin: 122.727px 98.912px; }
   10%, 100% { transform: rotate(0deg); transform-origin: 122.727px 98.912px; }
