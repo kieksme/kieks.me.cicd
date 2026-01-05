@@ -22,6 +22,7 @@ export default defineConfig({
         'fundamentals/fonts': resolve(__dirname, 'app/fundamentals/fonts.html'),
         'implementations/index': resolve(__dirname, 'app/implementations/index.html'),
         'implementations/business-cards': resolve(__dirname, 'app/implementations/business-cards.html'),
+        'implementations/web-applications': resolve(__dirname, 'app/implementations/web-applications.html'),
         impressum: resolve(__dirname, 'app/impressum.html'),
       },
     },
