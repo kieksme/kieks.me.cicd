@@ -6,8 +6,16 @@
   <title>Visitenkarte - {{name}}</title>
   <link rel="stylesheet" href="business-card-styles.css">
 </head>
-<body>
+<body class="front-page">
   <div class="business-card-front">
+    <div class="logo-container">
+      {{#if logoSvgContent}}
+      <div class="logo-svg-wrapper">{{logoSvgContent}}</div>
+      {{else}}
+      <img src="{{logoPath}}" alt="kieks.me Logo" class="logo-image">
+      {{/if}}
+    </div>
+    
     <div class="contact-info">
       <div class="name">{{name}}</div>
       {{#if position}}
@@ -43,14 +51,6 @@
         </div>
         {{/if}}
       </div>
-    </div>
-    
-    <div class="logo-container">
-      {{#if logoSvgContent}}
-      <div class="logo-svg-wrapper">{{logoSvgContent}}</div>
-      {{else}}
-      <img src="{{logoPath}}" alt="kieks.me Logo">
-      {{/if}}
     </div>
   </div>
 </body>

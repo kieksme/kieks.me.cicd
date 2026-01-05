@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "inquirer": "^9.2.15",
-    "puppeteer": "^21.6.1",
+    "puppeteer": "^23.11.1",
     "qrcode": "^1.5.3"
   },
   "engines": {

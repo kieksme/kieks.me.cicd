@@ -195,10 +195,10 @@ async function generatePDF(html, outputPath) {
 
     const page = await browser.newPage();
     
-    // Set viewport
+    // Set viewport - larger to accommodate crop marks
     await page.setViewport({
-      width: 336,
-      height: 212,
+      width: 359, // 91mm at 100 DPI
+      height: 241, // 61mm at 100 DPI
       deviceScaleFactor: 1,
     });
     
@@ -218,8 +218,8 @@ async function generatePDF(html, outputPath) {
       });
     });
 
-    // Wait for rendering
-    await page.waitForTimeout(500);
+    // Wait for rendering (waitForTimeout was removed in newer Puppeteer versions)
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     // Generate PDF with business card dimensions
     await page.pdf({

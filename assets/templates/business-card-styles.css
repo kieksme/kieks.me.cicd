@@ -27,74 +27,93 @@ body {
   print-color-adjust: exact;
 }
 
+/* Front side body has dark background */
+body.front-page {
+  background: #1E2A45;
+}
+
 /* Front Side Styles */
 .business-card-front {
   width: 85mm;
   height: 55mm;
-  padding: 6mm 8mm;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  padding: 0;
   position: relative;
-  background: #1E2A45;
-}
-
-.contact-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-right: 4mm;
+  background: transparent;
 }
 
 .logo-container {
-  flex-shrink: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40mm;
+  height: 55mm;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
+  z-index: 1;
 }
 
-.logo-container img,
+.contact-info {
+  position: absolute;
+  left: 45mm;
+  top: 12mm;
+  right: 6mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 2;
+  min-height: 0;
+}
+
+.logo-container img.logo-image,
 .logo-container .logo-svg-wrapper {
-  height: 20mm;
-  width: auto;
-  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 47mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+  padding-top: 8mm;
+  padding-left: 2mm;
 }
 
 .logo-container .logo-svg-wrapper svg {
-  height: 100%;
-  width: auto;
+  width: 100%;
+  height: auto;
+  max-height: 47mm;
   display: block;
+  margin: auto;
 }
 
 .name {
   font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 14pt;
+  font-size: 12pt;
   font-weight: 700;
   color: #FFFFFF;
-  margin-bottom: 2mm;
-  line-height: 1.2;
+  margin-bottom: 1.5mm;
+  line-height: 1.1;
 }
 
 .position {
-  font-size: 9pt;
+  font-size: 7.5pt;
   font-weight: 600;
   color: #00FFDC;
-  margin-bottom: 4mm;
-  line-height: 1.3;
+  margin-bottom: 3mm;
+  line-height: 1.2;
 }
 
 .contact-details {
   display: flex;
   flex-direction: column;
-  gap: 1.5mm;
+  gap: 1mm;
 }
 
 .contact-item {
-  font-size: 8pt;
+  font-size: 7pt;
   color: #FFFFFF;
-  line-height: 1.4;
+  line-height: 1.3;
   display: flex;
   align-items: center;
 }
@@ -110,103 +129,76 @@ body {
 
 .contact-label {
   font-weight: 600;
-  margin-right: 2mm;
   color: #CCCCCC;
-  min-width: 20px;
+  width: 10mm;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-align: left;
 }
 
 /* Back Side Styles - Grayscale */
 .business-card-back {
   width: 85mm;
   height: 55mm;
-  padding: 5mm 6mm;
+  padding: 5mm;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 4mm;
   position: relative;
   background: #FFFFFF;
-  /* filter: grayscale(100%); - Removed for PDF compatibility */
-}
-
-.back-decoration {
-  position: absolute;
-  top: 3mm;
-  right: 3mm;
-  width: 15mm;
-  height: 15mm;
-  opacity: 0.3;
-  z-index: 1;
-}
-
-.poke-illustration {
-  width: 100%;
-  height: 100%;
 }
 
 .qr-container {
-  flex: 1;
+  flex: 0 0 auto;
+  width: 50mm;
+  height: 50mm;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  gap: 2mm;
-  z-index: 2;
 }
 
 .qr-code {
-  width: 30mm;
-  height: 30mm;
-  background: #FFFFFF;
-  border: 1px solid #333333;
-  padding: 2mm;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* filter: grayscale(100%); - Removed for PDF compatibility */
 }
 
 .qr-code img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* filter: grayscale(100%); - Removed for PDF compatibility */
 }
 
 .qr-info {
-  text-align: center;
-  max-width: 60mm;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 2mm;
   color: #333333;
 }
 
 .qr-title {
   font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 8pt;
+  font-size: 9pt;
   font-weight: 700;
   color: #000000;
-  margin-bottom: 1mm;
+  margin-bottom: 2mm;
   line-height: 1.2;
 }
 
 .qr-description {
-  font-size: 6pt;
+  font-size: 7pt;
   color: #666666;
-  line-height: 1.3;
+  line-height: 1.4;
   margin: 0;
-}
-
-.back-logo-container {
-  margin-top: auto;
-  padding-top: 1mm;
-  z-index: 2;
-}
-
-.back-logo-container img {
-  height: 4mm;
-  width: auto;
-  opacity: 0.4;
-  /* filter: grayscale(100%); - Removed for PDF compatibility */
 }
 
 /* Print Styles */

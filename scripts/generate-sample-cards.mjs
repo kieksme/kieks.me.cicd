@@ -21,7 +21,7 @@ const sampleContacts = [
   {
     name: 'Max Mustermann',
     position: 'Geschäftsführer',
-    email: 'max.mustermann@kieks.me',
+    email: 'max@kieks.me',
     phone: '+49 123 456789',
     mobile: '+49 123 4567890',
     address: 'Musterstraße 123',
@@ -34,7 +34,7 @@ const sampleContacts = [
   {
     name: 'Anna Schmidt',
     position: 'Lead Developer',
-    email: 'anna.schmidt@kieks.me',
+    email: 'anna@kieks.me',
     phone: '+49 123 456788',
     mobile: '+49 123 4567880',
     address: 'Beispielweg 45',
@@ -47,7 +47,7 @@ const sampleContacts = [
   {
     name: 'Tom Weber',
     position: 'Designer',
-    email: 'tom.weber@kieks.me',
+    email: 'tom@kieks.me',
     mobile: '+49 123 4567870',
     address: 'Designstraße 78',
     postalCode: '10115',
