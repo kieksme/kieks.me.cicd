@@ -67,7 +67,9 @@ function generateVCard(data) {
     lines.push(`TITLE:${data.position}`);
   }
 
-  lines.push('ORG:kieks.me GbR');
+  // Add organization/company name
+  const companyName = data.companyName || 'kieks.me GbR';
+  lines.push(`ORG:${companyName}`);
 
   if (data.email) {
     lines.push(`EMAIL;TYPE=WORK,INTERNET:${data.email}`);
@@ -94,20 +96,26 @@ function generateVCard(data) {
     lines.push(`ADR;TYPE=WORK:${addressParts.join(';')}`);
   }
 
+  // Add website URL (if present)
   if (data.website) {
     const url = normalizeUrl(data.website);
     lines.push(`URL:${url}`);
   }
 
+  // Add social media URLs as separate URL entries with TYPE parameter
   if (data.socialMedia) {
     // Handle both array format (new) and string format (legacy)
     if (Array.isArray(data.socialMedia)) {
       // New format: array of objects with name and url
+      // Each social media entry becomes a separate URL entry in the vCard
       data.socialMedia.forEach((entry) => {
         if (entry.url) {
           const url = normalizeUrl(entry.url);
+          // Use URL with TYPE parameter for social media profiles
+          // Format: URL;TYPE=ServiceName:https://...
           lines.push(`URL;TYPE=${entry.name}:${url}`);
         } else if (entry.name) {
+          // If no URL provided, add as note
           lines.push(`NOTE:Social Media: ${entry.name}`);
         }
       });

@@ -100,6 +100,14 @@ body.front-page {
   font-size: 7.5pt;
   font-weight: 600;
   color: #00FFDC;
+  margin-bottom: 1.5mm;
+  line-height: 1.2;
+}
+
+.company-name {
+  font-size: 7pt;
+  font-weight: 500;
+  color: #CCCCCC;
   margin-bottom: 3mm;
   line-height: 1.2;
 }
