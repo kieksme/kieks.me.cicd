@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.2](https://github.com/kieksme/kieks.me.cicd/compare/v0.11.1...v0.11.2) (2026-01-05)
+
+
+### Bug Fixes
+
+* update navigation styles and enhance header behavior ([5fdac71](https://github.com/kieksme/kieks.me.cicd/commit/5fdac7155bf12afa8048e618c1dd16e1939204d5))
+
 ## [0.11.1](https://github.com/kieksme/kieks.me.cicd/compare/v0.11.0...v0.11.1) (2026-01-05)
 
 
