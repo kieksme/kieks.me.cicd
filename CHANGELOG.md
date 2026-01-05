@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.6.1](https://github.com/kieksme/kieks.me.cicd/compare/v0.6.0...v0.6.1) (2026-01-05)
+
+
+### Bug Fixes
+
+* **README:** clarify logo usage instructions and add usage examples ([ce8c470](https://github.com/kieksme/kieks.me.cicd/commit/ce8c470fdf0d360ef688e0cfb37306330613d41f))
+* **README:** update logo documentation with background colors for improved visibility ([148852d](https://github.com/kieksme/kieks.me.cicd/commit/148852dda260786a43d01976196020ae9aee5599))
+* **release:** correct escape character in changelog header formatting ([4280c03](https://github.com/kieksme/kieks.me.cicd/commit/4280c033d4b63e47a95fdad0313da984802ed7b6))
+
 ## [0.6.0](https://github.com/kieksme/kieks.me.cicd/compare/v0.5.0...v0.6.0) (2026-01-05)
 
 
