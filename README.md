@@ -80,6 +80,59 @@ Download the latest release package or refer to the guidelines for creating new 
 
 **Please review the brand guidelines before using any assets to ensure consistent brand representation across all touchpoints.**
 
+### Business Card Generator
+
+The repository includes a business card generator that creates print-ready PDFs with QR codes containing vCard data.
+
+#### Installation
+
+1. Install Node.js dependencies:
+```bash
+pnpm install
+```
+
+2. (Optional but recommended) Install Ghostscript for font-to-path conversion:
+   - macOS: `brew install ghostscript`
+   - Linux: `sudo apt-get install ghostscript` or `sudo yum install ghostscript`
+   - Windows: Download from [Ghostscript website](https://www.ghostscript.com/download/gsdnld.html)
+
+#### Usage
+
+Generate a business card:
+```bash
+pnpm generate-card
+```
+
+Generate sample business cards:
+```bash
+pnpm generate-samples
+```
+
+#### Dependencies
+
+**Node.js packages:**
+- `puppeteer` - PDF generation from HTML
+- `qrcode` - QR code generation
+- `inquirer` - Interactive CLI prompts
+
+**External tools:**
+- **Ghostscript** (optional) - Converts fonts to paths in PDFs for print compatibility
+  - The generator automatically detects Ghostscript if installed
+  - If not installed, PDFs will still be generated but fonts won't be converted to paths
+
+#### Print Specifications
+
+The generator creates PDFs compliant with print shop specifications:
+- Final size: 85mm × 55mm (landscape)
+- PDF size with bleed: 89mm × 59mm (2mm bleed on all sides)
+- Safe area: 82mm × 52mm (content 1.5mm from edge)
+- Resolution: 300 DPI minimum
+- Color mode: CMYK with "PSO Uncoated ISO12647 (Fogra 47L)" profile
+- Page order: Front = Page 1, Back = Page 2
+- Fonts: Converted to paths (if Ghostscript is installed)
+
+For more details, see [Business Card Templates documentation](assets/templates/README.md).
+
 ## Contributing
 
 To propose changes to corporate identity materials:

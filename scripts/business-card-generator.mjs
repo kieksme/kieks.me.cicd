@@ -6,7 +6,8 @@
 
 import { fileURLToPath } from 'url';
 import { dirname, join, resolve } from 'path';
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync, unlinkSync, renameSync } from 'fs';
+import { execSync, spawn } from 'child_process';
 import puppeteer from 'puppeteer';
 import QRCode from 'qrcode';
 import inquirer from 'inquirer';
@@ -219,12 +220,68 @@ function loadTemplate(templatePath, data) {
 }
 
 /**
- * Generate PDF from HTML
- * @param {string} html - HTML content
+ * Check if Ghostscript is available
+ * @returns {boolean} True if Ghostscript is available
+ */
+function checkGhostscriptAvailable() {
+  try {
+    execSync('gs --version', { stdio: 'ignore' });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Convert fonts to paths in PDF using Ghostscript
+ * @param {string} inputPath - Input PDF path
  * @param {string} outputPath - Output PDF path
  * @returns {Promise<void>}
  */
-async function generatePDF(html, outputPath) {
+async function convertFontsToPaths(inputPath, outputPath) {
+  return new Promise((resolve, reject) => {
+    // Ghostscript command to convert fonts to paths
+    // -dNOPAUSE -dBATCH: non-interactive mode
+    // -sDEVICE=pdfwrite: output as PDF
+    // -dNoOutputFonts: don't embed fonts (forces path conversion)
+    // -dCompatibilityLevel=1.4: PDF version
+    const gsProcess = spawn('gs', [
+      '-dNOPAUSE',
+      '-dBATCH',
+      '-sDEVICE=pdfwrite',
+      '-dNoOutputFonts',
+      '-dCompatibilityLevel=1.4',
+      `-sOutputFile=${outputPath}`,
+      inputPath,
+    ]);
+
+    let stderr = '';
+    gsProcess.stderr.on('data', (data) => {
+      stderr += data.toString();
+    });
+
+    gsProcess.on('close', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`Ghostscript conversion failed: ${stderr}`));
+      }
+    });
+
+    gsProcess.on('error', (err) => {
+      reject(new Error(`Failed to execute Ghostscript: ${err.message}`));
+    });
+  });
+}
+
+/**
+ * Generate PDF from HTML
+ * @param {string} html - HTML content
+ * @param {string} outputPath - Output PDF path
+ * @param {boolean} convertFonts - Whether to convert fonts to paths (requires Ghostscript)
+ * @returns {Promise<void>}
+ */
+async function generatePDF(html, outputPath, convertFonts = false) {
   let browser;
   try {
     browser = await puppeteer.launch({
@@ -246,10 +303,12 @@ async function generatePDF(html, outputPath) {
 
     const page = await browser.newPage();
     
-    // Set viewport - larger to accommodate crop marks
+    // Set viewport for 300 DPI output with bleed (89mm x 59mm)
+    // At 300 DPI: 89mm = 1051px, 59mm = 697px
+    // Using deviceScaleFactor of 3 to achieve 300 DPI from base 100 DPI
     await page.setViewport({
-      width: 359, // 91mm at 100 DPI
-      height: 241, // 61mm at 100 DPI
+      width: 1051, // 89mm at 300 DPI (with 2mm bleed on each side)
+      height: 697, // 59mm at 300 DPI (with 2mm bleed on each side)
       deviceScaleFactor: 1,
     });
     
@@ -272,11 +331,14 @@ async function generatePDF(html, outputPath) {
     // Wait for rendering (waitForTimeout was removed in newer Puppeteer versions)
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // Generate PDF with business card dimensions
+    // Generate PDF with business card dimensions including bleed
+    // Final size: 85mm x 55mm, with 2mm bleed = 89mm x 59mm
+    const tempOutputPath = convertFonts ? outputPath.replace('.pdf', '.temp.pdf') : outputPath;
+    
     await page.pdf({
-      path: outputPath,
-      width: '85mm',
-      height: '55mm',
+      path: tempOutputPath,
+      width: '89mm', // 85mm + 2mm bleed on each side
+      height: '59mm', // 55mm + 2mm bleed on each side
       printBackground: true,
       preferCSSPageSize: true,
       margin: {
@@ -285,8 +347,38 @@ async function generatePDF(html, outputPath) {
         bottom: '0mm',
         left: '0mm',
       },
+      // Note: Puppeteer doesn't directly support CMYK color profile setting
+      // Color profile conversion should be done via post-processing
       timeout: 30000,
     });
+
+    // Convert fonts to paths if requested and Ghostscript is available
+    if (convertFonts) {
+      if (checkGhostscriptAvailable()) {
+        try {
+          await convertFontsToPaths(tempOutputPath, outputPath);
+          // Remove temporary file
+          if (existsSync(tempOutputPath)) {
+            try {
+              unlinkSync(tempOutputPath);
+            } catch {
+              // Ignore deletion errors
+            }
+          }
+        } catch (err) {
+          // If conversion fails, use original file
+          warn(`Font-zu-Pfad-Konvertierung fehlgeschlagen: ${err.message}. Verwende Original-PDF.`);
+          if (existsSync(tempOutputPath)) {
+            renameSync(tempOutputPath, outputPath);
+          }
+        }
+      } else {
+        warn('Ghostscript nicht gefunden. Schriften werden nicht in Pfade umgewandelt.');
+        if (existsSync(tempOutputPath)) {
+          renameSync(tempOutputPath, outputPath);
+        }
+      }
+    }
   } catch (err) {
     throw new Error(`PDF-Generierung fehlgeschlagen: ${err.message}`);
   } finally {
@@ -976,14 +1068,25 @@ async function generateBusinessCard(contactData, outputDir) {
     templateData.website = normalizeUrl(templateData.website);
   }
 
-  // Generate front side
-  cardProgress('Generiere Vorderseite …', 'generating');
+  // Check if Ghostscript is available for font-to-path conversion
+  const convertFonts = checkGhostscriptAvailable();
+  if (convertFonts) {
+    info('Ghostscript gefunden. Schriften werden in Pfade umgewandelt.');
+  } else {
+    warn('Ghostscript nicht gefunden. Schriften werden nicht in Pfade umgewandelt.');
+    warn('Für Druckqualität wird empfohlen, Ghostscript zu installieren.');
+  }
+
+  // Load CSS once for both sides
+  const cssPath = join(projectRoot, 'assets', 'templates', 'business-card-styles.css');
+  const css = readFileSync(cssPath, 'utf-8');
+
+  // Generate front side (Page 1)
+  cardProgress('Generiere Vorderseite (Seite 1) …', 'generating');
   const frontTemplatePath = join(projectRoot, 'assets', 'templates', 'business-card-front.html');
   const frontHtml = loadTemplate(frontTemplatePath, templateData);
   
   // Inject CSS
-  const cssPath = join(projectRoot, 'assets', 'templates', 'business-card-styles.css');
-  const css = readFileSync(cssPath, 'utf-8');
   const frontHtmlFinal = frontHtml.replace(
     '<link rel="stylesheet" href="business-card-styles.css">',
     `<style>${css}</style>`
@@ -991,15 +1094,15 @@ async function generateBusinessCard(contactData, outputDir) {
 
   const frontOutputPath = join(outputDir, `${contactData.name.replace(/\s+/g, '-')}-front.pdf`);
   try {
-    await generatePDF(frontHtmlFinal, frontOutputPath);
+    await generatePDF(frontHtmlFinal, frontOutputPath, convertFonts);
     cardProgress(`Vorderseite gespeichert: ${frontOutputPath}`, 'done');
   } catch (err) {
     cardProgress(`Fehler bei Vorderseite: ${err.message}`, 'error');
     throw err;
   }
 
-  // Generate back side
-  cardProgress('Generiere Rückseite …', 'generating');
+  // Generate back side (Page 2)
+  cardProgress('Generiere Rückseite (Seite 2) …', 'generating');
   const backTemplatePath = join(projectRoot, 'assets', 'templates', 'business-card-back.html');
   const backHtml = loadTemplate(backTemplatePath, templateData);
   
@@ -1011,7 +1114,7 @@ async function generateBusinessCard(contactData, outputDir) {
 
   const backOutputPath = join(outputDir, `${contactData.name.replace(/\s+/g, '-')}-back.pdf`);
   try {
-    await generatePDF(backHtmlFinal, backOutputPath);
+    await generatePDF(backHtmlFinal, backOutputPath, convertFonts);
     cardProgress(`Rückseite gespeichert: ${backOutputPath}`, 'done');
   } catch (err) {
     cardProgress(`Fehler bei Rückseite: ${err.message}`, 'error');

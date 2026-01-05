@@ -1,8 +1,9 @@
 /* Business Card Styles */
-/* Standard size: 85mm x 55mm (336px x 212px at 100 DPI) */
+/* Print specifications: 85mm x 55mm final size with 2mm bleed = 89mm x 59mm PDF size */
+/* Safe area: 82mm x 52mm (content 1.5mm from edge, centered with 3.5mm offset) */
 
 @page {
-  size: 85mm 55mm;
+  size: 89mm 59mm; /* Includes 2mm bleed on all sides */
   margin: 0;
 }
 
@@ -13,8 +14,8 @@
 }
 
 body {
-  width: 85mm;
-  height: 55mm;
+  width: 89mm; /* PDF size with bleed */
+  height: 59mm; /* PDF size with bleed */
   margin: 0;
   padding: 0;
   font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
@@ -25,28 +26,41 @@ body {
   overflow: hidden;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
+  position: relative;
 }
 
-/* Front side body has dark background */
+/* Front side body has dark background extending to bleed */
 body.front-page {
   background: #1E2A45;
 }
 
+/* Safe area container - content must be within this area */
+.safe-area {
+  width: 82mm; /* 85mm - 3mm (1.5mm margin on each side) */
+  height: 52mm; /* 55mm - 3mm (1.5mm margin on each side) */
+  position: absolute;
+  left: 3.5mm; /* (89mm - 82mm) / 2 = 3.5mm offset */
+  top: 3.5mm; /* (59mm - 52mm) / 2 = 3.5mm offset */
+  overflow: visible;
+}
+
 /* Front Side Styles */
 .business-card-front {
-  width: 85mm;
-  height: 55mm;
+  width: 89mm; /* Extend to bleed area */
+  height: 59mm; /* Extend to bleed area */
   padding: 0;
-  position: relative;
-  background: transparent;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #1E2A45; /* Background extends to bleed */
 }
 
 .logo-container {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 3.5mm; /* Safe area offset */
+  top: 3.5mm; /* Safe area offset */
   width: 40mm;
-  height: 55mm;
+  height: 52mm; /* Safe area height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,9 +70,9 @@ body.front-page {
 
 .contact-info {
   position: absolute;
-  left: 45mm;
-  top: 12mm;
-  right: 6mm;
+  left: 48.5mm; /* 3.5mm (offset) + 45mm (original position) */
+  top: 15.5mm; /* 3.5mm (offset) + 12mm (original position) */
+  right: 9.5mm; /* 3.5mm (offset) + 6mm (original margin) */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -146,16 +160,23 @@ body.front-page {
 
 /* Back Side Styles - Grayscale */
 .business-card-back {
-  width: 85mm;
-  height: 55mm;
-  padding: 5mm;
+  width: 89mm; /* Extend to bleed area */
+  height: 59mm; /* Extend to bleed area */
+  padding: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 4mm;
-  position: relative;
-  background: #FFFFFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #FFFFFF; /* Background extends to bleed */
+  /* Safe area padding */
+  padding-left: 8.5mm; /* 3.5mm (offset) + 5mm (original padding) */
+  padding-right: 8.5mm;
+  padding-top: 8.5mm;
+  padding-bottom: 8.5mm;
 }
 
 .qr-container {
