@@ -49,6 +49,8 @@ Detailed documentation for each aspect of the brand identity:
 
 **Download the latest release of brand assets:**
 
+[![Download Latest Release](https://img.shields.io/github/v/release/kieksme/kieks.me.cicd?label=Download%20Latest%20Release&style=for-the-badge&logo=github&logoColor=white&color=00FFDC)](https://github.com/kieksme/kieks.me.cicd/releases/latest)
+
 Visit the [Releases](https://github.com/kieksme/kieks.me.cicd/releases) page to download the latest version of all brand assets as a complete package.
 
 ### For Developers
