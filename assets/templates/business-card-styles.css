@@ -33,19 +33,11 @@ body {
   height: 55mm;
   padding: 6mm 8mm;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   position: relative;
-}
-
-.logo-container {
-  margin-bottom: 4mm;
-}
-
-.logo-container img {
-  height: 8mm;
-  width: auto;
-  display: block;
+  background: #1E2A45;
 }
 
 .contact-info {
@@ -53,13 +45,34 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-right: 4mm;
+}
+
+.logo-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container img,
+.logo-container .logo-svg-wrapper {
+  height: 20mm;
+  width: auto;
+  display: block;
+}
+
+.logo-container .logo-svg-wrapper svg {
+  height: 100%;
+  width: auto;
+  display: block;
 }
 
 .name {
   font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   font-size: 14pt;
   font-weight: 700;
-  color: #000000;
+  color: #FFFFFF;
   margin-bottom: 2mm;
   line-height: 1.2;
 }
@@ -80,14 +93,14 @@ body {
 
 .contact-item {
   font-size: 8pt;
-  color: #333333;
+  color: #FFFFFF;
   line-height: 1.4;
   display: flex;
   align-items: center;
 }
 
 .contact-item a {
-  color: #333333;
+  color: #FFFFFF;
   text-decoration: none;
 }
 
@@ -98,56 +111,102 @@ body {
 .contact-label {
   font-weight: 600;
   margin-right: 2mm;
-  color: #666666;
+  color: #CCCCCC;
   min-width: 20px;
 }
 
-/* Back Side Styles */
+/* Back Side Styles - Grayscale */
 .business-card-back {
   width: 85mm;
   height: 55mm;
-  padding: 6mm 8mm;
+  padding: 5mm 6mm;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   position: relative;
+  background: #FFFFFF;
+  /* filter: grayscale(100%); - Removed for PDF compatibility */
+}
+
+.back-decoration {
+  position: absolute;
+  top: 3mm;
+  right: 3mm;
+  width: 15mm;
+  height: 15mm;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.poke-illustration {
+  width: 100%;
+  height: 100%;
 }
 
 .qr-container {
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+  gap: 2mm;
+  z-index: 2;
 }
 
 .qr-code {
-  width: 35mm;
-  height: 35mm;
+  width: 30mm;
+  height: 30mm;
   background: #FFFFFF;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #333333;
   padding: 2mm;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* filter: grayscale(100%); - Removed for PDF compatibility */
 }
 
 .qr-code img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  /* filter: grayscale(100%); - Removed for PDF compatibility */
+}
+
+.qr-info {
+  text-align: center;
+  max-width: 60mm;
+  color: #333333;
+}
+
+.qr-title {
+  font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 8pt;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 1mm;
+  line-height: 1.2;
+}
+
+.qr-description {
+  font-size: 6pt;
+  color: #666666;
+  line-height: 1.3;
+  margin: 0;
 }
 
 .back-logo-container {
   margin-top: auto;
-  padding-top: 2mm;
+  padding-top: 1mm;
+  z-index: 2;
 }
 
 .back-logo-container img {
-  height: 5mm;
+  height: 4mm;
   width: auto;
-  opacity: 0.6;
+  opacity: 0.4;
+  /* filter: grayscale(100%); - Removed for PDF compatibility */
 }
 
 /* Print Styles */

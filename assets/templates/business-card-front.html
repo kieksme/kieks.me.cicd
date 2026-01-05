@@ -8,10 +8,6 @@
 </head>
 <body>
   <div class="business-card-front">
-    <div class="logo-container">
-      <img src="{{logoPath}}" alt="kieks.me Logo">
-    </div>
-    
     <div class="contact-info">
       <div class="name">{{name}}</div>
       {{#if position}}
@@ -47,6 +43,14 @@
         </div>
         {{/if}}
       </div>
+    </div>
+    
+    <div class="logo-container">
+      {{#if logoSvgContent}}
+      <div class="logo-svg-wrapper">{{logoSvgContent}}</div>
+      {{else}}
+      <img src="{{logoPath}}" alt="kieks.me Logo">
+      {{/if}}
     </div>
   </div>
 </body>

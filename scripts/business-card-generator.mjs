@@ -22,16 +22,16 @@ import {
 } from './misc-cli-utils.mjs';
 
 /**
- * Convert SVG file to base64 data URI
+ * Convert SVG file to data URI (URL-encoded for better compatibility)
  * @param {string} filePath - Path to SVG file
- * @returns {string} Base64 data URI
+ * @returns {string} Data URI
  */
 function svgToDataUri(filePath) {
   try {
     const svgContent = readFileSync(filePath, 'utf-8');
-    // Encode SVG content
-    const base64 = Buffer.from(svgContent).toString('base64');
-    return `data:image/svg+xml;base64,${base64}`;
+    // URL-encode SVG content (more reliable than base64 for SVG)
+    const encoded = encodeURIComponent(svgContent);
+    return `data:image/svg+xml;charset=utf-8,${encoded}`;
   } catch (err) {
     throw new Error(`Logo konnte nicht geladen werden: ${err.message}`);
   }
@@ -174,18 +174,52 @@ function loadTemplate(templatePath, data) {
  * @returns {Promise<void>}
  */
 async function generatePDF(html, outputPath) {
-  const browser = await puppeteer.launch({
-    headless: 'new',
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
-
+  let browser;
   try {
+    browser = await puppeteer.launch({
+      headless: 'new',
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--disable-software-rasterizer',
+        '--disable-extensions',
+        '--disable-background-networking',
+        '--disable-background-timer-throttling',
+        '--disable-renderer-backgrounding',
+        '--disable-backgrounding-occluded-windows',
+      ],
+      timeout: 60000,
+    });
+
     const page = await browser.newPage();
     
-    // Set content
+    // Set viewport
+    await page.setViewport({
+      width: 336,
+      height: 212,
+      deviceScaleFactor: 1,
+    });
+    
+    // Set timeouts
+    page.setDefaultNavigationTimeout(20000);
+    page.setDefaultTimeout(20000);
+    
+    // Set content - use networkidle0 but with shorter timeout
     await page.setContent(html, {
       waitUntil: 'networkidle0',
+      timeout: 15000,
+    }).catch(() => {
+      // Fallback: if networkidle0 fails, try with load
+      return page.setContent(html, {
+        waitUntil: 'load',
+        timeout: 10000,
+      });
     });
+
+    // Wait for rendering
+    await page.waitForTimeout(500);
 
     // Generate PDF with business card dimensions
     await page.pdf({
@@ -194,9 +228,24 @@ async function generatePDF(html, outputPath) {
       height: '55mm',
       printBackground: true,
       preferCSSPageSize: true,
+      margin: {
+        top: '0mm',
+        right: '0mm',
+        bottom: '0mm',
+        left: '0mm',
+      },
+      timeout: 30000,
     });
+  } catch (err) {
+    throw new Error(`PDF-Generierung fehlgeschlagen: ${err.message}`);
   } finally {
-    await browser.close();
+    if (browser) {
+      try {
+        await browser.close();
+      } catch (closeErr) {
+        // Ignore close errors
+      }
+    }
   }
 }
 
@@ -308,9 +357,10 @@ async function generateBusinessCard(contactData, outputDir) {
   const qrCodeDataUri = await generateQRCode(vCardData);
   cardProgress('QR-Code generiert', 'done');
 
-  // Load logo as base64 data URI
-  const logoPath = join(projectRoot, 'assets', 'logos', 'kieks.me-horizontal-aqua-dark.svg');
+  // Load logo as SVG content
+  const logoPath = join(projectRoot, 'assets', 'logos', 'kieks.me-single-circle.svg');
   cardProgress('Lade Logo …', 'generating');
+  const logoSvgContent = readFileSync(logoPath, 'utf-8');
   const logoDataUri = svgToDataUri(logoPath);
   cardProgress('Logo geladen', 'done');
 
@@ -319,6 +369,7 @@ async function generateBusinessCard(contactData, outputDir) {
      ...contactData,
     qrCodeDataUri,
     logoPath: logoDataUri,
+    logoSvgContent: logoSvgContent, // Also provide raw SVG for inline embedding
   };
 
   // Normalize website URL
@@ -340,8 +391,13 @@ async function generateBusinessCard(contactData, outputDir) {
   );
 
   const frontOutputPath = join(outputDir, `${contactData.name.replace(/\s+/g, '-')}-front.pdf`);
-  await generatePDF(frontHtmlFinal, frontOutputPath);
-  cardProgress(`Vorderseite gespeichert: ${frontOutputPath}`, 'done');
+  try {
+    await generatePDF(frontHtmlFinal, frontOutputPath);
+    cardProgress(`Vorderseite gespeichert: ${frontOutputPath}`, 'done');
+  } catch (err) {
+    cardProgress(`Fehler bei Vorderseite: ${err.message}`, 'error');
+    throw err;
+  }
 
   // Generate back side
   cardProgress('Generiere Rückseite …', 'generating');
@@ -355,8 +411,13 @@ async function generateBusinessCard(contactData, outputDir) {
   );
 
   const backOutputPath = join(outputDir, `${contactData.name.replace(/\s+/g, '-')}-back.pdf`);
-  await generatePDF(backHtmlFinal, backOutputPath);
-  cardProgress(`Rückseite gespeichert: ${backOutputPath}`, 'done');
+  try {
+    await generatePDF(backHtmlFinal, backOutputPath);
+    cardProgress(`Rückseite gespeichert: ${backOutputPath}`, 'done');
+  } catch (err) {
+    cardProgress(`Fehler bei Rückseite: ${err.message}`, 'error');
+    throw err;
+  }
 
   return {
     front: frontOutputPath,

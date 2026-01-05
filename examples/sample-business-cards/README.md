@@ -33,6 +33,7 @@ This will prompt you interactively for all contact information and generate pers
 ## Output Format
 
 Each business card consists of two PDF files:
+
 - `{name}-front.pdf` - Front side with contact information and logo
 - `{name}-back.pdf` - Back side with QR code containing vCard data
 

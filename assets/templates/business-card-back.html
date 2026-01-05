@@ -8,9 +8,25 @@
 </head>
 <body>
   <div class="business-card-back">
+    <div class="back-decoration">
+      <svg class="poke-illustration" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Person being poked -->
+        <circle cx="30" cy="50" r="12" fill="#666666" opacity="0.8"/>
+        <rect x="25" y="62" width="10" height="20" rx="2" fill="#666666" opacity="0.8"/>
+        <!-- Finger poking -->
+        <path d="M 70 30 Q 75 25, 80 30 L 75 35 Q 70 35, 70 30 Z" fill="#333333"/>
+        <circle cx="75" cy="30" r="3" fill="#333333"/>
+        <line x1="70" y1="30" x2="30" y2="50" stroke="#333333" stroke-width="1.5" stroke-dasharray="2,2" opacity="0.5"/>
+      </svg>
+    </div>
+    
     <div class="qr-container">
       <div class="qr-code">
         <img src="{{qrCodeDataUri}}" alt="QR Code">
+      </div>
+      <div class="qr-info">
+        <p class="qr-title">Kontaktdaten scannen</p>
+        <p class="qr-description">Scannen Sie den QR-Code mit Ihrer Kamera-App, um die Kontaktdaten automatisch zu speichern.</p>
       </div>
     </div>
     
