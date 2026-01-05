@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.7.1](https://github.com/kieksme/kieks.me.cicd/compare/v0.7.0...v0.7.1) (2026-01-05)
+
+
+### Bug Fixes
+
+* add animations to favicon SVG for enhanced interactivity ([1547e6b](https://github.com/kieksme/kieks.me.cicd/commit/1547e6b4a4da9ebc7eb294c7adc796a7911b80b3))
+* add font licenses section and update documentation ([40a5fa5](https://github.com/kieksme/kieks.me.cicd/commit/40a5fa5bedae04accbba862c03ff6ab3c33c9b2d))
+* update logo SVG paths to use absolute URLs for improved accessibility ([8837683](https://github.com/kieksme/kieks.me.cicd/commit/8837683a231462a1c56e8470aa18c0af964bef60))
+
 ## [0.7.0](https://github.com/kieksme/kieks.me.cicd/compare/v0.6.3...v0.7.0) (2026-01-05)
 
 
