@@ -6,7 +6,7 @@
 
 import { fileURLToPath } from 'url';
 import { dirname, join, resolve } from 'path';
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'fs';
 import puppeteer from 'puppeteer';
 import QRCode from 'qrcode';
 import inquirer from 'inquirer';
@@ -268,6 +268,10 @@ async function promptMainMenu() {
           value: 'generate',
         },
         {
+          name: 'Bestehende Visitenkarte bearbeiten',
+          value: 'edit',
+        },
+        {
           name: 'Mustervisitenkarten generieren',
           value: 'generate-samples',
         },
@@ -283,32 +287,57 @@ async function promptMainMenu() {
 
 /**
  * Prompt user for contact data with enhanced prompts
+ * @param {Object} [existingData] - Optional existing contact data to pre-fill
  * @returns {Promise<Object>} Contact data object
  */
-async function promptContactData() {
-  // First, ask which optional fields to include
-  const { includeFields } = await inquirer.prompt([
-    {
-      type: 'checkbox',
-      name: 'includeFields',
-      message: 'Welche optionalen Felder möchten Sie hinzufügen?',
-      choices: [
-        { name: 'Position/Titel', value: 'position', checked: true },
-        { name: 'E-Mail-Adresse', value: 'email', checked: true },
-        { name: 'Telefonnummer', value: 'phone', checked: false },
-        { name: 'Mobilnummer', value: 'mobile', checked: true },
-        { name: 'Adresse', value: 'address', checked: true },
-        { name: 'Website', value: 'website', checked: true },
-        { name: 'Social Media', value: 'socialMedia', checked: false },
-      ],
-    },
-  ]);
+async function promptContactData(existingData = null) {
+  // Determine which fields should be included based on existing data or user selection
+  let includeFields;
+  
+  if (existingData) {
+    // If editing existing data, include all fields that have values
+    includeFields = [];
+    if (existingData.position) includeFields.push('position');
+    if (existingData.email) includeFields.push('email');
+    if (existingData.phone) includeFields.push('phone');
+    if (existingData.mobile) includeFields.push('mobile');
+    if (existingData.address || existingData.city || existingData.postalCode) includeFields.push('address');
+    if (existingData.website) includeFields.push('website');
+    if (existingData.socialMedia) includeFields.push('socialMedia');
+    
+    // Always include common fields if they exist
+    if (!includeFields.includes('position')) includeFields.push('position');
+    if (!includeFields.includes('email')) includeFields.push('email');
+    if (!includeFields.includes('mobile')) includeFields.push('mobile');
+    if (!includeFields.includes('address')) includeFields.push('address');
+    if (!includeFields.includes('website')) includeFields.push('website');
+  } else {
+    // First, ask which optional fields to include
+    const result = await inquirer.prompt([
+      {
+        type: 'checkbox',
+        name: 'includeFields',
+        message: 'Welche optionalen Felder möchten Sie hinzufügen?',
+        choices: [
+          { name: 'Position/Titel', value: 'position', checked: true },
+          { name: 'E-Mail-Adresse', value: 'email', checked: true },
+          { name: 'Telefonnummer', value: 'phone', checked: false },
+          { name: 'Mobilnummer', value: 'mobile', checked: true },
+          { name: 'Adresse', value: 'address', checked: true },
+          { name: 'Website', value: 'website', checked: true },
+          { name: 'Social Media', value: 'socialMedia', checked: false },
+        ],
+      },
+    ]);
+    includeFields = result.includeFields;
+  }
 
   const questions = [
     {
       type: 'input',
       name: 'name',
       message: 'Name (erforderlich):',
+      default: existingData?.name || undefined,
       validate: (input) => {
         if (!input || input.trim().length === 0) {
           return 'Name ist erforderlich';
@@ -324,6 +353,7 @@ async function promptContactData() {
       type: 'input',
       name: 'position',
       message: 'Position/Titel:',
+      default: existingData?.position || undefined,
     });
   }
 
@@ -333,6 +363,7 @@ async function promptContactData() {
       type: 'input',
       name: 'email',
       message: 'E-Mail-Adresse:',
+      default: existingData?.email || undefined,
       validate: (input) => {
         if (!input) return true;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -347,6 +378,7 @@ async function promptContactData() {
       type: 'input',
       name: 'phone',
       message: 'Telefonnummer:',
+      default: existingData?.phone || undefined,
       validate: (input) => {
         if (!input) return true;
         const phoneRegex = /^[\d\s\+\-\(\)]+$/;
@@ -361,6 +393,7 @@ async function promptContactData() {
       type: 'input',
       name: 'mobile',
       message: 'Mobilnummer:',
+      default: existingData?.mobile || undefined,
       validate: (input) => {
         if (!input) return true;
         const phoneRegex = /^[\d\s\+\-\(\)]+$/;
@@ -376,16 +409,19 @@ async function promptContactData() {
         type: 'input',
         name: 'address',
         message: 'Straße und Hausnummer:',
+        default: existingData?.address || undefined,
       },
       {
         type: 'input',
         name: 'postalCode',
         message: 'Postleitzahl:',
+        default: existingData?.postalCode || undefined,
       },
       {
         type: 'input',
         name: 'city',
         message: 'Stadt:',
+        default: existingData?.city || undefined,
       },
       {
         type: 'list',
@@ -397,7 +433,7 @@ async function promptContactData() {
           'Schweiz',
           'Andere',
         ],
-        default: 'Deutschland',
+        default: existingData?.country || 'Deutschland',
       },
     );
   }
@@ -408,6 +444,7 @@ async function promptContactData() {
       type: 'input',
       name: 'website',
       message: 'Website (mit oder ohne https://):',
+      default: existingData?.website || undefined,
       validate: (input) => {
         if (!input) return true;
         try {
@@ -429,6 +466,7 @@ async function promptContactData() {
       type: 'input',
       name: 'socialMedia',
       message: 'Social Media (z.B. LinkedIn, Twitter):',
+      default: existingData?.socialMedia || undefined,
     });
   }
 
@@ -493,6 +531,141 @@ async function promptRepeat() {
   ]);
 
   return repeat;
+}
+
+/**
+ * Get filename for contact data JSON file
+ * @param {Object} contactData - Contact data
+ * @returns {string} Filename
+ */
+function getContactDataFilename(contactData) {
+  const nameSlug = contactData.name.replace(/\s+/g, '-');
+  return `${nameSlug}.json`;
+}
+
+/**
+ * Save contact data to JSON file
+ * @param {Object} contactData - Contact data to save
+ * @param {string} outputDir - Output directory
+ * @returns {string} Path to saved JSON file
+ */
+function saveContactData(contactData, outputDir) {
+  // Ensure output directory exists
+  if (!existsSync(outputDir)) {
+    mkdirSync(outputDir, { recursive: true });
+  }
+
+  const filename = getContactDataFilename(contactData);
+  const filePath = join(outputDir, filename);
+  
+  // Add metadata
+  const dataToSave = {
+    ...contactData,
+    _metadata: {
+      savedAt: new Date().toISOString(),
+      version: '1.0',
+    },
+  };
+
+  writeFileSync(filePath, JSON.stringify(dataToSave, null, 2), 'utf-8');
+  return filePath;
+}
+
+/**
+ * Load contact data from JSON file
+ * @param {string} filePath - Path to JSON file
+ * @returns {Object} Contact data
+ */
+function loadContactData(filePath) {
+  try {
+    const fileContent = readFileSync(filePath, 'utf-8');
+    const data = JSON.parse(fileContent);
+    
+    // Remove metadata before returning
+    const { _metadata, ...contactData } = data;
+    return contactData;
+  } catch (err) {
+    throw new Error(`Fehler beim Laden der Kontaktdaten: ${err.message}`);
+  }
+}
+
+/**
+ * List all available contact data files in output directory
+ * @param {string} outputDir - Output directory
+ * @returns {Array<Object>} Array of file info objects with name, path, and contact data
+ */
+function listContactDataFiles(outputDir) {
+  if (!existsSync(outputDir)) {
+    return [];
+  }
+
+  try {
+    const files = readdirSync(outputDir);
+    const jsonFiles = files
+      .filter(file => file.endsWith('.json'))
+      .map(file => {
+        const filePath = join(outputDir, file);
+        try {
+          const contactData = loadContactData(filePath);
+          const stats = statSync(filePath);
+          return {
+            name: contactData.name || file.replace('.json', ''),
+            filename: file,
+            path: filePath,
+            contactData,
+            modified: stats.mtime,
+          };
+        } catch (err) {
+          // Skip files that can't be loaded
+          return null;
+        }
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.modified - a.modified); // Sort by modification date, newest first
+
+    return jsonFiles;
+  } catch (err) {
+    error(`Fehler beim Auflisten der Kontaktdaten: ${err.message}`);
+    return [];
+  }
+}
+
+/**
+ * Prompt user to select an existing contact data file
+ * @param {string} outputDir - Output directory
+ * @returns {Promise<Object|null>} Selected contact data or null if cancelled
+ */
+async function promptSelectExistingContact(outputDir) {
+  const files = listContactDataFiles(outputDir);
+
+  if (files.length === 0) {
+    warn('Keine gespeicherten Kontaktdaten gefunden.');
+    return null;
+  }
+
+  const { selectedFile } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'selectedFile',
+      message: 'Welche Visitenkarte möchten Sie bearbeiten?',
+      choices: [
+        ...files.map(file => ({
+          name: `${file.name} (${new Date(file.modified).toLocaleDateString('de-DE')})`,
+          value: file.path,
+        })),
+        {
+          name: 'Abbrechen',
+          value: null,
+        },
+      ],
+    },
+  ]);
+
+  if (!selectedFile) {
+    return null;
+  }
+
+  return loadContactData(selectedFile);
 }
 
 /**
@@ -587,9 +760,15 @@ async function generateBusinessCard(contactData, outputDir) {
     throw err;
   }
 
+  // Save contact data to JSON file
+  cardProgress('Speichere Kontaktdaten …', 'generating');
+  const jsonPath = saveContactData(contactData, outputDir);
+  cardProgress(`Kontaktdaten gespeichert: ${jsonPath}`, 'done');
+
   return {
     front: frontOutputPath,
     back: backOutputPath,
+    json: jsonPath,
   };
 }
 
@@ -677,6 +856,69 @@ async function main() {
         break;
       }
 
+      if (action === 'edit') {
+        // Determine output directory
+        const outputDir = join(projectRoot, 'output');
+        
+        // Prompt user to select existing contact
+        const existingData = await promptSelectExistingContact(outputDir);
+        
+        if (!existingData) {
+          // User cancelled or no files found
+          const repeat = await promptRepeat();
+          if (!repeat) {
+            shouldContinue = false;
+          }
+          continue;
+        }
+
+        info('Bearbeite bestehende Visitenkarte:');
+        // Prompt for contact data with pre-filled values
+        const contactData = await promptContactData(existingData);
+
+        // Show confirmation with preview
+        const confirmed = await promptConfirmation(contactData);
+
+        if (!confirmed) {
+          warn('Bearbeitung abgebrochen.');
+          const repeat = await promptRepeat();
+          if (!repeat) {
+            shouldContinue = false;
+            break;
+          }
+          continue;
+        }
+
+        // Generate business cards
+        try {
+          const result = await generateBusinessCard(contactData, outputDir);
+
+          success('Visitenkarten erfolgreich aktualisiert!');
+          info(`Vorderseite: ${result.front}`);
+          info(`Rückseite: ${result.back}`);
+          info(`Kontaktdaten: ${result.json}`);
+        } catch (err) {
+          error(`Fehler bei der Generierung: ${err.message}`);
+          const { retry } = await inquirer.prompt([
+            {
+              type: 'confirm',
+              name: 'retry',
+              message: 'Möchten Sie es erneut versuchen?',
+              default: false,
+            },
+          ]);
+          if (retry) {
+            continue;
+          }
+        }
+
+        // Ask if user wants to generate another card
+        const repeat = await promptRepeat();
+        if (!repeat) {
+          shouldContinue = false;
+        }
+      }
+
       if (action === 'generate') {
         // Prompt for contact data
         info('Bitte geben Sie die Kontaktdaten ein:');
@@ -705,6 +947,7 @@ async function main() {
           success('Visitenkarten erfolgreich generiert!');
           info(`Vorderseite: ${result.front}`);
           info(`Rückseite: ${result.back}`);
+          info(`Kontaktdaten: ${result.json}`);
         } catch (err) {
           error(`Fehler bei der Generierung: ${err.message}`);
           const { retry } = await inquirer.prompt([
@@ -751,4 +994,8 @@ export {
   promptMainMenu,
   promptConfirmation,
   promptRepeat,
+  saveContactData,
+  loadContactData,
+  listContactDataFiles,
+  promptSelectExistingContact,
 };
