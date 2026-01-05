@@ -6,20 +6,20 @@ This directory contains the official kieks.me GbR brand color palette, including
 
 ## Available Files
 
-| File Name | Format | Description | Download |
-|-----------|--------|-------------|----------|
-| `colors.css` | CSS | CSS variables for web projects | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.css) |
-| `colors.json` | JSON | HEX, RGB, and CMYK values for JavaScript/TypeScript projects | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.json) |
+| File Name     | Format | Description                                                  | Download                                                                             |
+|---------------|--------|--------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| `colors.css`  | CSS    | CSS variables for web projects                               | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.css)  |
+| `colors.json` | JSON   | HEX, RGB, and CMYK values for JavaScript/TypeScript projects | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.json) |
 
 ### Color Swatches
 
-| File Name | Format | Color | Download |
-|-----------|--------|-------|----------|
-| `swatches/aqua.svg` | SVG | Aqua (#00FFDC) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/aqua.svg) |
-| `swatches/navy.svg` | SVG | Navy (#1E2A45) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/navy.svg) |
-| `swatches/fuchsia.svg` | SVG | Fuchsia (#FF008F) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/fuchsia.svg) |
-| `swatches/white.svg` | SVG | White (#FFFFFF) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/white.svg) |
-| `swatches/dark-gray.svg` | SVG | Dark Gray (#333333) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/dark-gray.svg) |
+| File Name                | Format | Color               | Download                                                                                        |
+|--------------------------|--------|---------------------|-------------------------------------------------------------------------------------------------|
+| `swatches/aqua.svg`      | SVG    | Aqua (#00FFDC)      | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/aqua.svg)      |
+| `swatches/navy.svg`      | SVG    | Navy (#1E2A45)      | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/navy.svg)      |
+| `swatches/fuchsia.svg`   | SVG    | Fuchsia (#FF008F)   | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/fuchsia.svg)   |
+| `swatches/white.svg`     | SVG    | White (#FFFFFF)     | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/white.svg)     |
+| `swatches/dark-gray.svg` | SVG    | Dark Gray (#333333) | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/swatches/dark-gray.svg) |
 
 ## Primary Brand Colors
 
