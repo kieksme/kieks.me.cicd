@@ -269,6 +269,14 @@ nav .link-fuchsia:hover {
 }
 
 /* Navigation */
+nav.bg-navy.sticky {
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+nav.bg-navy.sticky.header-transparent {
+    background-color: transparent;
+}
+
 .nav-link {
     transition: color 0.2s;
 }
