@@ -147,6 +147,16 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 1rem;
 }
 
+/* Release Section */
+.release-content {
+    transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.release-content.hidden {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         display: none;

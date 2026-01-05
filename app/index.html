@@ -181,10 +181,27 @@
     <!-- Latest Release Section -->
     <section id="latest-release" class="py-16 px-4 bg-navy text-white">
         <div class="max-w-6xl mx-auto">
-            <h2 class="font-heading text-3xl md:text-4xl font-bold mb-8 text-center">Latest Release</h2>
-            <div id="release-info" class="text-left">
+            <div class="flex items-center justify-center gap-4 mb-8">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-center">Latest Release</h2>
+                <button id="release-toggle" 
+                        class="bg-aqua text-navy p-2 rounded-lg hover:bg-opacity-90 transition-colors"
+                        aria-label="Toggle release information"
+                        aria-expanded="false">
+                    <svg id="release-toggle-icon" class="w-6 h-6 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="release-buttons" class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                 <div class="animate-pulse">
-                    <p class="font-body text-lg">Loading release information...</p>
+                    <p class="font-body text-lg text-center">Loading release information...</p>
+                </div>
+            </div>
+            <div id="release-info" class="text-left release-content hidden">
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8 max-w-4xl mx-auto">
+                    <div class="animate-pulse">
+                        <p class="font-body text-lg">Loading release notes...</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -264,6 +281,7 @@
                 const release = await response.json();
                 
                 const releaseInfo = document.getElementById('release-info');
+                const releaseButtons = document.getElementById('release-buttons');
                 const zipAsset = release.assets.find(asset => asset.name.endsWith('.zip'));
                 const releaseDate = new Date(release.published_at).toLocaleDateString('de-DE', { 
                     year: 'numeric', 
@@ -279,35 +297,43 @@
                 
                 const markdownHtml = release.body ? marked.parse(release.body) : '';
                 
+                // Update buttons (always visible)
+                releaseButtons.innerHTML = `
+                    <a href="${release.html_url}" 
+                       class="bg-aqua text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors text-center">
+                        View Release
+                    </a>
+                    ${zipAsset ? `
+                        <a href="${zipAsset.browser_download_url}" 
+                           class="bg-white text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors text-center">
+                            Download ZIP (${(zipAsset.size / 1024 / 1024).toFixed(2)} MB)
+                        </a>
+                    ` : ''}
+                `;
+                
+                // Update release notes (collapsible)
                 releaseInfo.innerHTML = `
                     <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8 max-w-4xl mx-auto">
-                        ${markdownHtml ? `<div class="font-body text-base markdown-content max-w-none mb-6">${markdownHtml}</div>` : '<p class="font-body text-base mb-6">No release notes available.</p>'}
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="${release.html_url}" 
-                               class="bg-aqua text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors text-center">
-                                View Release
-                            </a>
-                            ${zipAsset ? `
-                                <a href="${zipAsset.browser_download_url}" 
-                                   class="bg-white text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors text-center">
-                                    Download ZIP (${(zipAsset.size / 1024 / 1024).toFixed(2)} MB)
-                                </a>
-                            ` : ''}
-                        </div>
+                        ${markdownHtml ? `<div class="font-body text-base markdown-content max-w-none">${markdownHtml}</div>` : '<p class="font-body text-base">No release notes available.</p>'}
                     </div>
                 `;
             } catch (error) {
                 console.error('Error fetching release:', error);
                 const releaseInfo = document.getElementById('release-info');
+                const releaseButtons = document.getElementById('release-buttons');
+                
+                // Update buttons (always visible)
+                releaseButtons.innerHTML = `
+                    <a href="https://github.com/kieksme/kieks.me.cicd/releases" 
+                       class="bg-aqua text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors text-center">
+                        View All Releases
+                    </a>
+                `;
+                
+                // Update release notes (collapsible)
                 releaseInfo.innerHTML = `
                     <div class="bg-white/10 backdrop-blur-sm rounded-lg p-8 max-w-4xl mx-auto">
-                        <p class="font-body text-base mb-6">Unable to load release information.</p>
-                        <div class="flex justify-center">
-                            <a href="https://github.com/kieksme/kieks.me.cicd/releases" 
-                               class="bg-aqua text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors text-center">
-                                View All Releases
-                            </a>
-                        </div>
+                        <p class="font-body text-base">Unable to load release information.</p>
                     </div>
                 `;
             }
@@ -315,6 +341,20 @@
         
         // Fetch release info on page load
         fetchLatestRelease();
+        
+        // Release section toggle
+        const releaseToggle = document.getElementById('release-toggle');
+        const releaseInfo = document.getElementById('release-info');
+        const releaseToggleIcon = document.getElementById('release-toggle-icon');
+        
+        if (releaseToggle && releaseInfo && releaseToggleIcon) {
+            releaseToggle.addEventListener('click', () => {
+                const isExpanded = releaseToggle.getAttribute('aria-expanded') === 'true';
+                releaseInfo.classList.toggle('hidden');
+                releaseToggle.setAttribute('aria-expanded', !isExpanded);
+                releaseToggleIcon.classList.toggle('rotate-180');
+            });
+        }
         
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
