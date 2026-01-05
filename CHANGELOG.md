@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/kieksme/kieks.me.cicd/compare/v0.13.0...v0.13.1) (2026-01-05)
+
+
+### Bug Fixes
+
+* standardize HTML structure and improve accessibility ([a90006c](https://github.com/kieksme/kieks.me.cicd/commit/a90006cc147157ef920ba05d1f6e02ca93573682))
+
 ## [0.13.0](https://github.com/kieksme/kieks.me.cicd/compare/v0.12.0...v0.13.0) (2026-01-05)
 
 
