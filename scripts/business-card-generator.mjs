@@ -15,10 +15,13 @@ import {
   success,
   error,
   info,
+  warn,
   cardProgress,
   validateContactData,
   normalizeUrl,
   endGroup,
+  formatContactPreview,
+  summaryBox,
 } from './misc-cli-utils.mjs';
 
 /**
@@ -250,10 +253,57 @@ async function generatePDF(html, outputPath) {
 }
 
 /**
- * Prompt user for contact data
+ * Prompt user for main menu selection
+ * @returns {Promise<Object>} Menu selection object
+ */
+async function promptMainMenu() {
+  const { action } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'action',
+      message: 'Was möchten Sie tun?',
+      choices: [
+        {
+          name: 'Visitenkarte generieren',
+          value: 'generate',
+        },
+        {
+          name: 'Mustervisitenkarten generieren',
+          value: 'generate-samples',
+        },
+        {
+          name: 'Beenden',
+          value: 'exit',
+        },
+      ],
+    },
+  ]);
+  return { action };
+}
+
+/**
+ * Prompt user for contact data with enhanced prompts
  * @returns {Promise<Object>} Contact data object
  */
 async function promptContactData() {
+  // First, ask which optional fields to include
+  const { includeFields } = await inquirer.prompt([
+    {
+      type: 'checkbox',
+      name: 'includeFields',
+      message: 'Welche optionalen Felder möchten Sie hinzufügen?',
+      choices: [
+        { name: 'Position/Titel', value: 'position', checked: true },
+        { name: 'E-Mail-Adresse', value: 'email', checked: true },
+        { name: 'Telefonnummer', value: 'phone', checked: false },
+        { name: 'Mobilnummer', value: 'mobile', checked: true },
+        { name: 'Adresse', value: 'address', checked: true },
+        { name: 'Website', value: 'website', checked: true },
+        { name: 'Social Media', value: 'socialMedia', checked: false },
+      ],
+    },
+  ]);
+
   const questions = [
     {
       type: 'input',
@@ -266,12 +316,20 @@ async function promptContactData() {
         return true;
       },
     },
-    {
+  ];
+
+  // Add position if selected
+  if (includeFields.includes('position')) {
+    questions.push({
       type: 'input',
       name: 'position',
       message: 'Position/Titel:',
-    },
-    {
+    });
+  }
+
+  // Add email if selected
+  if (includeFields.includes('email')) {
+    questions.push({
       type: 'input',
       name: 'email',
       message: 'E-Mail-Adresse:',
@@ -280,51 +338,161 @@ async function promptContactData() {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(input) || 'Ungültige E-Mail-Adresse';
       },
-    },
-    {
+    });
+  }
+
+  // Add phone if selected
+  if (includeFields.includes('phone')) {
+    questions.push({
       type: 'input',
       name: 'phone',
       message: 'Telefonnummer:',
-    },
-    {
+      validate: (input) => {
+        if (!input) return true;
+        const phoneRegex = /^[\d\s\+\-\(\)]+$/;
+        return phoneRegex.test(input) && input.replace(/\D/g, '').length >= 6 || 'Ungültige Telefonnummer';
+      },
+    });
+  }
+
+  // Add mobile if selected
+  if (includeFields.includes('mobile')) {
+    questions.push({
       type: 'input',
       name: 'mobile',
       message: 'Mobilnummer:',
-    },
-    {
-      type: 'input',
-      name: 'address',
-      message: 'Straße und Hausnummer:',
-    },
-    {
-      type: 'input',
-      name: 'postalCode',
-      message: 'Postleitzahl:',
-    },
-    {
-      type: 'input',
-      name: 'city',
-      message: 'Stadt:',
-    },
-    {
-      type: 'input',
-      name: 'country',
-      message: 'Land:',
-      default: 'Deutschland',
-    },
-    {
+      validate: (input) => {
+        if (!input) return true;
+        const phoneRegex = /^[\d\s\+\-\(\)]+$/;
+        return phoneRegex.test(input) && input.replace(/\D/g, '').length >= 6 || 'Ungültige Mobilnummer';
+      },
+    });
+  }
+
+  // Add address fields if selected
+  if (includeFields.includes('address')) {
+    questions.push(
+      {
+        type: 'input',
+        name: 'address',
+        message: 'Straße und Hausnummer:',
+      },
+      {
+        type: 'input',
+        name: 'postalCode',
+        message: 'Postleitzahl:',
+      },
+      {
+        type: 'input',
+        name: 'city',
+        message: 'Stadt:',
+      },
+      {
+        type: 'list',
+        name: 'country',
+        message: 'Land:',
+        choices: [
+          'Deutschland',
+          'Österreich',
+          'Schweiz',
+          'Andere',
+        ],
+        default: 'Deutschland',
+      },
+    );
+  }
+
+  // Add website if selected
+  if (includeFields.includes('website')) {
+    questions.push({
       type: 'input',
       name: 'website',
       message: 'Website (mit oder ohne https://):',
-    },
-    {
+      validate: (input) => {
+        if (!input) return true;
+        try {
+          const urlWithProtocol = input.startsWith('http://') || input.startsWith('https://')
+            ? input
+            : `https://${input}`;
+          new URL(urlWithProtocol);
+          return true;
+        } catch {
+          return 'Ungültige Website-URL';
+        }
+      },
+    });
+  }
+
+  // Add social media if selected
+  if (includeFields.includes('socialMedia')) {
+    questions.push({
       type: 'input',
       name: 'socialMedia',
       message: 'Social Media (z.B. LinkedIn, Twitter):',
-    },
-  ];
+    });
+  }
 
-  return await inquirer.prompt(questions);
+  const answers = await inquirer.prompt(questions);
+
+  // Handle country selection - only prompt for custom country if "Andere" was selected
+  if (answers.country === 'Andere') {
+    const { countryOther } = await inquirer.prompt([
+      {
+        type: 'input',
+        name: 'countryOther',
+        message: 'Land eingeben:',
+        default: 'Deutschland',
+      },
+    ]);
+    answers.country = countryOther;
+  }
+
+  // Ensure country has a default value if address was not selected
+  if (!answers.country) {
+    answers.country = 'Deutschland';
+  }
+
+  return answers;
+}
+
+/**
+ * Prompt user for confirmation with data preview
+ * @param {Object} contactData - Contact data to preview
+ * @returns {Promise<boolean>} True if confirmed, false otherwise
+ */
+async function promptConfirmation(contactData) {
+  // Show preview
+  console.log('\n');
+  summaryBox('Vorschau der Kontaktdaten', formatContactPreview(contactData), 'cyan');
+  console.log('\n');
+
+  const { confirmed } = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'confirmed',
+      message: 'Möchten Sie mit diesen Daten fortfahren?',
+      default: true,
+    },
+  ]);
+
+  return confirmed;
+}
+
+/**
+ * Prompt user if they want to generate another card
+ * @returns {Promise<boolean>} True if user wants to generate another card
+ */
+async function promptRepeat() {
+  const { repeat } = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'repeat',
+      message: 'Möchten Sie eine weitere Visitenkarte generieren?',
+      default: false,
+    },
+  ]);
+
+  return repeat;
 }
 
 /**
@@ -432,20 +600,135 @@ async function main() {
   try {
     header('Business Card Generator', 'Generiere Visitenkarten mit QR-Code', 'bgCyan');
 
-    // Prompt for contact data
-    info('Bitte geben Sie die Kontaktdaten ein:');
-    const contactData = await promptContactData();
+    let shouldContinue = true;
 
-    // Determine output directory
-    const outputDir = join(projectRoot, 'output');
-    
-    // Generate business cards
-    const result = await generateBusinessCard(contactData, outputDir);
+    while (shouldContinue) {
+      // Show main menu
+      const { action } = await promptMainMenu();
+
+      if (action === 'exit') {
+        info('Auf Wiedersehen!');
+        shouldContinue = false;
+        break;
+      }
+
+      if (action === 'generate-samples') {
+        // Import and run sample generator
+        const sampleGeneratorPath = join(__dirname, 'generate-sample-cards.mjs');
+        const { default: generateSamples } = await import(`file://${sampleGeneratorPath}`);
+        // Note: generate-sample-cards.mjs doesn't export a default function,
+        // so we'll handle it differently - just execute the script logic here
+        const sampleContacts = [
+          {
+            name: 'Max Mustermann',
+            position: 'Geschäftsführer',
+            email: 'max@kieks.me',
+            phone: '+49 123 456789',
+            mobile: '+49 123 4567890',
+            address: 'Musterstraße 123',
+            postalCode: '12345',
+            city: 'Berlin',
+            country: 'Deutschland',
+            website: 'www.kieks.me',
+            socialMedia: 'LinkedIn: max-mustermann',
+          },
+          {
+            name: 'Anna Schmidt',
+            position: 'Lead Developer',
+            email: 'anna@kieks.me',
+            phone: '+49 123 456788',
+            mobile: '+49 123 4567880',
+            address: 'Beispielweg 45',
+            postalCode: '54321',
+            city: 'München',
+            country: 'Deutschland',
+            website: 'www.kieks.me',
+            socialMedia: 'GitHub: @annaschmidt',
+          },
+          {
+            name: 'Tom Weber',
+            position: 'Designer',
+            email: 'tom@kieks.me',
+            mobile: '+49 123 4567870',
+            address: 'Designstraße 78',
+            postalCode: '10115',
+            city: 'Berlin',
+            country: 'Deutschland',
+            website: 'www.kieks.me',
+          },
+        ];
+
+        const outputDir = join(projectRoot, 'examples', 'sample-business-cards');
+        
+        info(`Generiere ${sampleContacts.length} Mustervisitenkarten...`);
+
+        for (let i = 0; i < sampleContacts.length; i++) {
+          const contact = sampleContacts[i];
+          info(`\nGeneriere Visitenkarte ${i + 1}/${sampleContacts.length}: ${contact.name}`);
+          
+          const result = await generateBusinessCard(contact, outputDir);
+          success(`✓ ${contact.name} - Vorder- und Rückseite generiert`);
+        }
+
+        success(`Alle ${sampleContacts.length} Mustervisitenkarten erfolgreich generiert!`);
+        info(`Ausgabe-Verzeichnis: ${outputDir}`);
+        endGroup();
+        shouldContinue = false;
+        break;
+      }
+
+      if (action === 'generate') {
+        // Prompt for contact data
+        info('Bitte geben Sie die Kontaktdaten ein:');
+        const contactData = await promptContactData();
+
+        // Show confirmation with preview
+        const confirmed = await promptConfirmation(contactData);
+
+        if (!confirmed) {
+          warn('Generierung abgebrochen.');
+          const repeat = await promptRepeat();
+          if (!repeat) {
+            shouldContinue = false;
+            break;
+          }
+          continue;
+        }
+
+        // Determine output directory
+        const outputDir = join(projectRoot, 'output');
+        
+        // Generate business cards
+        try {
+          const result = await generateBusinessCard(contactData, outputDir);
+
+          success('Visitenkarten erfolgreich generiert!');
+          info(`Vorderseite: ${result.front}`);
+          info(`Rückseite: ${result.back}`);
+        } catch (err) {
+          error(`Fehler bei der Generierung: ${err.message}`);
+          const { retry } = await inquirer.prompt([
+            {
+              type: 'confirm',
+              name: 'retry',
+              message: 'Möchten Sie es erneut versuchen?',
+              default: false,
+            },
+          ]);
+          if (retry) {
+            continue;
+          }
+        }
+
+        // Ask if user wants to generate another card
+        const repeat = await promptRepeat();
+        if (!repeat) {
+          shouldContinue = false;
+        }
+      }
+    }
 
     endGroup();
-    success('Visitenkarten erfolgreich generiert!');
-    info(`Vorderseite: ${result.front}`);
-    info(`Rückseite: ${result.back}`);
   } catch (err) {
     endGroup();
     error(`Fehler: ${err.message}`);
@@ -465,4 +748,7 @@ export {
   generateVCard,
   generateQRCode,
   promptContactData,
+  promptMainMenu,
+  promptConfirmation,
+  promptRepeat,
 };

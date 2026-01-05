@@ -491,3 +491,86 @@ export function cardProgress(step, status = 'generating') {
   const { label, color } = statusMap[status] || statusMap.generating;
   progress(label, step, '', color);
 }
+
+/**
+ * Format contact data for preview display
+ * @param {Object} contactData - Contact data object
+ * @returns {string} Formatted preview string
+ */
+export function formatContactPreview(contactData) {
+  const lines = [];
+  
+  if (contactData.name) {
+    lines.push(`${chalk.bold('Name:')} ${contactData.name}`);
+  }
+  
+  if (contactData.position) {
+    lines.push(`${chalk.bold('Position:')} ${contactData.position}`);
+  }
+  
+  if (contactData.email) {
+    lines.push(`${chalk.bold('E-Mail:')} ${contactData.email}`);
+  }
+  
+  if (contactData.phone) {
+    lines.push(`${chalk.bold('Telefon:')} ${contactData.phone}`);
+  }
+  
+  if (contactData.mobile) {
+    lines.push(`${chalk.bold('Mobil:')} ${contactData.mobile}`);
+  }
+  
+  if (contactData.address || contactData.city || contactData.postalCode) {
+    const addressParts = [
+      contactData.address,
+      contactData.postalCode,
+      contactData.city,
+    ].filter(Boolean);
+    if (addressParts.length > 0) {
+      lines.push(`${chalk.bold('Adresse:')} ${addressParts.join(', ')}`);
+    }
+  }
+  
+  if (contactData.country) {
+    lines.push(`${chalk.bold('Land:')} ${contactData.country}`);
+  }
+  
+  if (contactData.website) {
+    lines.push(`${chalk.bold('Website:')} ${contactData.website}`);
+  }
+  
+  if (contactData.socialMedia) {
+    lines.push(`${chalk.bold('Social Media:')} ${contactData.socialMedia}`);
+  }
+  
+  return lines.join('\n');
+}
+
+/**
+ * Prompt with retry logic
+ * @param {Function} promptFn - Function that returns a promise resolving to prompt result
+ * @param {Object} options - Retry options
+ * @param {number} options.maxRetries - Maximum number of retries (default: 3)
+ * @param {Function} options.onError - Error handler function
+ * @returns {Promise<any>} Prompt result
+ */
+export async function promptWithRetry(promptFn, options = {}) {
+  const { maxRetries = 3, onError } = options;
+  let lastError;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      return await promptFn();
+    } catch (err) {
+      lastError = err;
+      if (onError) {
+        onError(err, attempt + 1, maxRetries);
+      }
+      if (attempt < maxRetries - 1) {
+        warn(`Fehler aufgetreten. Versuch ${attempt + 2}/${maxRetries}...`);
+      }
+    }
+  }
+  
+  throw lastError;
+}
