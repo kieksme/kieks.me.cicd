@@ -6,7 +6,7 @@ This release contains all official Corporate Identity and Corporate Design mater
 
 ### Assets Structure
 
-- **Logos**: All logo variants in SVG, PNG, and JPG formats
+- **Logos**: All logo variants in SVG and PNG formats
   - Dark background versions (purple and red)
   - Light background versions (red)
   - Favicon files in multiple formats

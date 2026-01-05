@@ -25,7 +25,6 @@ Our logo comes in several variations to ensure versatility across different appl
 ### Raster Formats
 
 - **PNG**: Transparent background, for digital use
-- **JPG**: With background, for specific applications
 - **Minimum Resolution**: 300 DPI for print, 72 DPI for web
 
 ## Clear Space
