@@ -62,75 +62,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --color-aqua: #00FFDC;
-            --color-navy: #1E2A45;
-            --color-fuchsia: #FF008F;
-            --color-white: #FFFFFF;
-            --color-gray-dark: #333333;
-            --color-gray-medium: #666666;
-            --color-gray-light: #CCCCCC;
-            --font-heading: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        body {
-            font-family: var(--font-body);
-            color: var(--color-gray-dark);
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-        }
-        
-        .font-heading { font-family: var(--font-heading); }
-        .font-body { font-family: var(--font-body); }
-        .text-aqua { color: var(--color-aqua); }
-        .text-navy { color: var(--color-navy); }
-        .text-fuchsia { color: var(--color-fuchsia); }
-        .bg-aqua { background-color: var(--color-aqua); }
-        .bg-navy { background-color: var(--color-navy); }
-        .bg-fuchsia { background-color: var(--color-fuchsia); }
-        .border-aqua { border-color: var(--color-aqua); }
-        .border-navy { border-color: var(--color-navy); }
-        .border-fuchsia { border-color: var(--color-fuchsia); }
-        
-        .nav-link {
-            transition: color 0.2s;
-        }
-        
-        .nav-link:hover {
-            color: var(--color-aqua);
-        }
-        
-        .nav-link.active {
-            color: var(--color-aqua);
-        }
-        
         .color-swatch {
             width: 100%;
             height: 120px;
             border-radius: 0.5rem;
             margin-bottom: 1rem;
-        }
-        
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .nav-menu.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: var(--color-navy);
-                padding: 1rem;
-                z-index: 1000;
-            }
         }
     </style>
 </head>
@@ -169,14 +107,36 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="bg-navy text-white py-16 px-4">
-        <div class="max-w-6xl mx-auto">
-            <h1 class="font-heading text-4xl md:text-5xl font-bold text-center mb-4">
+    <header class="bg-navy text-white py-16 px-4 hero-section relative">
+        <!-- Decorative elements -->
+        <div class="hero-decorative-circle hero-decorative-circle-1"></div>
+        <div class="hero-decorative-circle hero-decorative-circle-2"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <!-- Logo -->
+            <div class="mb-8">
+                <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-dark.svg" 
+                     alt="kieks.me Logo" 
+                     class="h-12 md:h-16">
+            </div>
+            
+            <!-- Title -->
+            <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
                 Brand Colors
             </h1>
-            <p class="font-body text-xl text-center text-gray-300 max-w-2xl mx-auto">
-                Official kieks.me GbR color palette and specifications
+            
+            <!-- Subtitle -->
+            <p class="font-body text-lg md:text-xl text-gray-300 mb-4 max-w-2xl">
+                Official color palette and specifications
             </p>
+            
+            <!-- Color tags -->
+            <p class="font-body text-lg md:text-xl text-aqua mb-4">
+                Aqua • Navy • Fuchsia
+            </p>
+            
+            <!-- Accent line -->
+            <div class="hero-accent-line"></div>
         </div>
     </header>
 

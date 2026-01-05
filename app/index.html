@@ -91,139 +91,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
     <!-- Custom Styles -->
-    <style>
-        :root {
-            /* Brand Colors */
-            --color-aqua: #00FFDC;
-            --color-navy: #1E2A45;
-            --color-fuchsia: #FF008F;
-            --color-white: #FFFFFF;
-            --color-black: #000000;
-            --color-gray-dark: #333333;
-            --color-gray-medium: #666666;
-            --color-gray-light: #CCCCCC;
-            
-            /* Fonts */
-            --font-heading: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        body {
-            font-family: var(--font-body);
-            color: var(--color-gray-dark);
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-        }
-        
-        .font-heading {
-            font-family: var(--font-heading);
-        }
-        
-        .font-body {
-            font-family: var(--font-body);
-        }
-        
-        .text-aqua {
-            color: var(--color-aqua);
-        }
-        
-        .text-navy {
-            color: var(--color-navy);
-        }
-        
-        .text-fuchsia {
-            color: var(--color-fuchsia);
-        }
-        
-        .bg-aqua {
-            background-color: var(--color-aqua);
-        }
-        
-        .bg-navy {
-            background-color: var(--color-navy);
-        }
-        
-        .bg-fuchsia {
-            background-color: var(--color-fuchsia);
-        }
-        
-        .border-aqua {
-            border-color: var(--color-aqua);
-        }
-        
-        .border-navy {
-            border-color: var(--color-navy);
-        }
-        
-        .border-fuchsia {
-            border-color: var(--color-fuchsia);
-        }
-        
-        /* Markdown styling */
-        .markdown-content h1,
-        .markdown-content h2,
-        .markdown-content h3,
-        .markdown-content h4 {
-            font-family: var(--font-heading);
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-        }
-        
-        .markdown-content p {
-            margin-bottom: 1em;
-        }
-        
-        .markdown-content ul,
-        .markdown-content ol {
-            margin-left: 1.5em;
-            margin-bottom: 1em;
-        }
-        
-        .markdown-content code {
-            background-color: rgba(0, 0, 0, 0.1);
-            padding: 0.2em 0.4em;
-            border-radius: 0.25rem;
-            font-size: 0.9em;
-        }
-        
-        .markdown-content a {
-            color: var(--color-aqua);
-            text-decoration: underline;
-        }
-        
-        /* Navigation */
-        .nav-link {
-            transition: color 0.2s;
-        }
-        
-        .nav-link:hover {
-            color: var(--color-aqua);
-        }
-        
-        .nav-link.active {
-            color: var(--color-aqua);
-        }
-        
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
-            .nav-menu.open {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: var(--color-navy);
-                padding: 1rem;
-                z-index: 1000;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-white">
     <!-- Navigation -->
@@ -260,19 +128,32 @@
     </nav>
     
     <!-- Hero Section -->
-    <header class="bg-navy text-white py-16 px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex items-center justify-center mb-8">
-                <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.svg" 
+    <header class="bg-navy text-white py-16 px-4 hero-section relative">
+        <!-- Decorative elements -->
+        <div class="hero-decorative-circle hero-decorative-circle-1"></div>
+        <div class="hero-decorative-circle hero-decorative-circle-2"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <!-- Logo -->
+            <div class="mb-8">
+                <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-dark.svg" 
                      alt="kieks.me Logo" 
-                     class="h-20 w-20 md:h-32 md:w-32">
+                     class="h-12 md:h-16">
             </div>
-            <h1 class="font-heading text-4xl md:text-5xl font-bold text-center mb-4">
-                Corporate Identity & Corporate Design
+            
+            <!-- Title -->
+            <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                Corporate Identity<br>
+                <span class="text-aqua">&amp; Corporate Design</span>
             </h1>
-            <p class="font-body text-xl text-center text-gray-300 max-w-2xl mx-auto">
-                Brand assets, guidelines, and resources for kieks.me GbR
+            
+            <!-- Subtitle -->
+            <p class="font-body text-lg md:text-xl text-gray-300 mb-4 max-w-2xl">
+                Brand assets, logos, colors, fonts, and guidelines
             </p>
+            
+            <!-- Accent line -->
+            <div class="hero-accent-line"></div>
         </div>
     </header>
 
