@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.16.0](https://github.com/kieksme/kieks.me.cicd/compare/v0.15.0...v0.16.0) (2026-01-06)
+
+
+### Features
+
+* add new grayscale avatar examples and enhance avatar generation script ([9bf4ee9](https://github.com/kieksme/kieks.me.cicd/commit/9bf4ee9d4d8ee62023108a2089c493551effabb2))
+
+
+### Bug Fixes
+
+* refine avatar image border-radius styles ([50c12ff](https://github.com/kieksme/kieks.me.cicd/commit/50c12ff0e62a5bbb7d9904f011fce5c8355614be))
+
 ## [0.15.0](https://github.com/kieksme/kieks.me.cicd/compare/v0.14.0...v0.15.0) (2026-01-06)
 
 
