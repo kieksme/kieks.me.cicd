@@ -6,12 +6,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Vite plugin to process HTML includes
- * Replaces <!-- include: navigation --> and <!-- include: footer --> with components
+ * Replaces <!-- include: navigation -->, <!-- include: footer -->, and <!-- include: analytics --> with components
  * and adjusts relative paths based on file depth
  */
 export function htmlInclude() {
   const navigationPath = resolve(__dirname, 'app/components/navigation.html');
   const footerPath = resolve(__dirname, 'app/components/footer.html');
+  const analyticsPath = resolve(__dirname, 'app/components/analytics.html');
   const releasePleaseManifestPath = resolve(__dirname, '.release-please-manifest.json');
   
   if (!existsSync(navigationPath)) {
@@ -20,6 +21,10 @@ export function htmlInclude() {
   
   if (!existsSync(footerPath)) {
     throw new Error(`Footer component not found at ${footerPath}`);
+  }
+  
+  if (!existsSync(analyticsPath)) {
+    throw new Error(`Analytics component not found at ${analyticsPath}`);
   }
 
   // Read version from .release-please-manifest.json
@@ -35,6 +40,7 @@ export function htmlInclude() {
 
   const navigationTemplate = readFileSync(navigationPath, 'utf-8');
   const footerTemplate = readFileSync(footerPath, 'utf-8');
+  const analyticsTemplate = readFileSync(analyticsPath, 'utf-8');
 
   return {
     name: 'html-include',
@@ -43,8 +49,9 @@ export function htmlInclude() {
       // Check if any includes are present
       const hasNavigation = html.includes('<!-- include: navigation -->');
       const hasFooter = html.includes('<!-- include: footer -->');
+      const hasAnalytics = html.includes('<!-- include: analytics -->');
       
-      if (!hasNavigation && !hasFooter) {
+      if (!hasNavigation && !hasFooter && !hasAnalytics) {
         return html;
       }
 
@@ -121,6 +128,11 @@ export function htmlInclude() {
         const changelogPath = `${basePath}CHANGELOG.md`;
         footer = footer.replace(/\{\{changelogPath\}\}/g, changelogPath);
         html = html.replace('<!-- include: footer -->', footer);
+      }
+      
+      // Replace analytics include if present
+      if (hasAnalytics) {
+        html = html.replace('<!-- include: analytics -->', analyticsTemplate);
       }
       
       return html;
