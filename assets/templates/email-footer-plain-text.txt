@@ -1,0 +1,12 @@
+--
+{{companyName}}
+{{#if address}}{{address}}{{/if}}
+
+{{#if name}}{{name}}{{/if}}
+{{#if position}}{{position}}{{/if}}
+{{#if email}}E-Mail: {{email}}{{/if}}
+{{#if phone}}Tel: {{phone}}{{/if}}
+
+© {{year}} {{companyName}}. All rights reserved.
+{{#if representatives}}Vertreten durch: {{representatives}}{{/if}}
+{{#if impressumUrl}}Impressum: {{impressumUrl}}{{/if}}
