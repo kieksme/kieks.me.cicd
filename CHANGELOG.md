@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.14.0](https://github.com/kieksme/kieks.me.cicd/compare/v0.13.1...v0.14.0) (2026-01-06)
+
+
+### Features
+
+* add Avatars implementation link across multiple HTML files ([e8c01b7](https://github.com/kieksme/kieks.me.cicd/commit/e8c01b7b61a4fc9b164db8ffde89b019a11982ad))
+* add Email Footer implementation link across multiple HTML files ([fad9c8a](https://github.com/kieksme/kieks.me.cicd/commit/fad9c8aac746637d0c396a644ec6ce16885e8a92))
+* add sample avatar generation script and update documentation ([d59ae34](https://github.com/kieksme/kieks.me.cicd/commit/d59ae341a6a68c4881d64639657dae13c4a67c89))
+* add shadow silhouette option to avatar generation ([c605d8d](https://github.com/kieksme/kieks.me.cicd/commit/c605d8decf3324e84fe226f2a5c923c0c27d9174))
+* enhance avatar generation with interactive mode and grayscale option ([935f8ff](https://github.com/kieksme/kieks.me.cicd/commit/935f8ff849b230aa59a24486d0a14fbcba17648e))
+* update avatar images and enhance shadow generation logic ([bd2425c](https://github.com/kieksme/kieks.me.cicd/commit/bd2425c5688d12ff54115e877cc47b0ef51e42a1))
+
+
+### Bug Fixes
+
+* update copyright year to 2026 across multiple HTML and XML files ([3fd795b](https://github.com/kieksme/kieks.me.cicd/commit/3fd795b605ec7b842ba02e97a59aa4328873fce4))
+* update email address and impressum link across multiple HTML files ([90fe5ae](https://github.com/kieksme/kieks.me.cicd/commit/90fe5ae4a01e8be12c9f3a46041d447229f2f9c0))
+
 ## [0.13.1](https://github.com/kieksme/kieks.me.cicd/compare/v0.13.0...v0.13.1) (2026-01-05)
 
 
