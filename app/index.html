@@ -275,6 +275,13 @@
                 `;
             } catch (error) {
                 console.error('Error fetching release:', error);
+                if (typeof swetrix !== 'undefined') {
+                    swetrix.trackError({
+                        name: error.name || 'Error',
+                        message: error.message || 'Failed to fetch release',
+                        stackTrace: error.stack,
+                    });
+                }
                 const releaseInfo = document.getElementById('release-info');
                 const releaseButtons = document.getElementById('release-buttons');
                 

@@ -540,6 +540,13 @@ Impressum: https://kieks.me/impressum`
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy:', err);
+                if (typeof swetrix !== 'undefined') {
+                    swetrix.trackError({
+                        name: err.name || 'Error',
+                        message: err.message || 'Failed to copy to clipboard',
+                        stackTrace: err.stack,
+                    });
+                }
                 // Fallback for older browsers
                 const textarea = document.createElement('textarea');
                 textarea.value = text;
@@ -557,6 +564,13 @@ Impressum: https://kieks.me/impressum`
                     }, 2000);
                 } catch (err) {
                     console.error('Fallback copy failed:', err);
+                    if (typeof swetrix !== 'undefined') {
+                        swetrix.trackError({
+                            name: err.name || 'Error',
+                            message: err.message || 'Fallback copy failed',
+                            stackTrace: err.stack,
+                        });
+                    }
                 }
                 document.body.removeChild(textarea);
             });

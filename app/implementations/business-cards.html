@@ -416,6 +416,16 @@
                     container.appendChild(canvas);
                 } catch (error) {
                     console.error('Error loading PDF:', error, 'URL:', pdfUrl);
+                    if (typeof swetrix !== 'undefined') {
+                        swetrix.trackError({
+                            name: error.name || 'Error',
+                            message: error.message || 'Failed to load PDF',
+                            stackTrace: error.stack,
+                            meta: {
+                                pdfUrl: pdfUrl,
+                            },
+                        });
+                    }
                     container.innerHTML = '<div class="pdf-error">Error loading PDF: ' + error.message + '. <a href="' + pdfUrl + '" target="_blank" class="text-aqua hover:underline">Download instead</a></div>';
                 }
             }

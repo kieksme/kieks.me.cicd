@@ -6,6 +6,9 @@
       apiURL: 'https://analytics-api.kieks.me/log',
     })
     swetrix.trackViews()
+    swetrix.trackErrors({
+      sampleRate: 1,
+    })
   })
 </script>
 
