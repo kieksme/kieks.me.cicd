@@ -3,7 +3,7 @@
  * Test script for pdf-lib business card generator
  */
 
-import { generateBusinessCardWithPdfLib } from './business-card-generator-pdflib.mjs';
+import { generateBusinessCardWithPdfLib } from './business-card-generator.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join, resolve } from 'path';
 
