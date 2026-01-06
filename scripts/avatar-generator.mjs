@@ -162,7 +162,10 @@ async function generateAvatar(portraitPath, colorName, size, outputPath, graysca
     
     // Convert to grayscale if requested (only the portrait, not the background)
     if (grayscale) {
-      portraitPipeline = portraitPipeline.greyscale();
+      portraitPipeline = portraitPipeline
+        .greyscale()
+        .normalise() // Normalize brightness/contrast
+        .linear(1.3, -38.4); // Increase contrast by 30% for better visibility (offset: -(128 * 0.3) = -38.4)
     }
     
     // Resize portrait to fill the square (cover strategy)
