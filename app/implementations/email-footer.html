@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-single-circle.png">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#1E2A45">
+    
+    <meta name="description" content="kieks.me GbR Email Footer - Professional email footer templates following brand guidelines">
+    <meta name="keywords" content="kieks.me, email footer, email signature, email template, brand guidelines">
+    <meta name="author" content="kieks.me GbR">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="German">
+    <title>Email Footer - kieks.me GbR</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kieksme.github.io/kieks.me.cicd/implementations/email-footer.html">
+    <meta property="og:title" content="Email Footer - kieks.me GbR">
+    <meta property="og:description" content="Professional email footer templates following kieks.me brand guidelines">
+    <meta property="og:image" content="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/implementations.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/svg+xml">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:site_name" content="kieks.me GbR">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://kieksme.github.io/kieks.me.cicd/implementations/email-footer.html">
+    <meta name="twitter:title" content="Email Footer - kieks.me GbR">
+    <meta name="twitter:description" content="Professional email footer templates following brand guidelines">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/implementations.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kieksme.github.io/kieks.me.cicd/implementations/email-footer.html">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Email Footer - kieks.me GbR",
+      "description": "Professional email footer templates following kieks.me brand guidelines",
+      "url": "https://kieksme.github.io/kieks.me.cicd/implementations/email-footer.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "kieks.me Corporate Identity",
+        "url": "https://kieksme.github.io/kieks.me.cicd/"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Email Footer",
+        "description": "Email footer templates implementing kieks.me brand fundamentals"
+      }
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles (imported via main.js) -->
+    <script type="module" src="../main.js"></script>
+    
+    <style>
+        .email-footer-preview {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f9fafb;
+            margin: 2rem 0;
+        }
+        
+        .email-footer-preview iframe {
+            width: 100%;
+            border: none;
+            display: block;
+        }
+        
+        .code-block {
+            background-color: #1E2A45;
+            color: #00FFDC;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+        
+        .code-block code {
+            color: #00FFDC;
+        }
+        
+        .copy-button {
+            background-color: #1E2A45;
+            color: #00FFDC;
+            border: 2px solid #00FFDC;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+        
+        .copy-button:hover {
+            background-color: #00FFDC;
+            color: #1E2A45;
+        }
+        
+        .copy-button.copied {
+            background-color: #00FFDC;
+            color: #1E2A45;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" class="bg-navy text-white sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="../index.html">
+                        <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-dark.svg" 
+                             alt="kieks.me Logo" 
+                             width="128"
+                             height="32"
+                             class="h-8">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="../index.html" class="nav-link font-body">Home</a>
+                    <div class="relative group">
+                        <a href="../fundamentals/index.html" class="nav-link font-body flex items-center">
+                            Fundamentals
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="py-2">
+                                <a href="../fundamentals/logos.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Logos</a>
+                                <a href="../fundamentals/colors.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Colors</a>
+                                <a href="../fundamentals/fonts.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Fonts</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <a href="index.html" class="nav-link active implementations font-body flex items-center">
+                            Implementations
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="py-2">
+                                <a href="business-cards.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Business Cards</a>
+                                <a href="web-applications.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Web Applications</a>
+                                <a href="email-footer.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 font-body">Email Footer</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../impressum.html" class="nav-link font-body">Impressum</a>
+                </div>
+                <button class="md:hidden" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-menu md:hidden" id="mobile-menu">
+                <a href="../index.html" class="nav-link font-body block py-2">Home</a>
+                <a href="../fundamentals/index.html" class="nav-link font-body block py-2">Fundamentals</a>
+                <a href="../fundamentals/logos.html" class="nav-link font-body block py-2 pl-4">→ Logos</a>
+                <a href="../fundamentals/colors.html" class="nav-link font-body block py-2 pl-4">→ Colors</a>
+                <a href="../fundamentals/fonts.html" class="nav-link font-body block py-2 pl-4">→ Fonts</a>
+                <a href="index.html" class="nav-link active implementations font-body block py-2">Implementations</a>
+                <a href="business-cards.html" class="nav-link font-body block py-2 pl-4">→ Business Cards</a>
+                <a href="web-applications.html" class="nav-link font-body block py-2 pl-4">→ Web Applications</a>
+                <a href="email-footer.html" class="nav-link active font-body block py-2 pl-4">→ Email Footer</a>
+                <a href="../impressum.html" class="nav-link font-body block py-2">Impressum</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header role="banner" class="bg-navy text-white py-16 px-4 hero-section relative">
+        <!-- Decorative elements -->
+        <div class="hero-decorative-circle hero-decorative-circle-1"></div>
+        <div class="hero-decorative-circle hero-decorative-circle-2"></div>
+        <div class="hero-decorative-circle hero-decorative-circle-3"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <!-- Title -->
+            <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+                Email Footer
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="font-body text-lg md:text-xl text-gray-300 mb-4 max-w-2xl">
+                Professional email footer templates following brand guidelines
+            </p>
+            
+            <!-- Features -->
+            <p class="font-body text-lg md:text-xl mb-4">
+                <span class="text-fuchsia">Brand Guidelines</span> • <span class="text-aqua">Email Compatible</span> • <span class="text-fuchsia">Responsive Design</span>
+            </p>
+            
+            <!-- Accent line -->
+            <div class="hero-accent-line-fuchsia"></div>
+        </div>
+    </header>
+
+    <main role="main">
+    <!-- Overview Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-8">Overview</h2>
+            <p class="font-body text-lg text-gray-700 mb-8">
+                Our email footer templates are designed to follow kieks.me brand fundamentals, ensuring consistency across all email communications. Each footer features our brand colors, typography, and logo, optimized for maximum compatibility with email clients.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Design Features</h3>
+                    <ul class="font-body text-gray-700 space-y-2 list-disc list-inside">
+                        <li>Brand logo (kieks.me horizontal variant)</li>
+                        <li>Contact information (email, phone, website)</li>
+                        <li>Company name and legal information</li>
+                        <li>Social media links (optional)</li>
+                        <li>Navy and aqua color scheme</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Technical Features</h3>
+                    <ul class="font-body text-gray-700 space-y-2 list-disc list-inside">
+                        <li>Table-based layout for email compatibility</li>
+                        <li>Inline CSS styles (no external stylesheets)</li>
+                        <li>Responsive design for mobile devices</li>
+                        <li>WCAG AA compliant color contrast</li>
+                        <li>Compatible with major email clients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Footer Examples Section -->
+    <section class="py-16 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-8 text-center">Email Footer Examples</h2>
+            <p class="font-body text-lg text-gray-700 mb-12 text-center max-w-3xl mx-auto">
+                Below are example email footers showcasing different configurations. Each footer demonstrates our brand identity applied to email communications.
+            </p>
+
+            <!-- Standard Footer -->
+            <div class="mb-16">
+                <h3 class="font-heading text-2xl font-bold text-navy mb-6">Standard Footer</h3>
+                <p class="font-body text-gray-700 mb-4">
+                    A clean, professional footer with logo, contact information, and company details.
+                </p>
+                
+                <div class="email-footer-preview">
+                    <iframe id="standard-footer-preview" src="about:blank" style="height: 300px;"></iframe>
+                </div>
+                
+                <div class="mt-4">
+                    <h4 class="font-heading text-lg font-semibold text-navy mb-2">HTML Code:</h4>
+                    <div class="code-block" id="standard-footer-code">
+                        <code id="standard-footer-code-content"></code>
+                    </div>
+                    <button class="copy-button" onclick="copyToClipboard('standard-footer-code-content', this)">Copy Code</button>
+                </div>
+            </div>
+
+            <!-- Minimal Footer -->
+            <div class="mb-16">
+                <h3 class="font-heading text-2xl font-bold text-navy mb-6">Minimal Footer</h3>
+                <p class="font-body text-gray-700 mb-4">
+                    A simplified footer with essential information only.
+                </p>
+                
+                <div class="email-footer-preview">
+                    <iframe id="minimal-footer-preview" src="about:blank" style="height: 200px;"></iframe>
+                </div>
+                
+                <div class="mt-4">
+                    <h4 class="font-heading text-lg font-semibold text-navy mb-2">HTML Code:</h4>
+                    <div class="code-block" id="minimal-footer-code">
+                        <code id="minimal-footer-code-content"></code>
+                    </div>
+                    <button class="copy-button" onclick="copyToClipboard('minimal-footer-code-content', this)">Copy Code</button>
+                </div>
+            </div>
+
+            <!-- Extended Footer -->
+            <div class="mb-16">
+                <h3 class="font-heading text-2xl font-bold text-navy mb-6">Extended Footer</h3>
+                <p class="font-body text-gray-700 mb-4">
+                    A comprehensive footer with social media links and additional information.
+                </p>
+                
+                <div class="email-footer-preview">
+                    <iframe id="extended-footer-preview" src="about:blank" style="height: 400px;"></iframe>
+                </div>
+                
+                <div class="mt-4">
+                    <h4 class="font-heading text-lg font-semibold text-navy mb-2">HTML Code:</h4>
+                    <div class="code-block" id="extended-footer-code">
+                        <code id="extended-footer-code-content"></code>
+                    </div>
+                    <button class="copy-button" onclick="copyToClipboard('extended-footer-code-content', this)">Copy Code</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Features Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-8">Design Features</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Brand Colors</h3>
+                    <p class="font-body text-gray-700">
+                        Uses our official brand colors: Navy (#1E2A45) with Aqua accents (#00FFDC) for optimal contrast and brand recognition in email clients.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Typography</h3>
+                    <p class="font-body text-gray-700">
+                        Follows brand typography guidelines: Hanken Grotesk for headings and Source Sans 3 for body text, with web-safe fallbacks for email compatibility.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h3 class="font-heading text-xl font-bold text-navy mb-4">Email Compatibility</h3>
+                    <p class="font-body text-gray-700">
+                        Built with table-based layouts and inline styles for maximum compatibility with Gmail, Outlook, Apple Mail, and other major email clients.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Details Section -->
+    <section class="py-16 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy mb-8">Technical Details</h2>
+            
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="font-heading text-xl font-bold text-navy mb-4">Email Client Compatibility</h3>
+                <p class="font-body text-lg text-gray-700 mb-4">
+                    Our email footer templates are designed to work across all major email clients:
+                </p>
+                <ul class="font-body text-gray-700 space-y-2 list-disc list-inside mb-6">
+                    <li>Gmail (Web, iOS, Android)</li>
+                    <li>Outlook (Windows, Mac, Web)</li>
+                    <li>Apple Mail (macOS, iOS)</li>
+                    <li>Yahoo Mail</li>
+                    <li>Thunderbird</li>
+                    <li>And many more...</li>
+                </ul>
+                
+                <h3 class="font-heading text-xl font-bold text-navy mb-4 mt-8">Best Practices</h3>
+                <p class="font-body text-lg text-gray-700 mb-4">
+                    When using these email footer templates:
+                </p>
+                <ul class="font-body text-gray-700 space-y-2 list-disc list-inside">
+                    <li>Always use inline styles (no external CSS files)</li>
+                    <li>Use table-based layouts for structure</li>
+                    <li>Test in multiple email clients before sending</li>
+                    <li>Keep image file sizes small for faster loading</li>
+                    <li>Use absolute URLs for images and links</li>
+                    <li>Ensure all text has sufficient color contrast (WCAG AA)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo" class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-dark.svg" 
+                         alt="kieks.me Logo" 
+                         width="128"
+                         height="32"
+                         class="h-8">
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="font-body text-sm text-gray-400">
+                        © 2024 kieks.me GbR. All rights reserved.
+                    </p>
+                    <p class="font-body text-sm text-gray-400 mt-2">
+                        <a href="https://github.com/kieksme/kieks.me.cicd" class="text-aqua hover:opacity-90 transition-colors">View on GitHub</a> | 
+                        <a href="../impressum.html" class="text-aqua hover:opacity-90 transition-colors">Impressum</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Email footer templates
+        const emailFooters = {
+            standard: `<!-- Standard Email Footer -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-family: 'Source Sans 3', Arial, sans-serif; background-color: #ffffff; border-top: 3px solid #00FFDC; padding: 30px 20px;">
+    <tr>
+        <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px;">
+                <!-- Logo -->
+                <tr>
+                    <td align="left" style="padding-bottom: 20px;">
+                        <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-dark.svg" alt="kieks.me Logo" width="128" height="32" style="display: block; height: 32px; width: auto;">
+                    </td>
+                </tr>
+                <!-- Contact Information -->
+                <tr>
+                    <td align="left" style="padding-bottom: 15px;">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td style="font-size: 14px; line-height: 1.6; color: #1E2A45;">
+                                    <strong style="color: #1E2A45; font-family: 'Hanken Grotesk', Arial, sans-serif;">kieks.me GbR</strong><br>
+                                    <span style="color: #666666;">E-Mail: <a href="mailto:info@kieks.me" style="color: #006B5F; text-decoration: none;">info@kieks.me</a></span><br>
+                                    <span style="color: #666666;">Web: <a href="https://kieks.me" style="color: #006B5F; text-decoration: none;">https://kieks.me</a></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Divider -->
+                <tr>
+                    <td style="border-top: 1px solid #CCCCCC; padding-top: 15px; padding-bottom: 15px;">
+                        <p style="margin: 0; font-size: 12px; color: #666666; line-height: 1.5;">
+                            © 2024 kieks.me GbR. All rights reserved.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>`,
+            minimal: `<!-- Minimal Email Footer -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-family: 'Source Sans 3', Arial, sans-serif; background-color: #ffffff; padding: 20px;">
+    <tr>
+        <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px;">
+                <tr>
+                    <td align="left" style="font-size: 12px; color: #666666; line-height: 1.6;">
+                        <strong style="color: #1E2A45; font-family: 'Hanken Grotesk', Arial, sans-serif;">kieks.me GbR</strong> | 
+                        <a href="mailto:info@kieks.me" style="color: #006B5F; text-decoration: none;">info@kieks.me</a> | 
+                        <a href="https://kieks.me" style="color: #006B5F; text-decoration: none;">kieks.me</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>`,
+            extended: `<!-- Extended Email Footer -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-family: 'Source Sans 3', Arial, sans-serif; background-color: #1E2A45; padding: 40px 20px;">
+    <tr>
+        <td align="center">
+            <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px;">
+                <!-- Logo -->
+                <tr>
+                    <td align="left" style="padding-bottom: 25px;">
+                        <img src="https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/logos/kieks.me-horizontal-aqua-dark.svg" alt="kieks.me Logo" width="128" height="32" style="display: block; height: 32px; width: auto; filter: brightness(0) invert(1);">
+                    </td>
+                </tr>
+                <!-- Content Grid -->
+                <tr>
+                    <td>
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td width="50%" valign="top" style="padding-right: 20px;">
+                                    <p style="margin: 0 0 15px 0; font-size: 14px; line-height: 1.6; color: #FFFFFF;">
+                                        <strong style="font-family: 'Hanken Grotesk', Arial, sans-serif; color: #00FFDC;">Contact</strong><br>
+                                        <span style="color: #CCCCCC;">E-Mail: <a href="mailto:info@kieks.me" style="color: #00FFDC; text-decoration: none;">info@kieks.me</a></span><br>
+                                        <span style="color: #CCCCCC;">Web: <a href="https://kieks.me" style="color: #00FFDC; text-decoration: none;">kieks.me</a></span>
+                                    </p>
+                                </td>
+                                <td width="50%" valign="top" style="padding-left: 20px;">
+                                    <p style="margin: 0 0 15px 0; font-size: 14px; line-height: 1.6; color: #FFFFFF;">
+                                        <strong style="font-family: 'Hanken Grotesk', Arial, sans-serif; color: #00FFDC;">Follow Us</strong><br>
+                                        <a href="https://github.com/kieksme" style="color: #00FFDC; text-decoration: none; font-size: 14px;">GitHub</a><br>
+                                        <a href="https://linkedin.com/company/kieksme" style="color: #00FFDC; text-decoration: none; font-size: 14px;">LinkedIn</a>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- Divider -->
+                <tr>
+                    <td style="border-top: 1px solid #5A6B8C; padding-top: 20px; padding-bottom: 15px;">
+                        <p style="margin: 0; font-size: 12px; color: #CCCCCC; line-height: 1.5;">
+                            © 2024 kieks.me GbR. All rights reserved. | 
+                            <a href="https://kieks.me/impressum" style="color: #00FFDC; text-decoration: none;">Impressum</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>`
+        };
+
+        // Load email footer previews
+        function loadEmailFooterPreviews() {
+            const previews = [
+                { id: 'standard-footer-preview', template: emailFooters.standard },
+                { id: 'minimal-footer-preview', template: emailFooters.minimal },
+                { id: 'extended-footer-preview', template: emailFooters.extended }
+            ];
+
+            previews.forEach(preview => {
+                const iframe = document.getElementById(preview.id);
+                const codeElement = document.getElementById(preview.id.replace('-preview', '-code-content'));
+                
+                if (iframe && codeElement) {
+                    // Set code content
+                    codeElement.textContent = preview.template;
+                    
+                    // Create preview document
+                    const doc = iframe.contentDocument || iframe.contentWindow.document;
+                    doc.open();
+                    doc.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <meta charset="UTF-8">
+                            <style>
+                                body { margin: 0; padding: 0; background-color: #f5f5f5; }
+                            </style>
+                        </head>
+                        <body>
+                            ${preview.template}
+                        </body>
+                        </html>
+                    `);
+                    doc.close();
+                }
+            });
+        }
+
+        // Copy to clipboard function
+        function copyToClipboard(elementId, button) {
+            const codeElement = document.getElementById(elementId);
+            if (!codeElement) return;
+
+            const text = codeElement.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copy Code';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    button.textContent = 'Copied!';
+                    button.classList.add('copied');
+                    setTimeout(() => {
+                        button.textContent = 'Copy Code';
+                        button.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Fallback copy failed:', err);
+                }
+                document.body.removeChild(textarea);
+            });
+        }
+
+        // Initialize on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadEmailFooterPreviews);
+        } else {
+            loadEmailFooterPreviews();
+        }
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+        }
+    </script>
+</body>
+</html>
