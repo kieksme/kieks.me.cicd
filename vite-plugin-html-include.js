@@ -6,24 +6,33 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Vite plugin to process HTML includes
- * Replaces <!-- include: navigation --> with navigation component
+ * Replaces <!-- include: navigation --> and <!-- include: footer --> with components
  * and adjusts relative paths based on file depth
  */
 export function htmlInclude() {
   const navigationPath = resolve(__dirname, 'app/components/navigation.html');
+  const footerPath = resolve(__dirname, 'app/components/footer.html');
   
   if (!existsSync(navigationPath)) {
     throw new Error(`Navigation component not found at ${navigationPath}`);
   }
+  
+  if (!existsSync(footerPath)) {
+    throw new Error(`Footer component not found at ${footerPath}`);
+  }
 
   const navigationTemplate = readFileSync(navigationPath, 'utf-8');
+  const footerTemplate = readFileSync(footerPath, 'utf-8');
 
   return {
     name: 'html-include',
     enforce: 'pre',
     transformIndexHtml(html, context) {
-      // Only process if navigation include is present
-      if (!html.includes('<!-- include: navigation -->')) {
+      // Check if any includes are present
+      const hasNavigation = html.includes('<!-- include: navigation -->');
+      const hasFooter = html.includes('<!-- include: footer -->');
+      
+      if (!hasNavigation && !hasFooter) {
         return html;
       }
 
@@ -86,8 +95,17 @@ export function htmlInclude() {
         navigation = navigation.replace(new RegExp(escapedPlaceholder, 'g'), value ? 'active' : '');
       });
       
-      // Replace the include comment with processed navigation
-      html = html.replace('<!-- include: navigation -->', navigation);
+      // Replace navigation include if present
+      if (hasNavigation) {
+        html = html.replace('<!-- include: navigation -->', navigation);
+      }
+      
+      // Replace footer include if present
+      if (hasFooter) {
+        let footer = footerTemplate;
+        footer = footer.replace(/\{\{basePath\}\}/g, basePath);
+        html = html.replace('<!-- include: footer -->', footer);
+      }
       
       return html;
     }
