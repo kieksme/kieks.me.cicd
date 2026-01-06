@@ -399,8 +399,10 @@
             <p class="font-body text-lg text-gray-700 mb-6">
               Avatars für kieks.me Team-Mitglieder sind quadratische Grafiken,
               die freigestellte Portraits mit Firmenfarben als Hintergrund
-              kombinieren. Diese Richtlinien beschreiben, wie Avatare erstellt
-              werden sollen, um der Corporate Identity zu entsprechen.
+              kombinieren. Optional kann ein farbiger Schattenriss (Silhouette)
+              hinter dem Portrait hinzugefügt werden, um Tiefe und visuelles
+              Interesse zu schaffen. Diese Richtlinien beschreiben, wie Avatare
+              erstellt werden sollen, um der Corporate Identity zu entsprechen.
             </p>
           </div>
 
@@ -430,8 +432,27 @@
                 <li><strong>Freistellung:</strong> Portrait muss freigestellt sein</li>
                 <li><strong>Zentrierung:</strong> Portrait wird zentriert platziert</li>
                 <li><strong>Größe:</strong> Füllt das Quadrat (mit Zuschnitt bei Bedarf)</li>
+                <li><strong>Schattenriss:</strong> Optional - farbiger Schattenriss (20% größer, nach links/oben verschoben)</li>
               </ul>
             </div>
+          </div>
+
+          <div class="bg-gray-50 p-6 rounded-lg mb-8">
+            <h3 class="font-heading text-xl font-bold text-navy mb-4">
+              Schattenriss (Silhouette)
+            </h3>
+            <p class="font-body text-gray-700 mb-4">
+              Optional kann ein farbiger Schattenriss hinter dem Portrait hinzugefügt werden:
+            </p>
+            <ul class="font-body text-gray-700 space-y-2 list-disc list-inside mb-4">
+              <li><strong>Farbe:</strong> Automatisch eine andere Firmenfarbe als der Hintergrund</li>
+              <li><strong>Größe:</strong> 20% größer als das Portrait (120%)</li>
+              <li><strong>Position:</strong> Nach links und oben verschoben (Offset basierend auf Avatar-Größe)</li>
+              <li><strong>Effekt:</strong> Verleiht dem Avatar Tiefe und visuelles Interesse</li>
+            </ul>
+            <p class="font-body text-sm text-gray-600">
+              <em>Hinweis: Der Schattenriss ist standardmäßig aktiviert, kann aber mit <code class="bg-gray-200 px-2 py-1 rounded">--no-shadow</code> deaktiviert werden.</em>
+            </p>
           </div>
 
           <div class="bg-gray-50 p-6 rounded-lg mb-8">
@@ -774,6 +795,10 @@ pnpm run generate:avatar</code></pre>
               <li>
                 <strong>--grayscale</strong>: Konvertiert das Portrait in Graustufen
                 (Hintergrund bleibt farbig) [optional]
+              </li>
+              <li>
+                <strong>--no-shadow</strong>: Deaktiviert den Schattenriss
+                (Standard: aktiviert) [optional]
               </li>
             </ul>
           </div>

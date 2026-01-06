@@ -64,15 +64,64 @@ function hexToRgb(hex) {
 }
 
 /**
+ * Get shadow color (different from background color)
+ * @param {string} backgroundColor - Background color name (aqua, navy, fuchsia)
+ * @returns {string} Shadow color name
+ */
+function getShadowColor(backgroundColor) {
+  const colorMap = {
+    aqua: ['navy', 'fuchsia'],
+    navy: ['aqua', 'fuchsia'],
+    fuchsia: ['aqua', 'navy'],
+  };
+  
+  const options = colorMap[backgroundColor.toLowerCase()];
+  if (!options || options.length === 0) {
+    // Fallback: use navy if available
+    return 'navy';
+  }
+  
+  // Return first available different color
+  return options[0];
+}
+
+/**
+ * Calculate shadow offset based on avatar size
+ * @param {number} size - Avatar size in pixels
+ * @returns {Object} Offset object with x and y (negative for top-left)
+ */
+function calculateShadowOffset(size) {
+  let offset;
+  
+  if (size <= 256) {
+    // Small avatars: 5-8px offset
+    offset = Math.max(5, Math.floor(size * 0.03));
+  } else if (size <= 512) {
+    // Medium avatars: 10-15px offset
+    offset = Math.max(10, Math.floor(size * 0.025));
+  } else {
+    // Large avatars: 15-20px offset
+    offset = Math.max(15, Math.floor(size * 0.02));
+  }
+  
+  // Top-left offset (negative values)
+  return {
+    x: -offset,
+    y: -offset,
+  };
+}
+
+/**
  * Generate square avatar with brand color background
  * @param {string} portraitPath - Path to cut-out portrait image (PNG with transparency)
  * @param {string} colorName - Brand color name (aqua, navy, fuchsia)
  * @param {number} size - Output size in pixels (square)
  * @param {string} outputPath - Output file path
  * @param {boolean} grayscale - Whether to convert portrait to grayscale (default: false)
+ * @param {boolean} withShadow - Whether to add shadow silhouette (default: true)
  * @returns {Promise<void>}
  */
-async function generateAvatar(portraitPath, colorName, size, outputPath, grayscale = false) {
+async function generateAvatar(portraitPath, colorName, size, outputPath, grayscale = false, withShadow = true) {
   try {
     // Validate inputs
     if (!existsSync(portraitPath)) {
@@ -141,14 +190,107 @@ async function generateAvatar(portraitPath, colorName, size, outputPath, graysca
       },
     });
 
-    // Composite portrait on top of background
+    // Prepare composite layers
+    const compositeLayers = [];
+
+    // Add shadow silhouette if enabled
+    if (withShadow) {
+      try {
+        const shadowColorName = getShadowColor(colorName);
+        const shadowColorHex = colors[shadowColorName];
+        const shadowRgb = hexToRgb(shadowColorHex);
+        
+        if (!shadowRgb) {
+          throw new Error(`Failed to parse shadow color: ${shadowColorHex}`);
+        }
+        
+        // Calculate offset first
+        const offset = calculateShadowOffset(size);
+        
+        // Calculate shadow size (120% of target size, but ensure it fits in canvas)
+        // Use a simple approach: shadow should be 120% of target, but max 90% of canvas
+        // This ensures it always fits, even with offset
+        const maxShadowSize = Math.floor(size * 0.9);
+        const desiredShadowSize = Math.floor(targetSize * 1.2);
+        const shadowSize = Math.max(1, Math.min(desiredShadowSize, maxShadowSize));
+        
+        // Validate shadow size
+        if (shadowSize <= 0 || shadowSize > size) {
+          throw new Error(`Invalid shadow size: ${shadowSize} (canvas size: ${size})`);
+        }
+        
+        // Create shadow silhouette:
+        // 1. Resize portrait to shadow size (120% of target, max canvas size)
+        const portraitForShadow = await sharp(portraitPath)
+          .resize(shadowSize, shadowSize, {
+            fit: 'cover',
+            position: 'center',
+          })
+          .ensureAlpha()
+          .raw()
+          .toBuffer({ resolveWithObject: true });
+        
+        // 2. Create shadow by replacing RGB with shadow color, keeping alpha
+        const { data: portraitData, info } = portraitForShadow;
+        const shadowBuffer = Buffer.allocUnsafe(shadowSize * shadowSize * 4);
+        
+        for (let i = 0; i < shadowSize * shadowSize; i++) {
+          const alpha = portraitData[i * 4 + 3];
+          shadowBuffer[i * 4 + 0] = shadowRgb.r; // R
+          shadowBuffer[i * 4 + 1] = shadowRgb.g; // G
+          shadowBuffer[i * 4 + 2] = shadowRgb.b; // B
+          shadowBuffer[i * 4 + 3] = alpha; // A (preserve transparency)
+        }
+        
+        // 3. Create shadow silhouette image from buffer
+        const shadowSilhouette = await sharp(shadowBuffer, {
+          raw: {
+            width: shadowSize,
+            height: shadowSize,
+            channels: 4,
+          },
+        })
+          .png()
+          .toBuffer();
+        
+        // 4. Calculate position for shadow (centered with offset)
+        // Start from center, then apply offset (negative for top-left)
+        const centerX = Math.floor((size - shadowSize) / 2);
+        const centerY = Math.floor((size - shadowSize) / 2);
+        const shadowX = centerX + offset.x;
+        const shadowY = centerY + offset.y;
+        
+        // Ensure shadow stays within bounds (clamp to 0 if negative, but allow slight overflow)
+        // Sharp allows negative positions for partial visibility
+        const finalX = Math.max(0, shadowX);
+        const finalY = Math.max(0, shadowY);
+        
+        compositeLayers.push({
+          input: shadowSilhouette,
+          blend: 'over',
+          left: finalX,
+          top: finalY,
+        });
+      } catch (err) {
+        error(`Failed to create shadow silhouette: ${err.message}`);
+        throw err;
+      }
+    }
+
+    // Add main portrait (centered)
+    const portraitX = Math.floor((size - targetSize) / 2);
+    const portraitY = Math.floor((size - targetSize) / 2);
+    
+    compositeLayers.push({
+      input: resizedPortrait,
+      blend: 'over',
+      left: portraitX,
+      top: portraitY,
+    });
+
+    // Composite all layers
     const avatar = await background
-      .composite([
-        {
-          input: resizedPortrait,
-          blend: 'over', // Standard alpha blending
-        },
-      ])
+      .composite(compositeLayers)
       .png()
       .toBuffer();
 
@@ -160,6 +302,11 @@ async function generateAvatar(portraitPath, colorName, size, outputPath, graysca
     info(`Color: ${colorName} (${colorHex})`);
     if (grayscale) {
       info(`Portrait: Graustufen`);
+    }
+    if (withShadow) {
+      const shadowColorName = getShadowColor(colorName);
+      const shadowColorHex = colors[shadowColorName];
+      info(`Schattenriss: ${shadowColorName} (${shadowColorHex})`);
     }
   } catch (err) {
     error(`Failed to generate avatar: ${err.message}`);
@@ -179,6 +326,7 @@ function parseArgs() {
     size: 512,
     output: null,
     grayscale: false,
+    withShadow: true, // Default: shadow enabled
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -193,6 +341,8 @@ function parseArgs() {
       parsed.output = args[++i];
     } else if (arg === '--grayscale' || arg === '--grey' || arg === '--gray') {
       parsed.grayscale = true;
+    } else if (arg === '--no-shadow') {
+      parsed.withShadow = false;
     } else if (arg === '--help' || arg === '-h') {
       return { help: true };
     }
@@ -321,6 +471,22 @@ async function promptGrayscale() {
 }
 
 /**
+ * Prompt user if shadow silhouette should be added
+ * @returns {Promise<boolean>} True if shadow should be added
+ */
+async function promptShadow() {
+  const { withShadow } = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'withShadow',
+      message: 'Soll ein Schattenriss hinzugefügt werden? (farbiger Schatten hinter dem Portrait)',
+      default: true,
+    },
+  ]);
+  return withShadow;
+}
+
+/**
  * Prompt user for output path
  * @param {string} portraitPath - Portrait image path (for default output name)
  * @param {string} color - Brand color name
@@ -398,6 +564,15 @@ async function promptMultipleAvatars(portraitPath) {
       default: false,
     },
   ]);
+  
+  const { withShadow } = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'withShadow',
+      message: 'Soll ein Schattenriss hinzugefügt werden? (farbiger Schatten hinter dem Portrait)',
+      default: true,
+    },
+  ]);
   const colors = loadBrandColors();
   const { selectedColors } = await inquirer.prompt([
     {
@@ -471,6 +646,7 @@ async function promptMultipleAvatars(portraitPath) {
         color,
         size,
         grayscale,
+        withShadow,
         outputPath: join(resolve(outputDir.trim()), `avatar-${portraitName}-${color}-${size}${grayscaleSuffix}.png`),
       });
     }
@@ -484,7 +660,7 @@ async function promptMultipleAvatars(portraitPath) {
  */
 function showHelp() {
   console.log(`
-${header('Avatar Generator')}
+${header('Avatar Generator', 'Einfach besser aussehen')}
 
 Usage:
   node scripts/avatar-generator.mjs [--portrait <path>] [--color <color>] [--size <pixels>] [--output <path>]
@@ -495,6 +671,7 @@ Options:
   --size <pixels>      Output size in pixels (square, default: 512)
   --output <path>      Output file path
   --grayscale          Convert portrait to grayscale (background stays colored)
+  --no-shadow          Disable shadow silhouette (default: enabled)
   --help, -h           Show this help message
 
 If no arguments are provided, an interactive prompt will guide you through the process.
@@ -529,7 +706,7 @@ Brand Colors:
  */
 async function main() {
   try {
-    console.log(header('Avatar Generator'));
+    console.log(header('Avatar Generator', 'Einfach besser aussehen'));
     
     const args = parseArgs();
 
@@ -548,7 +725,7 @@ async function main() {
       }
 
       // Generate avatar
-      await generateAvatar(args.portrait, args.color, args.size, args.output, args.grayscale);
+      await generateAvatar(args.portrait, args.color, args.size, args.output, args.grayscale, args.withShadow);
       success('Avatar generation completed!');
       return;
     }
@@ -569,7 +746,7 @@ async function main() {
       for (let i = 0; i < configs.length; i++) {
         const config = configs[i];
         info(`[${i + 1}/${configs.length}] Generiere Avatar: ${basename(config.outputPath)}`);
-        await generateAvatar(config.portraitPath, config.color, config.size, config.outputPath, config.grayscale);
+        await generateAvatar(config.portraitPath, config.color, config.size, config.outputPath, config.grayscale, config.withShadow);
       }
 
       success(`\nAlle ${configs.length} Avatar(s) erfolgreich generiert!`);
@@ -579,10 +756,11 @@ async function main() {
       const color = await promptBrandColor();
       const size = await promptAvatarSize();
       const grayscale = await promptGrayscale();
+      const withShadow = await promptShadow();
       const outputPath = await promptOutputPath(portraitPath, color, size, grayscale);
 
       info('\nGeneriere Avatar...\n');
-      await generateAvatar(portraitPath, color, size, outputPath, grayscale);
+      await generateAvatar(portraitPath, color, size, outputPath, grayscale, withShadow);
       success('\nAvatar generation completed!');
     }
   } catch (err) {
