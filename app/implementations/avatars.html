@@ -147,17 +147,22 @@
 
       .avatar-example img {
         border: 2px solid #e5e7eb;
-        border-radius: 0.5rem;
         display: block;
         margin: 0 auto 0.5rem;
+      }
+
+      /* Standard border-radius nur wenn nicht rounded-full oder rounded-lg */
+      .avatar-example img:not(.rounded-full):not(.rounded-lg) {
+        border-radius: 0.5rem;
       }
 
       .avatar-example img.rounded {
         border-radius: 1rem;
       }
 
-      .avatar-example img.circular {
-        border-radius: 50%;
+      .avatar-example img.circular,
+      .avatar-example img.rounded-full {
+        border-radius: 50% !important;
       }
 
       .avatar-example-label {
