@@ -22,7 +22,5 @@
   </g>
   
   <!-- Title -->
-  <text x="60" y="150" font-family="'Hanken Grotesk', sans-serif" font-size="36" font-weight="700" fill="#FFFFFF">
-    Documentation
-  </text>
+  <text x="60" y="150" font-family="'Hanken Grotesk', sans-serif" font-size="36" font-weight="700" fill="#FFFFFF">Documentation</text>
 </svg>

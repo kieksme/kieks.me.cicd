@@ -5,8 +5,8 @@
  */
 
 import { fileURLToPath } from 'url';
-import { dirname, join, resolve, existsSync } from 'path';
-import { readFileSync, writeFileSync, mkdirSync } from 'fs';
+import { dirname, join, resolve } from 'path';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import sharp from 'sharp';
 import {
   header,
@@ -113,19 +113,25 @@ async function generateSampleBanners() {
       writeFileSync(svgPath, customSVG);
       success(`Generated SVG: ${svgPath}`);
 
-      // Generate PNG from SVG
+      // Generate PNG from SVG (always regenerate to ensure PNGs exist)
       const pngPath = join(outputDir, `sample-readme-header-${repo.id}.png`);
-      const pngBuffer = await sharp(Buffer.from(customSVG))
-        .resize(README_HEADER_SPECS.width, README_HEADER_SPECS.height, {
-          fit: 'contain',
-          background: { r: 30, g: 42, b: 69 }, // Navy background
-        })
-        .png()
-        .toBuffer();
-      
-      writeFileSync(pngPath, pngBuffer);
-      const fileSizeMB = pngBuffer.length / (1024 * 1024);
-      success(`Generated PNG: ${pngPath} (${fileSizeMB.toFixed(2)}MB)`);
+      const svgBuffer = readFileSync(svgPath);
+      try {
+        const pngBuffer = await sharp(svgBuffer)
+          .resize(README_HEADER_SPECS.width, README_HEADER_SPECS.height, {
+            fit: 'contain',
+            background: { r: 30, g: 42, b: 69 }, // Navy background
+          })
+          .png()
+          .toBuffer();
+        
+        writeFileSync(pngPath, pngBuffer);
+        const fileSizeMB = pngBuffer.length / (1024 * 1024);
+        success(`Generated PNG: ${pngPath} (${fileSizeMB.toFixed(2)}MB)`);
+      } catch (pngErr) {
+        error(`Failed to generate PNG for ${repo.id}: ${pngErr.message}`);
+        // Continue with next repo even if PNG generation fails
+      }
     } catch (err) {
       error(`Failed to generate banner for ${repo.id}: ${err.message}`);
     }
