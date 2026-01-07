@@ -27,15 +27,56 @@ const CONFIG = loadConfig();
 const LINKEDIN_SPECS = CONFIG.linkedin.imageSpecs;
 
 /**
+ * Modify SVG logo colors based on background color
+ * @param {string} svgContent - SVG content as string
+ * @param {string} backgroundColor - Background color name (navy, aqua, fuchsia)
+ * @returns {string} Modified SVG content
+ */
+function modifyLogoColors(svgContent, backgroundColor) {
+  const colors = loadBrandColors();
+  
+  // Determine circle color based on background
+  // Navy background → Fuchsia circle
+  // Fuchsia background → Navy circle
+  // Aqua background → Fuchsia circle (or keep default)
+  let circleColor;
+  if (backgroundColor === 'navy') {
+    circleColor = colors.fuchsia;
+  } else if (backgroundColor === 'fuchsia') {
+    circleColor = colors.navy;
+  } else {
+    // Aqua or default: use Fuchsia for contrast
+    circleColor = colors.fuchsia;
+  }
+  
+  // Replace the circle fill color (currently #1E2A45)
+  // Match: fill="#1E2A45" or fill='#1E2A45'
+  const modifiedSvg = svgContent.replace(
+    /fill="#1E2A45"/g,
+    `fill="${circleColor}"`
+  );
+  
+  return modifiedSvg;
+}
+
+/**
  * Convert SVG to PNG buffer
  * @param {string} svgPath - Path to SVG file
  * @param {number} width - Target width in pixels
  * @param {number} height - Target height in pixels
+ * @param {string} backgroundColor - Background color name for color adjustment
  * @returns {Promise<Buffer>} PNG buffer
  */
-async function svgToPng(svgPath, width, height) {
+async function svgToPng(svgPath, width, height, backgroundColor = null) {
   try {
-    const svgBuffer = readFileSync(svgPath);
+    let svgContent = readFileSync(svgPath, 'utf-8');
+    
+    // Modify logo colors if background color is provided
+    if (backgroundColor) {
+      svgContent = modifyLogoColors(svgContent, backgroundColor);
+    }
+    
+    const svgBuffer = Buffer.from(svgContent);
     const pngBuffer = await sharp(svgBuffer)
       .resize(width, height, {
         fit: 'contain',
@@ -168,7 +209,7 @@ async function generateLinkedInImage(type, options) {
           logoSize = Math.floor(Math.min(width, height) * 0.3); // 30% of smaller dimension
         }
 
-        const logoBuffer = await svgToPng(logoToUse, logoSize, logoSize);
+        const logoBuffer = await svgToPng(logoToUse, logoSize, logoSize, color);
         
         // Position logo
         let logoX, logoY;
