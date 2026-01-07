@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@datadog/browser-rum':
-        specifier: ^6.25.2
-        version: 6.25.2
       boxen:
         specifier: ^8.0.1
         version: 8.0.1
@@ -55,20 +52,6 @@ packages:
   '@babel/helper-validator-identifier@7.28.5':
     resolution: {integrity: sha512-qSs4ifwzKJSV39ucNjsvc6WVHs6b7S03sOh2OcHF9UHfVPqWWALUsNUVzhSBiItjRZoLHx7nIarVjqKVusUZ1Q==}
     engines: {node: '>=6.9.0'}
-
-  '@datadog/browser-core@6.25.2':
-    resolution: {integrity: sha512-onYhcpZN1buplG3H4ZGr2FhMo71OVSHQRkKfTK7tu63TNO1AXR+rJt/nx/0oWvpSiohWyMSmvxHfYWf19GQgnQ==}
-
-  '@datadog/browser-rum-core@6.25.2':
-    resolution: {integrity: sha512-v0fHbsrnXhQpyKWN+png0Y7aHroMwRVGTjZoszNw9XSnJe8vprUyYG45PJFjEoR7u1BciQC9mxWa29ucfS64nw==}
-
-  '@datadog/browser-rum@6.25.2':
-    resolution: {integrity: sha512-HnKrX5+RbuQ39WzO5DfBZG/bxU72R9jvxCL/Uw95W/4j07FrVGBX9wftTLd+WFPaGfEFQiirQwEUgXExi4Hosw==}
-    peerDependencies:
-      '@datadog/browser-logs': 6.25.2
-    peerDependenciesMeta:
-      '@datadog/browser-logs':
-        optional: true
 
   '@emnapi/runtime@1.8.1':
     resolution: {integrity: sha512-mehfKSMWjjNol8659Z8KxEMrdSJDDot5SXMq00dM8BN4o+CLNXQ0xH2V7EchNHV4RmbZLmmPdEaXZc5H2FXmDg==}
@@ -1456,17 +1439,6 @@ snapshots:
       picocolors: 1.1.1
 
   '@babel/helper-validator-identifier@7.28.5': {}
-
-  '@datadog/browser-core@6.25.2': {}
-
-  '@datadog/browser-rum-core@6.25.2':
-    dependencies:
-      '@datadog/browser-core': 6.25.2
-
-  '@datadog/browser-rum@6.25.2':
-    dependencies:
-      '@datadog/browser-core': 6.25.2
-      '@datadog/browser-rum-core': 6.25.2
 
   '@emnapi/runtime@1.8.1':
     dependencies:
