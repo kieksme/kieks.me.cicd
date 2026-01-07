@@ -155,6 +155,8 @@ function determineActiveStates(filePath) {
     activeWebApplications: false,
     activeEmailFooter: false,
     activeAvatars: false,
+    activeGithub: false,
+    activeLinkedin: false,
     activeImpressum: false
   };
 
@@ -200,6 +202,10 @@ function determineActiveStates(filePath) {
       states.activeEmailFooter = true;
     } else if (normalizedPath.includes('avatars.html')) {
       states.activeAvatars = true;
+    } else if (normalizedPath.includes('github.html')) {
+      states.activeGithub = true;
+    } else if (normalizedPath.includes('linkedin.html')) {
+      states.activeLinkedin = true;
     }
     
     return states;
