@@ -24,7 +24,6 @@
   "author": "kieks.me GbR",
   "license": "GPL-3.0",
   "dependencies": {
-    "@datadog/browser-rum": "^6.25.2",
     "boxen": "^8.0.1",
     "chalk": "^5.6.2"
   },
