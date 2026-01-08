@@ -118,3 +118,6 @@ puppeteer-core-*.log
 
 # qrcode
 qrcode.png
+
+# playwrite mcp
+.playwright-mcp/
