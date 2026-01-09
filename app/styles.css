@@ -19,6 +19,10 @@
     --color-fuchsia-medium: #BF006B;
     --color-fuchsia-light: #800047;
     
+    /* Accessible colors for dark backgrounds (WCAG AA compliant - 4.5:1 contrast) */
+    --color-aqua-on-dark: #4DFFE8;
+    --color-fuchsia-on-dark: #FF4DB3;
+    
     /* Fonts */
     --font-heading: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
@@ -76,6 +80,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .border-fuchsia {
     border-color: var(--color-fuchsia);
+}
+
+/* Accessibility: Override text colors on dark backgrounds for WCAG AA compliance */
+.bg-navy .text-aqua,
+.bg-gray-900 .text-aqua,
+footer .text-aqua,
+nav .text-aqua {
+    color: var(--color-aqua-on-dark) !important;
+}
+
+.bg-navy .text-fuchsia,
+.bg-gray-900 .text-fuchsia,
+footer .text-fuchsia,
+nav .text-fuchsia {
+    color: var(--color-fuchsia-on-dark) !important;
 }
 
 /* Color Shades - Text Colors */
