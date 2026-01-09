@@ -251,7 +251,9 @@
     .markdown-content h2,
     .markdown-content h3,
     .markdown-content h4 {
-        @apply font-heading mt-6 mb-2;
+        @apply font-heading;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
     }
 
     .markdown-content p {
@@ -264,7 +266,8 @@
     }
 
     .markdown-content code {
-        @apply bg-black/10 px-1.5 py-0.5 rounded text-[0.9em];
+        @apply bg-black/10 rounded text-[0.9em];
+        padding: 0.2em 0.4em;
     }
 
     /* Mobile Navigation Menu */
