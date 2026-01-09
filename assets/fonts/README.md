@@ -9,6 +9,7 @@ This directory contains the official kieks.me GbR brand fonts and typography ass
 ```plaintext
 assets/fonts/
 ├── README.md           # This file
+├── tailwind.config.js  # Tailwind CSS theme configuration for fonts
 ├── [font-family]/      # Font family directories (e.g., "inter", "roboto")
 │   ├── [weight]/       # Font weight directories (e.g., "400", "700")
 │   │   ├── [style]/    # Font style files (e.g., "regular.woff2", "italic.woff2")
@@ -142,6 +143,69 @@ const sourceSans3 = new FontFace('Source Sans 3', 'url(./source-sans-3/400/regul
 await Promise.all([hankenGrotesk.load(), sourceSans3.load()]);
 document.fonts.add(hankenGrotesk);
 document.fonts.add(sourceSans3);
+```
+
+**Tailwind CSS Example**:
+
+```javascript
+// In your tailwind.config.js
+const fontsConfig = require('./assets/fonts/tailwind.config.js');
+
+module.exports = {
+  ...fontsConfig,
+  // Your other Tailwind config
+};
+```
+
+Or import just the font configuration:
+
+```javascript
+// In your tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: require('./assets/fonts/tailwind.config.js').theme.extend.fontFamily,
+      fontWeight: require('./assets/fonts/tailwind.config.js').theme.extend.fontWeight,
+      fontSize: require('./assets/fonts/tailwind.config.js').theme.extend.fontSize,
+    },
+  },
+};
+```
+
+**Usage in HTML/Tailwind classes**:
+
+```html
+<!-- Font families -->
+<h1 class="font-heading">Heading with Hanken Grotesk</h1>
+<p class="font-body">Body text with Source Sans 3</p>
+<div class="font-hanken-grotesk">Direct font family usage</div>
+<div class="font-source-sans-3">Direct font family usage</div>
+
+<!-- Font weights -->
+<div class="font-heading-light">Light heading (300)</div>
+<div class="font-heading-regular">Regular heading (400)</div>
+<div class="font-heading-medium">Medium heading (500)</div>
+<div class="font-heading-bold">Bold heading (700)</div>
+
+<div class="font-body-regular">Regular body (400)</div>
+<div class="font-body-semibold">Semibold body (600)</div>
+
+<!-- Type scale (Desktop) -->
+<h1 class="text-h1-desktop">H1 Desktop (48px, Bold)</h1>
+<h2 class="text-h2-desktop">H2 Desktop (40px, Bold)</h2>
+<h3 class="text-h3-desktop">H3 Desktop (32px, Medium)</h3>
+<p class="text-body-desktop">Body Desktop (16px, Regular)</p>
+<p class="text-body-large-desktop">Body Large Desktop (18px, Regular)</p>
+<p class="text-body-small-desktop">Body Small Desktop (14px, Regular)</p>
+<span class="text-caption-desktop">Caption Desktop (12px, Regular)</span>
+
+<!-- Type scale (Mobile) -->
+<h1 class="text-h1-mobile">H1 Mobile (36px, Bold)</h1>
+<h2 class="text-h2-mobile">H2 Mobile (32px, Bold)</h2>
+<h3 class="text-h3-mobile">H3 Mobile (28px, Medium)</h3>
+<p class="text-body-mobile">Body Mobile (16px, Regular)</p>
+<p class="text-body-small-mobile">Body Small Mobile (14px, Regular)</p>
+<span class="text-caption-mobile">Caption Mobile (12px, Regular)</span>
 ```
 
 ### For Designers

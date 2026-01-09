@@ -6,10 +6,11 @@ This directory contains the official kieks.me GbR brand color palette, including
 
 ## Available Files
 
-| File Name     | Format | Description                                                  | Download                                                                             |
-|---------------|--------|--------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| `colors.css`  | CSS    | CSS variables for web projects                               | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.css)  |
-| `colors.json` | JSON   | HEX, RGB, and CMYK values for JavaScript/TypeScript projects | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.json) |
+| File Name              | Format | Description                                                  | Download                                                                                        |
+|------------------------|--------|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `colors.css`           | CSS    | CSS variables for web projects                               | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.css)             |
+| `colors.json`          | JSON   | HEX, RGB, and CMYK values for JavaScript/TypeScript projects | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/colors.json)            |
+| `tailwind.config.js`   | JS     | Tailwind CSS theme configuration for colors                 | [View](https://github.com/kieksme/kieks.me.cicd/blob/main/assets/colors/tailwind.config.js)     |
 
 ### Color Swatches
 
@@ -59,6 +60,57 @@ This directory contains the official kieks.me GbR brand color palette, including
 import colors from './colors.json';
 
 const primaryColor = colors.primary.hex;
+```
+
+**Tailwind CSS Example**:
+
+```javascript
+// In your tailwind.config.js
+const colorsConfig = require('./assets/colors/tailwind.config.js');
+
+module.exports = {
+  ...colorsConfig,
+  // Your other Tailwind config
+};
+```
+
+Or import just the colors:
+
+```javascript
+// In your tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: require('./assets/colors/tailwind.config.js').theme.extend.colors,
+    },
+  },
+};
+```
+
+**Usage in HTML/Tailwind classes**:
+
+```html
+<!-- Selection colors -->
+<div class="bg-aqua text-white">Aqua background</div>
+<div class="bg-aqua-medium text-white">Aqua medium background</div>
+<div class="bg-aqua-dark text-white">Aqua dark background</div>
+
+<div class="bg-navy text-white">Navy background</div>
+<div class="bg-navy-medium text-white">Navy medium background</div>
+<div class="bg-navy-light text-white">Navy light background</div>
+
+<div class="bg-fuchsia text-white">Fuchsia background</div>
+<div class="bg-fuchsia-medium text-white">Fuchsia medium background</div>
+<div class="bg-fuchsia-light text-white">Fuchsia light background</div>
+
+<!-- Primary brand colors -->
+<div class="bg-primary text-secondary">Primary background</div>
+<div class="bg-secondary text-primary">Secondary background</div>
+
+<!-- Neutral colors -->
+<div class="text-gray-dark">Dark gray text</div>
+<div class="text-gray-medium">Medium gray text</div>
+<div class="bg-gray-light">Light gray background</div>
 ```
 
 ### For Designers
