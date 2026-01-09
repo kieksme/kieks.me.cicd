@@ -495,9 +495,22 @@ const rgbValues = colors.selection.aqua.rgb;</code></pre>
                 </div>
             </div>
             
-            <p class="font-body text-lg text-gray-700 mt-8">
-                Download the complete color assets as part of the <a href="https://github.com/kieksme/kieks.me.cicd/releases/latest">latest release ZIP</a>.
-            </p>
+            <div class="card-aqua mt-8">
+                <h3 class="font-heading text-xl font-bold text-navy mb-4">Download Color Assets</h3>
+                <p class="font-body text-gray-700 mb-4">
+                    Download the complete color palette including CSS variables, JSON definitions, and color swatches.
+                </p>
+                <div id="colors-download-section">
+                    <a href="https://github.com/kieksme/kieks.me.cicd/releases/latest" 
+                       id="download-colors-btn"
+                       class="bg-aqua text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors inline-flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        <span>Download Colors ZIP</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
     </main>
@@ -516,6 +529,40 @@ const rgbValues = colors.selection.aqua.rgb;</code></pre>
                 mobileMenu.classList.toggle('open');
             });
         }
+
+        // Load latest release and update download link
+        async function loadColorsDownload() {
+            try {
+                const response = await fetch('https://api.github.com/repos/kieksme/kieks.me.cicd/releases/latest');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch release');
+                }
+                const release = await response.json();
+                
+                const allZipAssets = release.assets.filter(asset => asset.name.endsWith('.zip'));
+                const colorsZip = allZipAssets.find(asset => 
+                    asset.name.toLowerCase().includes('color') || 
+                    asset.name.toLowerCase().match(/kieks-me-colors/)
+                );
+                
+                const downloadBtn = document.getElementById('download-colors-btn');
+                if (downloadBtn && colorsZip) {
+                    downloadBtn.href = colorsZip.browser_download_url;
+                    downloadBtn.innerHTML = `
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        <span>Download Colors ZIP</span>
+                        <span class="text-sm font-normal">(${(colorsZip.size / 1024 / 1024).toFixed(2)} MB)</span>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading colors download:', error);
+            }
+        }
+        
+        // Load download link on page load
+        loadColorsDownload();
     </script>
     <!-- include: analytics -->
 </body>

@@ -65,6 +65,15 @@ jobs:
           cd release-assets-fonts
           zip -r ../kieks-me-fonts-v${VERSION}.zip .
           cd ..
+          
+          # Create icons-only ZIP
+          mkdir -p release-assets-icons
+          cp -r assets/icons release-assets-icons/icons 2>/dev/null || true
+          cd release-assets-icons
+          if [ -d icons ] && [ "$(ls -A icons)" ]; then
+            zip -r ../kieks-me-icons-v${VERSION}.zip .
+          fi
+          cd ..
 
       - name: Generate Release README
         id: readme
@@ -180,6 +189,17 @@ jobs:
           asset_path: ./kieks-me-fonts-v${{ steps.version.outputs.version }}.zip
           asset_name: kieks-me-fonts-v${{ steps.version.outputs.version }}.zip
           asset_content_type: application/zip
+
+      - name: Upload icons ZIP to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./kieks-me-icons-v${{ steps.version.outputs.version }}.zip
+          asset_name: kieks-me-icons-v${{ steps.version.outputs.version }}.zip
+          asset_content_type: application/zip
+        continue-on-error: true
 
       - name: Update Release Notes
         run: |

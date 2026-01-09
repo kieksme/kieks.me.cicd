@@ -219,11 +219,73 @@
             </div>
         </div>
     </section>
+
+    <!-- Download Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="card-aqua">
+                <h2 class="font-heading text-2xl font-bold text-navy mb-4">Download Complete Brand Assets</h2>
+                <p class="font-body text-gray-700 mb-4">
+                    Download the complete brand package including all logos, colors, fonts, icons, and guidelines documentation.
+                </p>
+                <div id="guidelines-download-section">
+                    <a href="https://github.com/kieksme/kieks.me.cicd/releases/latest" 
+                       id="download-complete-btn"
+                       class="bg-aqua text-navy px-6 py-3 rounded-lg font-heading font-bold hover:bg-opacity-90 transition-colors inline-flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        <span>Download Complete Package</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
     </main>
 
     <!-- include: fundamentals-grid -->
 
     <!-- include: footer -->
+
+    <script>
+        // Load latest release and update download link
+        async function loadCompleteDownload() {
+            try {
+                const response = await fetch('https://api.github.com/repos/kieksme/kieks.me.cicd/releases/latest');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch release');
+                }
+                const release = await response.json();
+                
+                const allZipAssets = release.assets.filter(asset => asset.name.endsWith('.zip'));
+                const completeZip = allZipAssets.find(asset => 
+                    (asset.name.includes('assets') || asset.name.includes('complete')) && 
+                    !asset.name.includes('logos') && !asset.name.includes('colors') && 
+                    !asset.name.includes('fonts') && !asset.name.includes('icons')
+                ) || allZipAssets.find(asset => 
+                    !asset.name.includes('logos') && !asset.name.includes('colors') && 
+                    !asset.name.includes('fonts') && !asset.name.includes('icons')
+                ) || allZipAssets[0];
+                
+                const downloadBtn = document.getElementById('download-complete-btn');
+                if (downloadBtn && completeZip) {
+                    downloadBtn.href = completeZip.browser_download_url;
+                    downloadBtn.innerHTML = `
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        <span>Download Complete Package</span>
+                        <span class="text-sm font-normal">(${(completeZip.size / 1024 / 1024).toFixed(2)} MB)</span>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading complete download:', error);
+            }
+        }
+        
+        // Load download link on page load
+        loadCompleteDownload();
+    </script>
     <!-- include: analytics -->
 </body>
 </html>
