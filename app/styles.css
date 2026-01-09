@@ -1,29 +1,40 @@
 @import "tailwindcss";
 
 @theme {
-    /* Brand Colors */
+    /* Brand Colors - Base colors are aliases for 500 */
     --color-aqua: #00FFDC;
+    --color-aqua-500: #00FFDC;
     --color-navy: #1E2A45;
+    --color-navy-500: #1E2A45;
     --color-fuchsia: #FF008F;
+    --color-fuchsia-500: #FF008F;
     --color-white: #FFFFFF;
     --color-black: #000000;
     --color-gray-dark: #333333;
     --color-gray-medium: #666666;
     --color-gray-light: #CCCCCC;
     
-    /* Color Shades */
-    --color-aqua-medium: #00BFA5;
-    --color-aqua-dark: #006B5F;
+    /* Color Shades - Tailwind numbering (50=lightest, 900=darkest) */
+    /* Aqua */
     --color-aqua-50: #E6FFFC;
     --color-aqua-100: #B3FFF5;
-    --color-navy-medium: #2F4169;
-    --color-navy-light: #5A6B8C;
+    --color-aqua-500: #00FFDC;
+    --color-aqua-600: #00BFA5;
+    --color-aqua-700: #006B5F;
+    
+    /* Navy */
     --color-navy-50: #F0F2F5;
     --color-navy-100: #E1E5EB;
-    --color-fuchsia-medium: #BF006B;
-    --color-fuchsia-light: #800047;
+    --color-navy-300: #5A6B8C;
+    --color-navy-400: #2F4169;
+    --color-navy-500: #1E2A45;
+    
+    /* Fuchsia */
     --color-fuchsia-50: #FFE6F5;
     --color-fuchsia-100: #FFCCEB;
+    --color-fuchsia-500: #FF008F;
+    --color-fuchsia-600: #BF006B;
+    --color-fuchsia-700: #800047;
     
     /* Accessible colors for dark backgrounds (WCAG AA compliant - 4.5:1 contrast) */
     --color-aqua-on-dark: #4DFFE8;
@@ -111,7 +122,7 @@
     /* Apply default color only if no explicit text color class is set */
     /* Exclude card links (bg-gray-50, bg-white, card classes) from default underline */
     a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white):not(.card):not(.card-aqua):not(.card-fuchsia):not(.card-navy) {
-        @apply text-aqua-dark underline;
+        @apply text-aqua-700 underline;
     }
 
     a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white):not(.card):not(.card-aqua):not(.card-fuchsia):not(.card-navy):hover {
@@ -136,7 +147,7 @@
     /* Ensure links with hover classes but no base color get a default color */
     /* Exclude card links from default underline */
     a:not(.nav-link):not(.active)[class*="hover:text-"]:not([class*="text-"]):not(.bg-gray-50):not(.bg-white):not(.card):not(.card-aqua):not(.card-fuchsia):not(.card-navy) {
-        @apply text-aqua-dark underline;
+        @apply text-aqua-700 underline;
     }
 
     /* Remove underline from card links (icons and headlines should not be underlined) */
@@ -163,7 +174,7 @@
     }
 
     .markdown-content a {
-        @apply text-aqua-dark underline;
+        @apply text-aqua-700 underline;
     }
 
     .markdown-content a:hover {
@@ -172,7 +183,7 @@
 
     /* Fuchsia link utility class */
     .link-fuchsia {
-        @apply text-fuchsia-medium underline;
+        @apply text-fuchsia-600 underline;
     }
 
     .link-fuchsia:hover {

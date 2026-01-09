@@ -99,51 +99,33 @@ CMYK: C:100 M:0 Y:11 K:58
 
 ### Navy Shades
 
-#### Navy Medium
+Navy uses Tailwind's standard numbering system (50=lightest, 900=darkest):
 
-```text
-Name: Navy Medium
-HEX: #2F4169
-RGB: rgb(47, 65, 105)
-CMYK: C:100 M:60 Y:0 K:59
-```
+- **Navy 50** (`#F0F2F5`): Very light navy for subtle backgrounds
+- **Navy 100** (`#E1E5EB`): Light navy for backgrounds
+- **Navy 300** (`#5A6B8C`): Light navy shade for better readability
+- **Navy 400** (`#2F4169`): Medium navy shade
+- **Navy 500** (`#1E2A45`): Base navy color (default)
 
-**Usage**: Medium navy shade
-
-#### Navy Light
-
-```text
-Name: Navy Light
-HEX: #5A6B8C
-RGB: rgb(90, 107, 140)
-CMYK: C:100 M:60 Y:0 K:45
-```
-
-**Usage**: Light navy shade for better readability
+**Usage Examples**:
+- `bg-navy-50` - Very light background
+- `text-navy-300` - Light text
+- `bg-navy-500` or `bg-navy` - Base color
 
 ### Fuchsia Shades
 
-#### Fuchsia Medium
+Fuchsia uses Tailwind's standard numbering system (50=lightest, 900=darkest):
 
-```text
-Name: Fuchsia Medium
-HEX: #BF006B
-RGB: rgb(191, 0, 107)
-CMYK: C:0 M:100 Y:44 K:25
-```
+- **Fuchsia 50** (`#FFE6F5`): Very light fuchsia for subtle backgrounds
+- **Fuchsia 100** (`#FFCCEB`): Light fuchsia for backgrounds
+- **Fuchsia 500** (`#FF008F`): Base fuchsia color (default)
+- **Fuchsia 600** (`#BF006B`): Medium fuchsia shade
+- **Fuchsia 700** (`#800047`): Dark fuchsia shade
 
-**Usage**: Medium fuchsia shade
-
-#### Fuchsia Light
-
-```text
-Name: Fuchsia Light
-HEX: #800047
-RGB: rgb(128, 0, 71)
-CMYK: C:0 M:100 Y:44 K:50
-```
-
-**Usage**: Light fuchsia shade
+**Usage Examples**:
+- `bg-fuchsia-50` - Very light background
+- `bg-fuchsia-600` - Medium shade for hover states
+- `bg-fuchsia-500` or `bg-fuchsia` - Base color
 
 ### Color Generation
 
