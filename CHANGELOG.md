@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.26.0](https://github.com/kieksme/kieks.me.brand/compare/v0.25.0...v0.26.0) (2026-01-09)
+
+
+### Features
+
+* enhance accessibility with new color variables for dark backgrounds ([06aacbb](https://github.com/kieksme/kieks.me.brand/commit/06aacbb215e697881f2e34d6d73e684a3f201592))
+
+
+### Bug Fixes
+
+* **styles.css:** ensure no underline for all card link variants to maintain uniform appearance ([748d22e](https://github.com/kieksme/kieks.me.brand/commit/748d22e8e142fed1b55d9f42f1eb67acb66051fe))
+
 ## [0.25.0](https://github.com/kieksme/kieks.me.brand/compare/v0.24.0...v0.25.0) (2026-01-09)
 
 
