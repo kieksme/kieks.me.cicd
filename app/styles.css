@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+@theme {
     /* Brand Colors */
     --color-aqua: #00FFDC;
     --color-navy: #1E2A45;
@@ -28,453 +28,263 @@
     --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
-body {
-    font-family: var(--font-body);
-    color: var(--color-gray-dark);
-    background-color: var(--color-navy);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-}
-
-.font-heading {
-    font-family: var(--font-heading);
-}
-
-.font-body {
-    font-family: var(--font-body);
-}
-
-.text-aqua {
-    color: var(--color-aqua);
-}
-
-.text-navy {
-    color: var(--color-navy);
-}
-
-.text-fuchsia {
-    color: var(--color-fuchsia);
-}
-
-.bg-aqua {
-    background-color: var(--color-aqua);
-}
-
-.bg-navy {
-    background-color: var(--color-navy);
-}
-
-.bg-fuchsia {
-    background-color: var(--color-fuchsia);
-}
-
-.border-aqua {
-    border-color: var(--color-aqua);
-}
-
-.border-navy {
-    border-color: var(--color-navy);
-}
-
-.border-fuchsia {
-    border-color: var(--color-fuchsia);
-}
-
-/* Accessibility: Override text colors on dark backgrounds for WCAG AA compliance */
-.bg-navy .text-aqua,
-.bg-gray-900 .text-aqua,
-footer .text-aqua,
-nav .text-aqua {
-    color: var(--color-aqua-on-dark) !important;
-}
-
-.bg-navy .text-fuchsia,
-.bg-gray-900 .text-fuchsia,
-footer .text-fuchsia,
-nav .text-fuchsia {
-    color: var(--color-fuchsia-on-dark) !important;
-}
-
-/* Color Shades - Text Colors */
-.text-aqua-medium {
-    color: var(--color-aqua-medium);
-}
-
-.text-aqua-dark {
-    color: var(--color-aqua-dark);
-}
-
-.text-navy-medium {
-    color: var(--color-navy-medium);
-}
-
-.text-navy-light {
-    color: var(--color-navy-light);
-}
-
-.text-fuchsia-medium {
-    color: var(--color-fuchsia-medium);
-}
-
-.text-fuchsia-light {
-    color: var(--color-fuchsia-light);
-}
-
-/* Color Shades - Background Colors */
-.bg-aqua-medium {
-    background-color: var(--color-aqua-medium);
-}
-
-.bg-aqua-dark {
-    background-color: var(--color-aqua-dark);
-}
-
-.bg-navy-medium {
-    background-color: var(--color-navy-medium);
-}
-
-.bg-navy-light {
-    background-color: var(--color-navy-light);
-}
-
-.bg-fuchsia-medium {
-    background-color: var(--color-fuchsia-medium);
-}
-
-.bg-fuchsia-light {
-    background-color: var(--color-fuchsia-light);
-}
-
-/* Color Shades - Border Colors */
-.border-aqua-medium {
-    border-color: var(--color-aqua-medium);
-}
-
-.border-aqua-dark {
-    border-color: var(--color-aqua-dark);
-}
-
-.border-navy-medium {
-    border-color: var(--color-navy-medium);
-}
-
-.border-navy-light {
-    border-color: var(--color-navy-light);
-}
-
-.border-fuchsia-medium {
-    border-color: var(--color-fuchsia-medium);
-}
-
-.border-fuchsia-light {
-    border-color: var(--color-fuchsia-light);
-}
-
-/* Markdown styling */
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3,
-.markdown-content h4 {
-    font-family: var(--font-heading);
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-}
-
-.markdown-content p {
-    margin-bottom: 1em;
-}
-
-.markdown-content ul,
-.markdown-content ol {
-    margin-left: 1.5em;
-    margin-bottom: 1em;
-}
-
-.markdown-content code {
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 0.2em 0.4em;
-    border-radius: 0.25rem;
-    font-size: 0.9em;
-}
-
-/* Links - Default to Aqua Dark for better contrast on light backgrounds */
-/* Apply default color only if no explicit text color class is set */
-/* Exclude card links (bg-gray-50, bg-white) from default underline */
-a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white) {
-    color: var(--color-aqua-dark) !important;
-    text-decoration: underline;
-}
-
-a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white):hover {
-    color: var(--color-aqua) !important;
-    text-decoration: underline;
-}
-
-/* Links on dark backgrounds (footer, header, dark sections) use normal Aqua */
-.bg-navy a:not(.nav-link):not(.active):not([class*="text-"]),
-.bg-gray-900 a:not(.nav-link):not(.active):not([class*="text-"]),
-footer a:not(.nav-link):not(.active):not([class*="text-"]),
-nav a:not(.nav-link):not(.active):not([class*="text-"]) {
-    color: var(--color-aqua) !important;
-    text-decoration: underline;
-}
-
-.bg-navy a:not(.nav-link):not(.active):not([class*="text-"]):hover,
-.bg-gray-900 a:not(.nav-link):not(.active):not([class*="text-"]):hover,
-footer a:not(.nav-link):not(.active):not([class*="text-"]):hover,
-nav a:not(.nav-link):not(.active):not([class*="text-"]):hover {
-    color: var(--color-aqua) !important;
-    opacity: 0.9;
-    text-decoration: underline;
-}
-
-/* Ensure links with hover classes but no base color get a default color */
-/* Exclude card links from default underline */
-a:not(.nav-link):not(.active)[class*="hover:text-"]:not([class*="text-"]):not(.bg-gray-50):not(.bg-white) {
-    color: var(--color-aqua-dark) !important;
-    text-decoration: underline;
-}
-
-/* Remove underline from card links (icons and headlines should not be underlined) */
-a.bg-white,
-a.bg-gray-50 {
-    text-decoration: none !important;
-}
-
-a.bg-white:hover,
-a.bg-gray-50:hover {
-    text-decoration: none !important;
-}
-
-/* Remove underline from all elements inside card links */
-a.bg-white *,
-a.bg-gray-50 *,
-a.bg-white h3,
-a.bg-white .text-4xl,
-a.bg-white .text-center > div:first-child,
-a.bg-gray-50 h3,
-a.bg-gray-50 i,
-a.bg-gray-50 .ti {
-    text-decoration: none !important;
-}
-
-.markdown-content a {
-    color: var(--color-aqua-dark);
-    text-decoration: underline;
-}
-
-.markdown-content a:hover {
-    color: var(--color-aqua);
-}
-
-/* Fuchsia link utility class */
-.link-fuchsia {
-    color: var(--color-fuchsia-medium) !important;
-    text-decoration: underline;
-}
-
-.link-fuchsia:hover {
-    color: var(--color-fuchsia) !important;
-    text-decoration: underline;
-}
-
-/* Fuchsia links on dark backgrounds */
-.bg-navy .link-fuchsia,
-.bg-gray-900 .link-fuchsia,
-footer .link-fuchsia,
-nav .link-fuchsia {
-    color: var(--color-fuchsia) !important;
-}
-
-.bg-navy .link-fuchsia:hover,
-.bg-gray-900 .link-fuchsia:hover,
-footer .link-fuchsia:hover,
-nav .link-fuchsia:hover {
-    color: var(--color-fuchsia) !important;
-    opacity: 0.9;
-}
-
-/* Navigation */
-nav.bg-navy.sticky {
-    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
-
-nav.bg-navy.sticky.header-transparent {
-    background-color: transparent;
-}
-
-.nav-link {
-    transition: color 0.2s;
-}
-
-.nav-link:hover {
-    color: var(--color-aqua);
-}
-
-.nav-link.active {
-    color: var(--color-aqua);
-}
-
-/* Navigation link variations - Fuchsia for alternate sections */
-.nav-link.active.implementations {
-    color: var(--color-fuchsia);
-}
-
-.nav-link:hover.implementations {
-    color: var(--color-fuchsia);
-}
-
-.nav-link.active.colors {
-    color: var(--color-fuchsia);
-}
-
-.nav-link:hover.colors {
-    color: var(--color-fuchsia);
-}
-
-/* Hero Section Styling */
-.hero-section {
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-decorative-circle {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.1;
-}
-
-.hero-decorative-circle-1 {
-    width: 300px;
-    height: 300px;
-    background-color: var(--color-aqua);
-    top: -150px;
-    right: -150px;
-}
-
-.hero-decorative-circle-2 {
-    width: 200px;
-    height: 200px;
-    background-color: var(--color-fuchsia);
-    bottom: -100px;
-    left: -100px;
-}
-
-.hero-decorative-circle-3 {
-    width: 150px;
-    height: 150px;
-    background-color: var(--color-fuchsia);
-    top: 50%;
-    right: 10%;
-    transform: translateY(-50%);
-}
-
-.hero-accent-line {
-    width: 200px;
-    height: 4px;
-    background-color: var(--color-aqua);
-    margin-top: 1rem;
-}
-
-.hero-accent-line-fuchsia {
-    width: 200px;
-    height: 4px;
-    background-color: var(--color-fuchsia);
-    margin-top: 1rem;
-}
-
-/* Release Section */
-.release-content {
-    transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
-    overflow: hidden;
-}
-
-.release-content.hidden {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .nav-menu {
-        display: none;
+@layer base {
+    body {
+        @apply font-body text-gray-dark bg-navy;
     }
-    
-    .nav-menu.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--color-navy);
-        padding: 1rem;
-        z-index: 1000;
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading;
     }
-    
+}
+
+@layer utilities {
+    /* Links - Default to Aqua Dark for better contrast on light backgrounds */
+    /* Apply default color only if no explicit text color class is set */
+    /* Exclude card links (bg-gray-50, bg-white) from default underline */
+    a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white) {
+        @apply text-aqua-dark underline;
+    }
+
+    a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white):hover {
+        @apply text-aqua underline;
+    }
+
+    /* Links on dark backgrounds (footer, header, dark sections) use normal Aqua */
+    .bg-navy a:not(.nav-link):not(.active):not([class*="text-"]),
+    .bg-gray-900 a:not(.nav-link):not(.active):not([class*="text-"]),
+    footer a:not(.nav-link):not(.active):not([class*="text-"]),
+    nav a:not(.nav-link):not(.active):not([class*="text-"]) {
+        @apply text-aqua underline;
+    }
+
+    .bg-navy a:not(.nav-link):not(.active):not([class*="text-"]):hover,
+    .bg-gray-900 a:not(.nav-link):not(.active):not([class*="text-"]):hover,
+    footer a:not(.nav-link):not(.active):not([class*="text-"]):hover,
+    nav a:not(.nav-link):not(.active):not([class*="text-"]):hover {
+        @apply text-aqua opacity-90 underline;
+    }
+
+    /* Ensure links with hover classes but no base color get a default color */
+    /* Exclude card links from default underline */
+    a:not(.nav-link):not(.active)[class*="hover:text-"]:not([class*="text-"]):not(.bg-gray-50):not(.bg-white) {
+        @apply text-aqua-dark underline;
+    }
+
+    /* Remove underline from card links (icons and headlines should not be underlined) */
+    a.bg-white,
+    a.bg-gray-50 {
+        @apply no-underline;
+    }
+
+    a.bg-white:hover,
+    a.bg-gray-50:hover {
+        @apply no-underline;
+    }
+
+    /* Remove underline from all elements inside card links */
+    a.bg-white *,
+    a.bg-gray-50 *,
+    a.bg-white h3,
+    a.bg-white .text-4xl,
+    a.bg-white .text-center > div:first-child,
+    a.bg-gray-50 h3,
+    a.bg-gray-50 i,
+    a.bg-gray-50 .ti {
+        @apply no-underline;
+    }
+
+    .markdown-content a {
+        @apply text-aqua-dark underline;
+    }
+
+    .markdown-content a:hover {
+        @apply text-aqua;
+    }
+
+    /* Fuchsia link utility class */
+    .link-fuchsia {
+        @apply text-fuchsia-medium underline;
+    }
+
+    .link-fuchsia:hover {
+        @apply text-fuchsia underline;
+    }
+
+    /* Fuchsia links on dark backgrounds */
+    .bg-navy .link-fuchsia,
+    .bg-gray-900 .link-fuchsia,
+    footer .link-fuchsia,
+    nav .link-fuchsia {
+        @apply text-fuchsia;
+    }
+
+    .bg-navy .link-fuchsia:hover,
+    .bg-gray-900 .link-fuchsia:hover,
+    footer .link-fuchsia:hover,
+    nav .link-fuchsia:hover {
+        @apply text-fuchsia opacity-90;
+    }
+
+    /* Accessibility: Override text colors on dark backgrounds for WCAG AA compliance */
+    .bg-navy .text-aqua,
+    .bg-gray-900 .text-aqua,
+    footer .text-aqua,
+    nav .text-aqua {
+        color: var(--color-aqua-on-dark) !important;
+    }
+
+    .bg-navy .text-fuchsia,
+    .bg-gray-900 .text-fuchsia,
+    footer .text-fuchsia,
+    nav .text-fuchsia {
+        color: var(--color-fuchsia-on-dark) !important;
+    }
+
+    /* Navigation */
+    nav.bg-navy.sticky {
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    nav.bg-navy.sticky.header-transparent {
+        @apply bg-transparent;
+    }
+
+    .nav-link {
+        @apply transition-colors duration-200;
+    }
+
+    .nav-link:hover {
+        @apply text-aqua;
+    }
+
+    .nav-link.active {
+        @apply text-aqua;
+    }
+
+    /* Navigation link variations - Fuchsia for alternate sections */
+    .nav-link.active.implementations {
+        @apply text-fuchsia;
+    }
+
+    .nav-link:hover.implementations {
+        @apply text-fuchsia;
+    }
+
+    .nav-link.active.colors {
+        @apply text-fuchsia;
+    }
+
+    .nav-link:hover.colors {
+        @apply text-fuchsia;
+    }
+
+    /* Hero Section Styling */
+    .hero-section {
+        @apply relative overflow-hidden;
+    }
+
+    .hero-decorative-circle {
+        @apply absolute rounded-full opacity-10;
+    }
+
     .hero-decorative-circle-1 {
-        width: 200px;
-        height: 200px;
-        top: -100px;
-        right: -100px;
+        @apply w-[300px] h-[300px] bg-aqua -top-[150px] -right-[150px];
     }
-    
+
     .hero-decorative-circle-2 {
-        width: 150px;
-        height: 150px;
-        bottom: -75px;
-        left: -75px;
+        @apply w-[200px] h-[200px] bg-fuchsia -bottom-[100px] -left-[100px];
     }
-    
+
     .hero-decorative-circle-3 {
-        width: 100px;
-        height: 100px;
-        top: 30%;
-        right: 5%;
+        @apply w-[150px] h-[150px] bg-fuchsia top-1/2 right-[10%] -translate-y-1/2;
     }
-}
 
-/* Animated SVG Objects */
-object[type="image/svg+xml"] {
-    display: block;
-    pointer-events: none;
-}
+    .hero-accent-line {
+        @apply w-[200px] h-1 bg-aqua mt-4;
+    }
 
-object[type="image/svg+xml"] svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
+    .hero-accent-line-fuchsia {
+        @apply w-[200px] h-1 bg-fuchsia mt-4;
+    }
 
-/* PDF Viewer Styles */
-.pdf-viewer {
-    width: 100%;
-    min-height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-}
+    /* Release Section */
+    .release-content {
+        @apply transition-all duration-300 ease-in-out overflow-hidden;
+    }
 
-.pdf-viewer canvas {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
+    .release-content.hidden {
+        @apply hidden;
+    }
 
-.pdf-loading {
-    color: var(--color-gray-medium);
-    font-family: var(--font-body);
-    padding: 2rem;
-    text-align: center;
-}
+    /* Markdown styling */
+    .markdown-content h1,
+    .markdown-content h2,
+    .markdown-content h3,
+    .markdown-content h4 {
+        @apply font-heading mt-6 mb-2;
+    }
 
-.pdf-error {
-    color: var(--color-fuchsia);
-    font-family: var(--font-body);
-    padding: 2rem;
-    text-align: center;
+    .markdown-content p {
+        @apply mb-4;
+    }
+
+    .markdown-content ul,
+    .markdown-content ol {
+        @apply ml-6 mb-4;
+    }
+
+    .markdown-content code {
+        @apply bg-black/10 px-1.5 py-0.5 rounded text-[0.9em];
+    }
+
+    /* Mobile Navigation Menu */
+    @media (max-width: 768px) {
+        .nav-menu {
+            @apply hidden;
+        }
+        
+        .nav-menu.open {
+            @apply flex flex-col absolute top-full left-0 right-0 bg-navy p-4;
+            z-index: 1000;
+        }
+        
+        .hero-decorative-circle-1 {
+            @apply w-[200px] h-[200px] -top-[100px] -right-[100px];
+        }
+        
+        .hero-decorative-circle-2 {
+            @apply w-[150px] h-[150px] -bottom-[75px] -left-[75px];
+        }
+        
+        .hero-decorative-circle-3 {
+            @apply w-[100px] h-[100px] top-[30%] right-[5%];
+        }
+    }
+
+    /* Animated SVG Objects */
+    object[type="image/svg+xml"] {
+        @apply block pointer-events-none;
+    }
+
+    object[type="image/svg+xml"] svg {
+        @apply block w-full h-full;
+    }
+
+    /* PDF Viewer Styles */
+    .pdf-viewer {
+        @apply w-full min-h-[300px] flex items-center justify-center bg-[#f5f5f5] rounded-lg overflow-hidden relative;
+    }
+
+    .pdf-viewer canvas {
+        @apply max-w-full h-auto block;
+    }
+
+    .pdf-loading {
+        @apply text-gray-medium font-body p-8 text-center;
+    }
+
+    .pdf-error {
+        @apply text-fuchsia font-body p-8 text-center;
+    }
 }
