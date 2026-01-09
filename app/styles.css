@@ -70,7 +70,10 @@
         @apply no-underline;
     }
     
-    a.card-aqua * {
+    a.card-aqua h3,
+    a.card-aqua h4,
+    a.card-aqua i,
+    a.card-aqua .ti {
         @apply no-underline;
     }
     
@@ -78,7 +81,10 @@
         @apply no-underline;
     }
     
-    a.card-fuchsia * {
+    a.card-fuchsia h3,
+    a.card-fuchsia h4,
+    a.card-fuchsia i,
+    a.card-fuchsia .ti {
         @apply no-underline;
     }
     
@@ -86,7 +92,10 @@
         @apply no-underline;
     }
     
-    a.card-navy * {
+    a.card-navy h3,
+    a.card-navy h4,
+    a.card-navy i,
+    a.card-navy .ti {
         @apply no-underline;
     }
 }
@@ -94,12 +103,12 @@
 @layer utilities {
     /* Links - Default to Aqua Dark for better contrast on light backgrounds */
     /* Apply default color only if no explicit text color class is set */
-    /* Exclude card links (bg-gray-50, bg-white) from default underline */
-    a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white) {
+    /* Exclude card links (bg-gray-50, bg-white, card classes) from default underline */
+    a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white):not(.card):not(.card-aqua):not(.card-fuchsia):not(.card-navy) {
         @apply text-aqua-dark underline;
     }
 
-    a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white):hover {
+    a:not(.nav-link):not(.active):not([class*="text-"]):not(.bg-gray-50):not(.bg-white):not(.card):not(.card-aqua):not(.card-fuchsia):not(.card-navy):hover {
         @apply text-aqua underline;
     }
 
@@ -120,7 +129,7 @@
 
     /* Ensure links with hover classes but no base color get a default color */
     /* Exclude card links from default underline */
-    a:not(.nav-link):not(.active)[class*="hover:text-"]:not([class*="text-"]):not(.bg-gray-50):not(.bg-white) {
+    a:not(.nav-link):not(.active)[class*="hover:text-"]:not([class*="text-"]):not(.bg-gray-50):not(.bg-white):not(.card):not(.card-aqua):not(.card-fuchsia):not(.card-navy) {
         @apply text-aqua-dark underline;
     }
 
