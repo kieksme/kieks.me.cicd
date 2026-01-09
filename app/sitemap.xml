@@ -183,6 +183,17 @@
     </image:image>
   </url>
   
+  <!-- Icons Page -->
+  <url>
+    <loc>https://brand.kieks.me/fundamentals/icons.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://raw.githubusercontent.com/kieksme/kieks.me.cicd/main/assets/og-banners/fundamentals.svg</image:loc>
+    </image:image>
+  </url>
+  
   <!-- Implementations Overview -->
   <url>
     <loc>https://brand.kieks.me/implementations/</loc>
