@@ -14,10 +14,16 @@
     /* Color Shades */
     --color-aqua-medium: #00BFA5;
     --color-aqua-dark: #006B5F;
+    --color-aqua-50: #E6FFFC;
+    --color-aqua-100: #B3FFF5;
     --color-navy-medium: #2F4169;
     --color-navy-light: #5A6B8C;
+    --color-navy-50: #F0F2F5;
+    --color-navy-100: #E1E5EB;
     --color-fuchsia-medium: #BF006B;
     --color-fuchsia-light: #800047;
+    --color-fuchsia-50: #FFE6F5;
+    --color-fuchsia-100: #FFCCEB;
     
     /* Accessible colors for dark backgrounds (WCAG AA compliant - 4.5:1 contrast) */
     --color-aqua-on-dark: #4DFFE8;
