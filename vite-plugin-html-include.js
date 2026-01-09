@@ -6,13 +6,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Vite plugin to process HTML includes
- * Replaces <!-- include: navigation -->, <!-- include: footer -->, and <!-- include: analytics --> with components
+ * Replaces <!-- include: navigation -->, <!-- include: footer -->, <!-- include: analytics -->,
+ * <!-- include: fundamentals-grid -->, and <!-- include: implementations-grid --> with components
  * and adjusts relative paths based on file depth
  */
 export function htmlInclude() {
   const navigationPath = resolve(__dirname, 'app/components/navigation.html');
   const footerPath = resolve(__dirname, 'app/components/footer.html');
   const analyticsPath = resolve(__dirname, 'app/components/analytics.html');
+  const fundamentalsGridPath = resolve(__dirname, 'app/components/fundamentals-grid.html');
+  const implementationsGridPath = resolve(__dirname, 'app/components/implementations-grid.html');
   const releasePleaseManifestPath = resolve(__dirname, '.release-please-manifest.json');
   
   if (!existsSync(navigationPath)) {
@@ -25,6 +28,14 @@ export function htmlInclude() {
   
   if (!existsSync(analyticsPath)) {
     throw new Error(`Analytics component not found at ${analyticsPath}`);
+  }
+
+  if (!existsSync(fundamentalsGridPath)) {
+    throw new Error(`Fundamentals grid component not found at ${fundamentalsGridPath}`);
+  }
+
+  if (!existsSync(implementationsGridPath)) {
+    throw new Error(`Implementations grid component not found at ${implementationsGridPath}`);
   }
 
   // Read version from .release-please-manifest.json
@@ -41,6 +52,8 @@ export function htmlInclude() {
   const navigationTemplate = readFileSync(navigationPath, 'utf-8');
   const footerTemplate = readFileSync(footerPath, 'utf-8');
   const analyticsTemplate = readFileSync(analyticsPath, 'utf-8');
+  const fundamentalsGridTemplate = readFileSync(fundamentalsGridPath, 'utf-8');
+  const implementationsGridTemplate = readFileSync(implementationsGridPath, 'utf-8');
 
   return {
     name: 'html-include',
@@ -50,8 +63,10 @@ export function htmlInclude() {
       const hasNavigation = html.includes('<!-- include: navigation -->');
       const hasFooter = html.includes('<!-- include: footer -->');
       const hasAnalytics = html.includes('<!-- include: analytics -->');
+      const hasFundamentalsGrid = html.includes('<!-- include: fundamentals-grid -->');
+      const hasImplementationsGrid = html.includes('<!-- include: implementations-grid -->');
       
-      if (!hasNavigation && !hasFooter && !hasAnalytics) {
+      if (!hasNavigation && !hasFooter && !hasAnalytics && !hasFundamentalsGrid && !hasImplementationsGrid) {
         return html;
       }
 
@@ -133,6 +148,20 @@ export function htmlInclude() {
       // Replace analytics include if present
       if (hasAnalytics) {
         html = html.replace('<!-- include: analytics -->', analyticsTemplate);
+      }
+      
+      // Replace fundamentals-grid include if present
+      if (hasFundamentalsGrid) {
+        let fundamentalsGrid = fundamentalsGridTemplate;
+        fundamentalsGrid = fundamentalsGrid.replace(/\{\{basePath\}\}/g, basePath);
+        html = html.replace('<!-- include: fundamentals-grid -->', fundamentalsGrid);
+      }
+      
+      // Replace implementations-grid include if present
+      if (hasImplementationsGrid) {
+        let implementationsGrid = implementationsGridTemplate;
+        implementationsGrid = implementationsGrid.replace(/\{\{basePath\}\}/g, basePath);
+        html = html.replace('<!-- include: implementations-grid -->', implementationsGrid);
       }
       
       return html;
